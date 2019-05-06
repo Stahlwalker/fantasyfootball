@@ -1,0 +1,582 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+        integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
+    <title>Fantasy Football</title>
+    <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="favicon.ico" type="image/x-icon"> -->
+    <link rel='icon' type='image/jpg' href='favicon.ico'>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/packersretro-16x16.ico" />
+    <link rel="shortcut icon" type="image/png" href="packersretro-24x24.png" sizes="24x24" />
+    <link rel="shortcut icon" type="image/png" href="packersretro-32x32.png" sizes="32x32" />
+    <link rel="shortcut icon" type="image/png" href="packersretro-48x48.png" sizes="48x48" />
+    <link rel="shortcut icon" type="image/png" href="packersretro-96x96.png" sizes="96x96" />
+    <link rel="shortcut icon" type="image/png" href="packersretro-128x128.png" sizes="128x128" />
+    <link rel="shortcut icon" type="image/png" href="packersretro-196x196.png" sizes="196x196" />
+    <link rel="apple-touch-icon" href="packersretro-57x57.png" sizes="57x57" />
+    <link rel="apple-touch-icon" href="packersretro-60x60.png" sizes="60x60" />
+    <link rel="apple-touch-icon" href="packersretro-72x72.png" sizes="72x72" />
+    <link rel="apple-touch-icon" href="packersretro-76x76.png" sizes="76x76" />
+    <link rel="apple-touch-icon" href="packersretro-114x114.png" sizes="114x114" />
+    <link rel="apple-touch-icon" href="packersretro-120x120.png" sizes="120x120" />
+    <link rel="apple-touch-icon" href="packersretro-144x144.png" sizes="144x144" />
+    <link rel="apple-touch-icon" href="packersretro-152x152.png" sizes="152x152" />
+    <meta name="application-name" content="Packers Nation Invasion" />
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-square64x64logo"
+        content="https://stahlwalker.github.io/greenbaypackers/packersretro-64x64.png" />
+    <meta name="msapplication-square70x70logo"
+        content="https://stahlwalker.github.io/greenbaypackers/packersretro-70x70.png" />
+    <meta name="msapplication-TileImage"
+        content="https://stahlwalker.github.io/greenbaypackers/packersretro-144x144.png" />
+    <meta name="msapplication-square150x150logo"
+        content="https://stahlwalker.github.io/greenbaypackers/packersretro-150x150.png" />
+    <meta name="msapplication-square310x150logo"
+        content="https://stahlwalker.github.io/greenbaypackers/packersretro-310x150.png" />
+    <meta name="msapplication-square310x310logo"
+        content="https://stahlwalker.github.io/greenbaypackers/packersretro-310x310.png" />
+
+    <meta property=“og:image” content=“https://stahlwalker.github.io/greenbaypackers/img/GBMapjpg” />
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" value="summary">
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="Packers Nation Invasion" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://stahlwalker.github.io/greenbaypackers/" />
+    <meta property="og:image" content="https://stahlwalker.github.io/greenbaypackers/img/GBMap.jpg" />
+    <meta property="og:description"
+        content="Packers Nation Invasion is a yearly trip my family and I take to support the Green Bay Packers as they take on road games" />
+    <meta property="fb:admins" content="330812921114307" />
+
+
+    <style>
+        header {
+            background: url(img/trophy.jpg);
+            background-size: cover;
+            background-position: center;
+            min-height: 1000px;
+        }
+
+
+        body {
+            /* font-family: 'Caveat', cursive; */
+            font-family: 'Poiret One', cursive;
+        }
+
+        nav .brand-logo {
+            position: absolute;
+            color: white;
+            display: inline-block;
+            font-size: 22px;
+            padding: 0;
+            font-weight: bold;
+            
+        }
+
+        nav ul a {
+            font-weight: bold;
+        }
+
+        .section {
+            padding-top: 4vw;
+            padding-bottom: 4vw;
+        }
+
+        .tabs .indicator {
+            background-color: rgb(36, 64, 55);
+        }
+
+        .tabs .tab a:focus,
+        .tabs .tab a:focus.active {
+            background: transparent;
+        }
+
+        @media screen and (max-width: 670px) {
+            header {
+                min-height: 500px;
+            }
+
+            .parallax-container {
+                position: relative;
+                overflow: hidden;
+                height: 390px;
+            }
+        }
+
+        .btn {
+            background-color: rgb(251, 194, 22);
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .datepicker-date-display {
+            -webkit-box-flex: 1;
+            -webkit-flex: 1 auto;
+            -ms-flex: 1 auto;
+            flex: 1 auto;
+            background-color: rgb(251, 194, 22);
+            color: #fff;
+            padding: 20px 22px;
+            font-weight: 500;
+        }
+
+        .green-text {
+            color: green !important;
+            font-size: 24px;
+        }
+
+        .datepicker-table td.is-today {
+            color: green;
+        }
+
+        .Single {
+            font-size: 50px;
+            color: rgb(251, 194, 22);
+        }
+
+        #demo {
+            font-size: 24px;
+            margin-top: -25px;
+        }
+
+        textarea.materialize-textarea:focus:not([readonly]) {
+            border-bottom: 1px solid green;
+            box-shadow: 0 1px 0 0 green;
+        }
+
+        .input-field {
+            color: green;
+        }
+
+        textarea.materialize-textarea:focus:focus:not([readonly])+label {
+            color: green;
+        }
+
+        input:not([type]):focus:focus:not([readonly])+label,
+        input[type=text]:not(.browswer-default):focus:not([readonly])+label,
+        input[type=email]:not(.browser-default):focus:not([readonly])+label,
+        textarea.materialize-textarea:focus:not([readonly])+label {
+            color: green;
+        }
+
+        input[type=email]:not(.browser-default):focus:not([readonly]) {
+            border-bottom: 1px solid green;
+            box-shadow: 0 1px 0 0 green;
+        }
+
+        .datepicker-table td.is-selected {
+            background-color: green;
+        }
+
+        .datepicker-cancel,
+        .datepicker-clear,
+        .datepicker-today,
+        .datepicker-done {
+            color: green;
+            padding: 0 1rem;
+        }
+
+        .page-footer .footer-copyright {
+            background-color: rgb(74, 182, 230);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- navbar -->
+    <header>
+        <nav class="nav-wrapper transparent">
+            <div class="container">
+                <a href="https://stahlwalker.github.io/greenbaypackers/" class="brand-logo">Fantasy Football Legends</a>
+                <a href="" class="sidenav-trigger" data-target="mobile-menu">
+                    <i class="material-icons">menu</i>
+                </a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="#Tradition">Scorecard</a></li>
+                    <li><a href="#Games">Gallery</a></li>
+                    <li><a href="#contact">Events</a></li>
+
+
+                    <!-- <li><a href="https://www.instagram.com/stahlwalker11/" class="btn-floating yellow darken-2"
+                            style="margin-top: 6px">
+                            <i class="fab fa-instagram"></i>
+                        </a></li>
+                    <li><a href="https://www.facebook.com/lucas.stahl.75" class="btn-floating yellow darken-2"
+                            style="margin-top: 6px">
+                            <i class="fab fa-facebook"></i>
+                        </a></li>
+                    <li><a href="https://twitter.com/LucasStahl11" class="btn-floating yellow darken-2"
+                            style="margin-top: 6px">
+                            <i class="fab fa-twitter"></i>
+                        </a></li>
+                    <li><a href="https://www.linkedin.com/in/lucasstahl" class="btn-floating yellow darken-2"
+                            style="margin-top: 6px">
+                            <i class="fab fa-linkedIn"></i>
+                        </a></li> -->
+
+                </ul>
+                <ul class="sidenav grey lighten-2" id="mobile-menu">
+                    <li><a href="#Tradition">Scorecard</a></li>
+                    <li><a href="#Games">Gallery</a></li>
+                    <li><a href="#contact">Events</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- services / tabs -->
+    <section class="container section scrollspy" id="Tradition">
+        <div class="row">
+            <div class="col s12 l4">
+                <h2 class="blue-text text-lighten-3">Fantasy Football Legends Showcase</h2>
+                <p>Started in 2013, a 10 member league with one goal, become the best of the best. Each season the winnings increase and the pressure to avoid the Toilet Bowl lingers. 
+                </p>
+                <!-- <p>On our journey, we get to take in the local festivities, eat amazing food and get away from the
+                    everyday grind. Packers fans have a great following and it’s truly amazing to see how an away team
+                    can come in and take over a stadium, there is nothing else like it.</p> -->
+                
+
+                <!-- Display the countdown timer in an element -->
+                <p><span style="color:rgb(74, 182, 230); font-size: 24px;">New Season Begins</span></p>
+                <p id="demo"></p>
+
+                <script>
+                    // Set the date we're counting down to
+                    var countDownDate = new Date("Sept 5, 2019 19:20:00").getTime();
+
+                    // Update the count down every 1 second
+                    var x = setInterval(function () {
+
+                        // Get todays date and time
+                        var now = new Date().getTime();
+
+                        // Find the distance between now and the count down date
+                        var distance = countDownDate - now;
+
+                        // Time calculations for days, hours, minutes and seconds
+                        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                        // Display the result in the element with id="demo"
+                        document.getElementById("demo").innerHTML = days + "d " + hours + "h " +
+                            minutes + "m " + seconds + "s ";
+
+                        // If the count down is finished, write some text 
+                        if (distance < 0) {
+                            clearInterval(x);
+                            document.getElementById("demo").innerHTML = "EXPIRED";
+                        }
+                    }, 1000);
+                </script>
+
+
+
+            </div>
+            <div class="col s12 l6 offset-l2">
+                <ul class="tabs">
+                    <li class="tab col s6">
+                        <a href="#home" class="blue-text text-lighten-1">Champions</a>
+                    </li>
+                    <li class="tab col s6">
+                        <a href="#away" class="red-text text-darken-5">Toilet Bowl</a>
+                    </li>
+                </ul>
+                <div class="col s12" id="home">
+                    <p class="flow-text blue-text text-lighten-2">WINNERS</p>
+                    <p>2018 The Ghost of Party Marty<span style="color:rgb(74, 182, 230); font-size: 22px;"> (Martin)</span></p>
+                    <p>2017 Rodger's Green Lanterns<span style="color:rgb(74, 182, 230); font-size: 22px;"> (Luke)</span></p>
+                    <p>2016 Power Bottoms<span style="color:rgb(74, 182, 230); font-size: 22px;"> (Chris)</span></p>
+                    <p>2015 Dirk Digglers<span style="color:rgb(74, 182, 230); font-size: 22px;"> (Conor)</span></p>
+                    <p>2014 Dillion Panthers<span style="color: rgb(74, 182, 230); font-size: 22px;"> (Weston)</span></p>
+                    <p>2013 Zompoc Deliver<span style="color:rgb(74, 182, 230); font-size: 22px;"> (Jared)</span></p>
+                </div>
+                <div class="col s12" id="away">
+                    <p class="flow-text red-text text-darken-5">LOSERS</p>
+                    <p>2018 The Fridge<span style="color:red; font-size: 22px;"> (Ethan)</span></p>
+                    <p>2017 Zompoc Delivery<span style="color:red; font-size: 22px;"> (Jared)</span></p>
+                    <p>2016 The Fridge<span style="color:red; font-size: 22px;"> (Ethan)</span></p>
+                    <p>2015 Chris Stark<span style="color:red; font-size: 22px;"> (Chris)</span></p>
+                    <p>2014 Grind House<span style="color:red; font-size: 22px;"> (Danny)</span></p>
+                    <p>2013 Team Ramrod<span style="color:red; font-size: 22px;"> (George)</span></p>
+                </div>
+            </div>
+            <div class="col s12 l6 offset-l2">
+
+                <!-- <p class="tab col s6">
+                    <a href="#home" class="green-text text-darken-1;">2019 Schedule</a>
+                    <img src="img/schedule.JPG" alt="" class="responsive-img materialboxed">
+                </p> -->
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- parallax -->
+    <div class="parallax-container">
+        <div class="parallax">
+            <img src="img/fantasy2.jpeg" id="map" alt="" class="responsive-img">
+        </div>
+    </div>
+
+    <!-- photo / grid -->
+    <section class="container section scrollspy" id="Games">
+        <div class="row">
+            <div class="col s12 l4 offset-l1 push-l7">
+                <img src="img/ffl.jpg" alt="" class="responsive-img materialboxed">
+            </div>
+            <div class="col s12 l6 offset-l1 pull-l5 right-align">
+                <h2 class="grey-text">2019 Season</h2>
+                <p>TBD</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 l4">
+                <img src="img/Martin3.png" alt="" class="responsive-img materialboxed">
+            </div>
+            <div class="col s12 l6 offset-l1">
+                <h2 class="grey-text">2018 Champion</h2>
+                <p>Team The Ghost of Party Marty defeated Takagomi Grubers to reign supreme.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 l4 offset-l1 push-l7">
+                <img src="img/Luke2.png" alt="" class="responsive-img materialboxed">
+            </div>
+            <div class="col s12 l6 offset-l1 pull-l5 right-align">
+                <h2 class="grey-text">2017 Champion</h2>
+                <p>9/11/16 Rodgers accounts for 3 TDs in 27-23 Packers Win!</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 l4">
+                <img src="img/Chris2.png" alt="" class="responsive-img materialboxed">
+            </div>
+            <div class="col s12 l6 offset-l1">
+                <h2 class="grey-text">2016 Champion</h2>
+                <p>10/12/14 Aaron Rodgers tosses TD with 3 seconds left for 27-24 Packers Win!</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 l4 offset-l1 push-l7">
+                <img src="img/Conor2.png" alt="" class="responsive-img materialboxed">
+            </div>
+            <div class="col s12 l6 offset-l1 pull-l5 right-align">
+                <h2 class="grey-text">2015 Champion</h2>
+                <p>Lambeau Field is the oldest continually operating NFL stadium. Known as The Frozen Tundra, Titletown
+                    USA.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 l4">
+                <img src="img/Weston2.png" alt="" class="responsive-img materialboxed">
+            </div>
+            <div class="col s12 l6 offset-l1">
+                <h2 class="grey-text">2014 Champion</h2>
+                <p>10/12/14 Aaron Rodgers tosses TD with 3 seconds left for 27-24 Packers Win!</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 l4 offset-l1 push-l7">
+                <img src="img/Jared2.png" alt="" class="responsive-img materialboxed">
+            </div>
+            <div class="col s12 l6 offset-l1 pull-l5 right-align">
+                <h2 class="grey-text">2013 Champion</h2>
+                <p>Lambeau Field is the oldest continually operating NFL stadium. Known as The Frozen Tundra, Titletown
+                    USA.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- parallax -->
+    <div class="parallax-container">
+        <div class="parallax">
+            <img src="img/toilet.png" alt="" class="responsive-img">
+        </div>
+    </div>
+
+<!-- photo / grid -->
+<section class="container section scrollspy" id="Games">
+    <div class="row">
+        <div class="col s12 l4 offset-l1 push-l7">
+            <img src="img/ToiletChamp2.png" alt="" class="responsive-img materialboxed">
+        </div>
+        <div class="col s12 l6 offset-l1 pull-l5 right-align">
+            <h2 class="grey-text">2019 Season</h2>
+            <p>TBD</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 l4">
+            <img src="img/Ethan2.png" alt="" class="responsive-img materialboxed">
+        </div>
+        <div class="col s12 l6 offset-l1">
+            <h2 class="grey-text">2018 Loser</h2>
+            <p>Team The Ghost of Party Marty defeated Takagomi Grubers to reign supreme.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 l4 offset-l1 push-l7">
+            <img src="img/JaredToil2.png" alt="" class="responsive-img materialboxed">
+        </div>
+        <div class="col s12 l6 offset-l1 pull-l5 right-align">
+            <h2 class="grey-text">2017 Loser</h2>
+            <p>9/11/16 Rodgers accounts for 3 TDs in 27-23 Packers Win!</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 l4">
+            <img src="img/Ethan2.png" alt="" class="responsive-img materialboxed">
+        </div>
+        <div class="col s12 l6 offset-l1">
+            <h2 class="grey-text">2016 Loser</h2>
+            <p>10/12/14 Aaron Rodgers tosses TD with 3 seconds left for 27-24 Packers Win!</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 l4 offset-l1 push-l7">
+            <img src="img/ChrisToil2.png" alt="" class="responsive-img materialboxed">
+        </div>
+        <div class="col s12 l6 offset-l1 pull-l5 right-align">
+            <h2 class="grey-text">2015 Loser</h2>
+            <p>Lambeau Field is the oldest continually operating NFL stadium. Known as The Frozen Tundra, Titletown
+                USA.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 l4">
+            <img src="img/ToiletChamp2.png" alt="" class="responsive-img materialboxed">
+        </div>
+        <div class="col s12 l6 offset-l1">
+            <h2 class="grey-text">2014 Loser</h2>
+            <p>10/12/14 Aaron Rodgers tosses TD with 3 seconds left for 27-24 Packers Win!</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 l4 offset-l1 push-l7">
+            <img src="img/ToiletChamp2.png" alt="" class="responsive-img materialboxed">
+        </div>
+        <div class="col s12 l6 offset-l1 pull-l5 right-align">
+            <h2 class="grey-text">2013 Loser</h2>
+            <p>Lambeau Field is the oldest continually operating NFL stadium. Known as The Frozen Tundra, Titletown
+                USA.</p>
+        </div>
+    </div>
+</section>
+
+<!-- parallax -->
+<div class="parallax-container">
+    <div class="parallax">
+        <img src="img/nfl2.jpg" id="map" alt="" class="responsive-img">
+    </div>
+</div>
+
+    <!-- contact form -->
+    <section class="section container scrollspy" id="contact">
+        <div class="row">
+            <div class="col s12 l5">
+                <h2 class="grey-text text-darken-2">Members</h2>
+                <p>I love hearing from other fans that travel and support their teams, whether it’s for the Packers or
+                    against. If you know of any hidden gems in and around the 32 stadiums, please reach out and share
+                    your story. </p>
+            </div>
+            <!--  -->
+        </div>
+    </section>
+
+    <!-- footer -->
+    <footer class="page-footer grey darken-3">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 l6">
+                    <h5>About Me</h5>
+                    <p>My name is Lucas Stahl and I'm a web designer, marketer and Packers fan.</p>
+                    <p>My family and I make it a point to support the team yearly by traveling to a new city to take in
+                        the festivities.</p>
+                </div>
+                <div class="col s12 l4 offset-l2">
+                    <h5>Connect</h5>
+                    <ul>
+                        <li><a href="https://www.facebook.com/lucas.stahl.75"
+                                class="blue-text text-lighten-3">Facebook</a>
+                            <i class="fab fa-facebook"></i>
+                        </li>
+                        <li><a href="https://twitter.com/LucasStahl11" class="blue-text text-lighten-3">Twitter</a>
+                            <i class="fab fa-twitter"></i>
+                        </li>
+                        <li><a href="https://www.linkedin.com/in/lucasstahl"
+                                class="blue-text text-lighten-3">LinkedIn</a>
+                            <i class="fab fa-linkedIn"></i>
+                        </li>
+                        <li><a href="https://www.instagram.com/stahlwalker11/"
+                                class="blue-text text-lighten-3">Instagram</a>
+                            <i class="fab fa-instagram"></i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright yellow-text text-darken-2">
+            <div class="container center-align"><a href="https://www.stahlwalker.org/">&copy; 2019 Stahlwalker</a></div>
+        </div>
+    </footer>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.sidenav').sidenav();
+            $('.materialboxed').materialbox();
+            $('.parallax').parallax();
+            $('.tabs').tabs();
+            $('.datepicker').datepicker({
+                // disableWeekends: true
+            });
+            $('.tooltipped').tooltip();
+            $('.scrollspy').scrollSpy();
+
+            $('.sidenav li').click(() => {
+                $('.sidenav').sidenav('close');
+            });
+
+            $({
+                Counter: 0
+            }).animate({
+                Counter: $('.Single').text()
+            }, {
+                duration: 1000,
+                easing: 'swing',
+                step: function () {
+                    $('.Single').text(Math.ceil(this.Counter));
+                }
+            });
+
+        });
+    </script>
+</body>
+
+</html>
