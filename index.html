@@ -664,11 +664,13 @@
                 display: none;
                 flex-direction: column;
                 width: 100%;
-                background: var(--bg-panel);
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(10px);
                 padding: 20px;
                 position: absolute;
                 top: 60px;
                 left: 0;
+                border-bottom: 2px solid var(--border-primary);
             }
 
             nav ul.open {
@@ -677,6 +679,8 @@
 
             nav a {
                 font-size: 9px;
+                padding: 10px;
+                display: block;
             }
 
             .mobile-menu-btn {
