@@ -3399,8 +3399,17 @@
         function toggleAudio() {
             const audio = document.getElementById('zelda-audio');
             const navButton = document.getElementById('audio-toggle');
+            const tecmoAudio = document.getElementById('tecmo-audio');
+            const terminalButton = document.getElementById('terminal-audio-toggle');
 
             if (audio.paused) {
+                // Stop tecmo audio if playing
+                if (!tecmoAudio.paused) {
+                    tecmoAudio.pause();
+                    tecmoAudio.currentTime = 0;
+                    terminalButton.classList.remove('playing');
+                }
+
                 // Start from beginning
                 audio.currentTime = 0;
                 audio.play().catch(err => {
@@ -3425,8 +3434,17 @@
         function toggleTerminalAudio() {
             const audio = document.getElementById('tecmo-audio');
             const terminalButton = document.getElementById('terminal-audio-toggle');
+            const zeldaAudio = document.getElementById('zelda-audio');
+            const navButton = document.getElementById('audio-toggle');
 
             if (audio.paused) {
+                // Stop zelda audio if playing
+                if (!zeldaAudio.paused) {
+                    zeldaAudio.pause();
+                    zeldaAudio.currentTime = 0;
+                    navButton.classList.remove('playing');
+                }
+
                 // Start from beginning
                 audio.currentTime = 0;
                 audio.play().catch(err => {
