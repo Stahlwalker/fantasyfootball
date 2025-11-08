@@ -874,6 +874,48 @@
                 height: 40px;
                 font-size: 16px;
             }
+
+            /* Terminal - Mobile */
+            .terminal-window {
+                width: 95%;
+                max-height: 70vh;
+            }
+
+            .terminal-title {
+                font-size: 8px;
+            }
+
+            .terminal-body {
+                font-size: 12px;
+                padding: 15px;
+                height: 300px;
+            }
+
+            .terminal-input {
+                font-size: 16px; /* 16px prevents iOS zoom on focus */
+            }
+
+            .terminal-prompt {
+                font-size: 12px;
+            }
+
+            .terminal-text {
+                font-size: 12px;
+            }
+
+            .suggestion-item {
+                padding: 12px 15px; /* Larger touch target */
+                font-size: 14px;
+            }
+
+            .autocomplete-suggestions {
+                max-height: 120px;
+            }
+
+            .terminal-btn {
+                width: 16px;
+                height: 16px;
+            }
         }
 
         /* Score Animation */
@@ -965,6 +1007,272 @@
 
         .game-modal.active {
             display: flex;
+        }
+
+        /* Terminal Window */
+        .terminal-window {
+            background: var(--bg-secondary);
+            border: 4px solid var(--border-primary);
+            border-radius: 0;
+            max-width: 800px;
+            width: 90%;
+            max-height: 80vh;
+            box-shadow:
+                0 0 60px var(--border-primary),
+                inset 0 0 40px var(--shadow-color);
+            animation: scaleIn 0.5s ease-out;
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            background: var(--bg-primary);
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 3px solid var(--border-primary);
+            position: relative;
+        }
+
+        .terminal-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .terminal-btn {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 0 10px currentColor;
+        }
+
+        .terminal-btn.close {
+            background: #ff5f56;
+            border: 2px solid #ff5f56;
+        }
+        .terminal-btn.minimize {
+            background: #ffbd2e;
+            border: 2px solid #ffbd2e;
+        }
+        .terminal-btn.maximize {
+            background: #27c93f;
+            border: 2px solid #27c93f;
+        }
+
+        .terminal-btn:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 20px currentColor;
+        }
+
+        .terminal-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
+            color: var(--border-primary);
+            text-shadow: 0 0 10px var(--border-primary);
+            flex: 1;
+            text-align: center;
+        }
+
+        .terminal-close-btn {
+            position: absolute;
+            right: 15px;
+            background: none;
+            border: 3px solid var(--text-accent);
+            color: var(--text-accent);
+            font-family: 'Press Start 2P', cursive;
+            font-size: 18px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .terminal-close-btn:hover {
+            background: var(--text-accent);
+            color: var(--bg-primary);
+            box-shadow: 0 0 30px var(--text-accent);
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        .terminal-esc-hint {
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 8px;
+            color: var(--text-secondary);
+            opacity: 0.5;
+            text-shadow: 0 0 5px var(--text-secondary);
+        }
+
+        .terminal-body {
+            background: var(--bg-primary);
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: var(--border-secondary);
+            height: 400px;
+            overflow-y: auto;
+            line-height: 1.8;
+        }
+
+        .terminal-body::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .terminal-body::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        .terminal-body::-webkit-scrollbar-thumb {
+            background: var(--border-secondary);
+            box-shadow: 0 0 10px var(--border-secondary);
+        }
+
+        .terminal-line {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .terminal-prompt {
+            color: var(--text-accent);
+            margin-right: 10px;
+            font-weight: bold;
+            text-shadow: 0 0 10px var(--text-accent);
+        }
+
+        .terminal-text {
+            color: var(--text-primary);
+        }
+
+        .terminal-input-line {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .terminal-input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-primary);
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            flex: 1;
+            padding: 0 5px;
+        }
+
+        .terminal-cursor {
+            color: var(--text-accent);
+            animation: blink 1s infinite;
+            text-shadow: 0 0 10px var(--text-accent);
+        }
+
+        .autocomplete-suggestions {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-secondary);
+            border-radius: 0;
+            margin-top: 10px;
+            max-height: 150px;
+            overflow-y: auto;
+            box-shadow: 0 0 20px var(--shadow-color);
+        }
+
+        .suggestion-item {
+            padding: 10px 15px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Courier New', monospace;
+            border-bottom: 1px solid var(--bg-primary);
+        }
+
+        .suggestion-item:hover,
+        .suggestion-item.selected {
+            background: var(--border-secondary);
+            color: var(--bg-primary);
+            box-shadow: 0 0 20px var(--border-secondary);
+        }
+
+        .terminal-error {
+            color: var(--text-accent);
+            text-shadow: 0 0 15px var(--text-accent);
+        }
+
+        .terminal-success {
+            color: var(--border-primary);
+            text-shadow: 0 0 15px var(--border-primary);
+        }
+
+        .terminal-warning {
+            color: #ff0080;
+            text-shadow: 0 0 15px #ff0080;
+        }
+
+        /* Space Invaders Animation */
+        .invaders-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+        }
+
+        .invader-row {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            animation: invaderMarch 2s ease-in-out;
+        }
+
+        .invader {
+            color: var(--border-secondary);
+            text-shadow: 0 0 10px var(--border-secondary);
+            animation: invaderBlink 0.5s infinite alternate;
+        }
+
+        .invader-row:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .invader-row:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes invaderMarch {
+            0% {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            50% {
+                transform: translateX(0);
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes invaderBlink {
+            from {
+                text-shadow: 0 0 10px var(--border-secondary);
+            }
+            to {
+                text-shadow: 0 0 20px var(--border-secondary), 0 0 30px var(--border-secondary);
+            }
         }
 
         .game-screen {
@@ -1606,37 +1914,36 @@
         </div>
     </header>
 
-    <!-- Game Modal -->
+    <!-- Terminal Modal -->
     <div class="game-modal" id="game-modal">
-        <div class="game-screen">
-            <button class="modal-close" onclick="closeGame()">✕</button>
-            <div class="game-title">GLORY OR SHAME</div>
-            <div class="game-question" id="game-question">
-                ARE YOU A CHAMPION<br>OR A LOSER?
-            </div>
-            <div class="game-buttons" id="game-buttons">
-                <button class="game-button" onclick="selectChampion()">CHAMPION</button>
-                <button class="game-button loser-btn" onclick="selectLoser()">LOSER</button>
-            </div>
-            <div id="name-selector">
-                <div class="player-grid">
-                    <button class="player-name-btn" onclick="selectPlayerName('Luke')">LUKE</button>
-                    <button class="player-name-btn" onclick="selectPlayerName('Martin')">MARTIN</button>
-                    <button class="player-name-btn" onclick="selectPlayerName('Jared')">JARED</button>
-                    <button class="player-name-btn" onclick="selectPlayerName('Tony')">TONY</button>
-                    <button class="player-name-btn" onclick="selectPlayerName('Chris')">CHRIS</button>
-                    <button class="player-name-btn" onclick="selectPlayerName('Weston')">WESTON</button>
-                    <button class="player-name-btn" onclick="selectPlayerName('Conor')">CONOR</button>
-                    <button class="player-name-btn" onclick="selectPlayerName('Brian')">BRIAN</button>
-                    <button class="player-name-btn" onclick="selectPlayerName('Ethan')">ETHAN</button>
-                    <button class="player-name-btn" onclick="selectPlayerName('Pat')">PAT</button>
-                    <button class="player-name-btn" onclick="selectPlayerName('Scott')">SCOTT</button>
-                    <button class="player-name-btn" onclick="selectPlayerName('Danny')">DANNY</button>
-                    <button class="player-name-btn" onclick="selectPlayerName('George')">GEORGE</button>
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <span class="terminal-btn close" onclick="closeGame()"></span>
+                    <span class="terminal-btn minimize"></span>
+                    <span class="terminal-btn maximize"></span>
                 </div>
-                <button class="pixel-button" onclick="verifyPlayer()">VERIFY</button>
+                <div class="terminal-title">fantasy-football-terminal</div>
+                <button class="terminal-close-btn" onclick="closeGame()">✕</button>
             </div>
-            <div class="game-response" id="game-response"></div>
+            <div class="terminal-body" id="terminal-body">
+                <div class="terminal-line">
+                    <span class="terminal-prompt">$</span>
+                    <span class="terminal-text">Welcome to Fantasy Football Legends Terminal v1.0</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="terminal-prompt">$</span>
+                    <span class="terminal-text">Initializing verification system...</span>
+                </div>
+                <div class="terminal-line" id="terminal-output"></div>
+                <div class="terminal-input-line" id="input-line" style="display: none;">
+                    <span class="terminal-prompt">></span>
+                    <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" />
+                    <span class="terminal-cursor">_</span>
+                </div>
+                <div class="autocomplete-suggestions" id="autocomplete"></div>
+                <div class="terminal-esc-hint">Press ESC to exit</div>
+            </div>
         </div>
     </div>
 
@@ -2347,34 +2654,288 @@
             }
         });
 
-        // Game Modal Functions
-        let selectedClaim = ''; // 'champion' or 'loser'
+        // Terminal Game Functions
+        let terminalState = 'init'; // 'init', 'asking-status', 'asking-name', 'verifying', 'complete'
+        let selectedClaim = '';
         let selectedPlayerName = '';
+        const playerNames = ['Luke', 'Martin', 'Jared', 'Tony', 'Chris', 'Weston', 'Conor', 'Brian', 'Ethan', 'Pat', 'Scott', 'Danny', 'George'];
+        let selectedSuggestionIndex = -1;
 
-        function startGame() {
-            const modal = document.getElementById('game-modal');
-            modal.classList.add('active');
-            // Reset the game state
-            document.getElementById('game-response').textContent = '';
-            document.getElementById('game-buttons').style.display = 'flex';
-            document.getElementById('name-selector').style.display = 'none';
-            document.getElementById('game-question').style.display = 'block';
-            selectedClaim = '';
-            selectedPlayerName = '';
-            // Remove selected class from all player buttons
-            document.querySelectorAll('.player-name-btn').forEach(btn => {
-                btn.classList.remove('selected');
+        function typeText(element, text, speed = 30) {
+            return new Promise((resolve) => {
+                let i = 0;
+                const interval = setInterval(() => {
+                    if (i < text.length) {
+                        element.textContent += text.charAt(i);
+                        i++;
+                    } else {
+                        clearInterval(interval);
+                        resolve();
+                    }
+                }, speed);
             });
         }
 
-        function selectPlayerName(name) {
-            selectedPlayerName = name;
-            // Remove selected class from all buttons
-            document.querySelectorAll('.player-name-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-            // Add selected class to clicked button
-            event.target.classList.add('selected');
+        async function startGame() {
+            const modal = document.getElementById('game-modal');
+            modal.classList.add('active');
+
+            terminalState = 'init';
+            selectedClaim = '';
+            selectedPlayerName = '';
+
+            // Clear terminal and reset
+            const output = document.getElementById('terminal-output');
+            output.innerHTML = '';
+            document.getElementById('input-line').style.display = 'none';
+            document.getElementById('autocomplete').innerHTML = '';
+
+            // Type out initial question
+            await new Promise(resolve => setTimeout(resolve, 500));
+            const line1 = document.createElement('div');
+            line1.className = 'terminal-line';
+            line1.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text"></span>';
+            output.appendChild(line1);
+
+            await typeText(line1.querySelector('.terminal-text'), 'Are you a CHAMPION or LOSER? (type: champion/loser)');
+
+            terminalState = 'asking-status';
+            showInput();
+        }
+
+        function showInput() {
+            const inputLine = document.getElementById('input-line');
+            const input = document.getElementById('terminal-input');
+            inputLine.style.display = 'flex';
+            input.value = '';
+
+            // For mobile: scroll to input and focus
+            setTimeout(() => {
+                input.focus();
+                // Scroll terminal to bottom to ensure input is visible above keyboard
+                const terminalBody = document.getElementById('terminal-body');
+                terminalBody.scrollTop = terminalBody.scrollHeight;
+            }, 100);
+        }
+
+        function hideInput() {
+            document.getElementById('input-line').style.display = 'none';
+        }
+
+        async function handleTerminalInput(value) {
+            const output = document.getElementById('terminal-output');
+            const input = document.getElementById('terminal-input');
+
+            // Echo user input
+            const echo = document.createElement('div');
+            echo.className = 'terminal-line';
+            echo.innerHTML = `<span class="terminal-prompt">></span><span class="terminal-text">${value}</span>`;
+            output.appendChild(echo);
+
+            hideInput();
+            document.getElementById('autocomplete').innerHTML = '';
+
+            if (terminalState === 'asking-status') {
+                const status = value.toLowerCase();
+                if (status === 'champion' || status === 'loser') {
+                    selectedClaim = status;
+
+                    const response = document.createElement('div');
+                    response.className = 'terminal-line';
+                    response.innerHTML = '<span class="terminal-prompt">$</span><span class="terminal-text terminal-success"></span>';
+                    output.appendChild(response);
+                    await typeText(response.querySelector('.terminal-text'), `Claim registered: ${status.toUpperCase()}`);
+
+                    await new Promise(resolve => setTimeout(resolve, 300));
+                    const question = document.createElement('div');
+                    question.className = 'terminal-line';
+                    question.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text"></span>';
+                    output.appendChild(question);
+                    await typeText(question.querySelector('.terminal-text'), 'Enter your name to verify:');
+
+                    terminalState = 'asking-name';
+                    showInput();
+                } else {
+                    const error = document.createElement('div');
+                    error.className = 'terminal-line';
+                    error.innerHTML = '<span class="terminal-prompt">$</span><span class="terminal-text terminal-error"></span>';
+                    output.appendChild(error);
+                    await typeText(error.querySelector('.terminal-text'), 'Error: Invalid input. Please type "champion" or "loser"');
+
+                    showInput();
+                }
+            } else if (terminalState === 'asking-name') {
+                const name = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+
+                if (playerNames.includes(name)) {
+                    selectedPlayerName = name;
+                    await verifyPlayer();
+                } else {
+                    const error = document.createElement('div');
+                    error.className = 'terminal-line';
+                    error.innerHTML = '<span class="terminal-prompt">$</span><span class="terminal-text terminal-error"></span>';
+                    output.appendChild(error);
+                    await typeText(error.querySelector('.terminal-text'), `Error: Player "${value}" not found. Try again.`);
+
+                    showInput();
+                }
+            }
+
+            // Scroll to bottom
+            document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight;
+        }
+
+        async function verifyPlayer() {
+            const output = document.getElementById('terminal-output');
+            const player = playerData[selectedPlayerName];
+            const isChampion = player.championships > 0;
+            const isLoser = player.toiletBowls > 0;
+
+            // Verification animation
+            const verifying = document.createElement('div');
+            verifying.className = 'terminal-line';
+            verifying.innerHTML = '<span class="terminal-prompt">$</span><span class="terminal-text"></span>';
+            output.appendChild(verifying);
+            await typeText(verifying.querySelector('.terminal-text'), 'Verifying against database...');
+
+            await new Promise(resolve => setTimeout(resolve, 800));
+
+            let response = '';
+            let navigateTo = '';
+            let colorClass = '';
+
+            if (selectedClaim === 'champion') {
+                if (isChampion && !isLoser) {
+                    response = `✓ VERIFICATION SUCCESSFUL\n${selectedPlayerName.toUpperCase()} is ${player.championships}X CHAMPION\nAccess granted to Hall of Glory...`;
+                    navigateTo = 'champions';
+                    colorClass = 'terminal-success';
+                } else if (isChampion && isLoser) {
+                    response = `⚠ PARTIAL MATCH\n${selectedPlayerName.toUpperCase()} is ${player.championships}X champion BUT also ${player.toiletBowls}X toilet bowl loser\nComplicated record detected...`;
+                    navigateTo = 'champions';
+                    colorClass = 'terminal-warning';
+                } else if (isLoser && !isChampion) {
+                    response = `✗ VERIFICATION FAILED\n${selectedPlayerName.toUpperCase()} has NEVER won a championship\n${player.toiletBowls}X toilet bowl loser detected\nRedirecting to Hall of Shame...`;
+                    navigateTo = 'losers';
+                    colorClass = 'terminal-error';
+                } else {
+                    response = `✗ VERIFICATION FAILED\n${selectedPlayerName.toUpperCase()} has never won\nNo championship record found\nRedirecting to roster...`;
+                    navigateTo = 'members';
+                    colorClass = 'terminal-warning';
+                }
+            } else {
+                if (isLoser && !isChampion) {
+                    response = `✓ VERIFICATION SUCCESSFUL\n${selectedPlayerName.toUpperCase()} is ${player.toiletBowls}X TOILET BOWL LOSER\nHonesty appreciated. Accessing Hall of Shame...`;
+                    navigateTo = 'losers';
+                    colorClass = 'terminal-success';
+                } else if (isLoser && isChampion) {
+                    response = `⚠ PARTIAL MATCH\n${selectedPlayerName.toUpperCase()} is ${player.toiletBowls}X loser BUT also ${player.championships}X champion\nHumble claim accepted...`;
+                    navigateTo = 'losers';
+                    colorClass = 'terminal-warning';
+                } else if (isChampion && !isLoser) {
+                    response = `✗ FALSE MODESTY DETECTED\n${selectedPlayerName.toUpperCase()} is ${player.championships}X CHAMPION\nNever lost toilet bowl\nRedirecting to Hall of Glory...`;
+                    navigateTo = 'champions';
+                    colorClass = 'terminal-error';
+                } else {
+                    response = `⚠ INTERESTING CLAIM\n${selectedPlayerName.toUpperCase()} has never won OR lost\nPerfectly average record\nRedirecting to roster...`;
+                    navigateTo = 'members';
+                    colorClass = 'terminal-warning';
+                }
+            }
+
+            const result = document.createElement('div');
+            result.className = 'terminal-line';
+            result.innerHTML = `<span class="terminal-prompt">$</span><span class="terminal-text ${colorClass}"></span>`;
+            output.appendChild(result);
+
+            // Type multi-line response
+            const lines = response.split('\n');
+            for (let i = 0; i < lines.length; i++) {
+                if (i > 0) {
+                    result.querySelector('.terminal-text').innerHTML += '<br>';
+                }
+                await typeText(result.querySelector('.terminal-text'), lines[i], 20);
+            }
+
+            // Show Space Invaders animation
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            await showSpaceInvaders();
+
+            // Navigate after animation
+            setTimeout(() => {
+                closeGame();
+                document.getElementById(navigateTo).scrollIntoView({ behavior: 'smooth' });
+            }, 500);
+        }
+
+        async function showSpaceInvaders() {
+            const output = document.getElementById('terminal-output');
+
+            // Create invaders container
+            const invadersDiv = document.createElement('div');
+            invadersDiv.className = 'invaders-container';
+            invadersDiv.innerHTML = `
+                <div class="invader-row">
+                    <span class="invader">👾</span>
+                    <span class="invader">👾</span>
+                    <span class="invader">👾</span>
+                    <span class="invader">👾</span>
+                    <span class="invader">👾</span>
+                </div>
+                <div class="invader-row">
+                    <span class="invader">👾</span>
+                    <span class="invader">👾</span>
+                    <span class="invader">👾</span>
+                    <span class="invader">👾</span>
+                    <span class="invader">👾</span>
+                </div>
+                <div class="invader-row">
+                    <span class="invader">👾</span>
+                    <span class="invader">👾</span>
+                    <span class="invader">👾</span>
+                    <span class="invader">👾</span>
+                    <span class="invader">👾</span>
+                </div>
+            `;
+
+            output.appendChild(invadersDiv);
+
+            // Scroll to bottom
+            document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight;
+
+            // Wait for animation to complete
+            await new Promise(resolve => setTimeout(resolve, 2500));
+        }
+
+        function showAutocomplete(value) {
+            const autocomplete = document.getElementById('autocomplete');
+
+            if (!value || terminalState !== 'asking-name') {
+                autocomplete.innerHTML = '';
+                selectedSuggestionIndex = -1;
+                return;
+            }
+
+            const matches = playerNames.filter(name =>
+                name.toLowerCase().startsWith(value.toLowerCase())
+            );
+
+            if (matches.length === 0) {
+                autocomplete.innerHTML = '';
+                selectedSuggestionIndex = -1;
+                return;
+            }
+
+            autocomplete.innerHTML = matches.map((name, index) =>
+                `<div class="suggestion-item ${index === selectedSuggestionIndex ? 'selected' : ''}" onclick="selectSuggestion('${name}')">${name}</div>`
+            ).join('');
+        }
+
+        function selectSuggestion(name) {
+            document.getElementById('terminal-input').value = name;
+            document.getElementById('autocomplete').innerHTML = '';
+            selectedSuggestionIndex = -1;
+            // Auto-submit the selected name
+            handleTerminalInput(name);
         }
 
         function closeGame() {
@@ -2382,82 +2943,40 @@
             modal.classList.remove('active');
         }
 
-        function selectChampion() {
-            selectedClaim = 'champion';
-            document.getElementById('game-buttons').style.display = 'none';
-            document.getElementById('game-question').textContent = 'SELECT YOUR NAME TO VERIFY...';
-            document.getElementById('name-selector').style.display = 'block';
-        }
+        // Terminal input event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            const input = document.getElementById('terminal-input');
 
-        function selectLoser() {
-            selectedClaim = 'loser';
-            document.getElementById('game-buttons').style.display = 'none';
-            document.getElementById('game-question').textContent = 'SELECT YOUR NAME TO VERIFY...';
-            document.getElementById('name-selector').style.display = 'block';
-        }
+            input.addEventListener('input', function(e) {
+                showAutocomplete(e.target.value);
+            });
 
-        function verifyPlayer() {
-            if (!selectedPlayerName) {
-                document.getElementById('game-response').textContent = 'PICK A NAME FIRST!';
-                return;
-            }
+            input.addEventListener('keydown', function(e) {
+                const suggestions = document.querySelectorAll('.suggestion-item');
 
-            const player = playerData[selectedPlayerName];
-            const isChampion = player.championships > 0;
-            const isLoser = player.toiletBowls > 0;
-
-            document.getElementById('name-selector').style.display = 'none';
-            document.getElementById('game-question').style.display = 'none';
-
-            let response = '';
-            let navigateTo = '';
-
-            if (selectedClaim === 'champion') {
-                if (isChampion && !isLoser) {
-                    // Pure champion - telling the truth!
-                    response = `TRUTH DETECTED!\n\n${selectedPlayerName.toUpperCase()} IS A CHAMPION!\n${player.championships}X WINNER!\n\nENTERING HALL OF GLORY...`;
-                    navigateTo = 'champions';
-                } else if (isChampion && isLoser) {
-                    // Both - technically true but...
-                    response = `TECHNICALLY CORRECT...\n\nBUT ${selectedPlayerName.toUpperCase()} IS ALSO A\n${player.toiletBowls}X TOILET BOWL LOSER!\n\nCOMPLICATED CAREER!`;
-                    navigateTo = 'champions';
-                } else if (isLoser && !isChampion) {
-                    // Liar! Only a loser
-                    response = `LIAR DETECTED!\n\n${selectedPlayerName.toUpperCase()} HAS NEVER WON!\n\nYOU'RE A ${player.toiletBowls}X LOSER!\n\nTO THE HALL OF SHAME!`;
-                    navigateTo = 'losers';
-                } else {
-                    // Never won or lost
-                    response = `DREAMER DETECTED!\n\n${selectedPlayerName.toUpperCase()} HAS NEVER WON!\n\nSTILL CHASING GLORY!\n\nVISIT THE ROSTER INSTEAD...`;
-                    navigateTo = 'members';
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (input.value.trim()) {
+                        handleTerminalInput(input.value.trim());
+                    }
+                } else if (e.key === 'ArrowDown' && suggestions.length > 0) {
+                    e.preventDefault();
+                    selectedSuggestionIndex = Math.min(selectedSuggestionIndex + 1, suggestions.length - 1);
+                    showAutocomplete(input.value);
+                } else if (e.key === 'ArrowUp' && suggestions.length > 0) {
+                    e.preventDefault();
+                    selectedSuggestionIndex = Math.max(selectedSuggestionIndex - 1, -1);
+                    showAutocomplete(input.value);
+                } else if (e.key === 'Tab' && suggestions.length > 0) {
+                    e.preventDefault();
+                    if (selectedSuggestionIndex >= 0) {
+                        selectSuggestion(suggestions[selectedSuggestionIndex].textContent);
+                    } else {
+                        selectSuggestion(suggestions[0].textContent);
+                    }
                 }
-            } else { // selectedClaim === 'loser'
-                if (isLoser && !isChampion) {
-                    // Pure loser - telling the truth!
-                    response = `HONESTY RESPECTED!\n\n${selectedPlayerName.toUpperCase()} IS A\n${player.toiletBowls}X TOILET BOWL LOSER!\n\nEMBRACING THE SHAME!`;
-                    navigateTo = 'losers';
-                } else if (isLoser && isChampion) {
-                    // Both - technically true but...
-                    response = `HUMBLE TRUTH...\n\nBUT ${selectedPlayerName.toUpperCase()} IS ALSO A\n${player.championships}X CHAMPION!\n\nSEEN BOTH SIDES!`;
-                    navigateTo = 'losers';
-                } else if (isChampion && !isLoser) {
-                    // Liar! Only a champion
-                    response = `FALSE MODESTY!\n\n${selectedPlayerName.toUpperCase()} IS A\n${player.championships}X CHAMPION!\n\nQUIT THE ACT!\n\nTO THE HALL OF GLORY!`;
-                    navigateTo = 'champions';
-                } else {
-                    // Never won or lost
-                    response = `INTERESTING CLAIM...\n\n${selectedPlayerName.toUpperCase()} HAS NEVER LOST!\n\nBUT NEVER WON EITHER!\n\nPERFECTLY AVERAGE!`;
-                    navigateTo = 'members';
-                }
-            }
-
-            document.getElementById('game-response').textContent = response;
-
-            // Navigate after delay
-            setTimeout(() => {
-                closeGame();
-                document.getElementById(navigateTo).scrollIntoView({ behavior: 'smooth' });
-            }, 4000);
-        }
+            });
+        });
 
         // Player Stats Data
         const playerData = {
