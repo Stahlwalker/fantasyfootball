@@ -849,6 +849,31 @@
                 min-height: 200px;
                 background-attachment: scroll;
             }
+
+            /* Player Name Selector - Mobile */
+            .player-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .player-name-btn {
+                font-size: 8px;
+                padding: 12px 8px;
+            }
+
+            .pixel-button {
+                font-size: 10px;
+                padding: 12px 20px;
+            }
+
+            /* Modal Close - Mobile */
+            .modal-close {
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
         }
 
         /* Score Animation */
@@ -881,6 +906,48 @@
             transform: translateY(-3px);
         }
 
+        /* Player Name Selector */
+        #name-selector {
+            display: none;
+            margin: 30px 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .player-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .player-name-btn {
+            background: var(--bg-panel);
+            border: 3px solid var(--border-secondary);
+            color: var(--border-secondary);
+            padding: 15px 10px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .player-name-btn:hover {
+            background: var(--border-secondary);
+            color: var(--bg-primary);
+            box-shadow: 0 0 30px var(--border-secondary);
+            transform: translateY(-3px);
+        }
+
+        .player-name-btn.selected {
+            background: var(--text-accent);
+            color: var(--bg-primary);
+            border-color: var(--text-accent);
+            box-shadow: 0 0 40px var(--text-accent);
+        }
+
         /* Game Modal */
         .game-modal {
             display: none;
@@ -911,6 +978,33 @@
                 0 0 60px var(--border-primary),
                 inset 0 0 40px var(--shadow-color);
             animation: scaleIn 0.5s ease-out;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: 3px solid var(--border-primary);
+            color: var(--border-primary);
+            font-family: 'Press Start 2P', cursive;
+            font-size: 20px;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            background: var(--border-primary);
+            color: var(--bg-primary);
+            box-shadow: 0 0 30px var(--border-primary);
+            transform: rotate(90deg) scale(1.1);
         }
 
         @keyframes scaleIn {
@@ -1515,21 +1609,41 @@
     <!-- Game Modal -->
     <div class="game-modal" id="game-modal">
         <div class="game-screen">
-            <div class="game-title">PLAYER SELECT</div>
-            <div class="game-question">
+            <button class="modal-close" onclick="closeGame()">✕</button>
+            <div class="game-title">GLORY OR SHAME</div>
+            <div class="game-question" id="game-question">
                 ARE YOU A CHAMPION<br>OR A LOSER?
             </div>
-            <div class="game-response" id="game-response"></div>
             <div class="game-buttons" id="game-buttons">
                 <button class="game-button" onclick="selectChampion()">CHAMPION</button>
                 <button class="game-button loser-btn" onclick="selectLoser()">LOSER</button>
             </div>
+            <div id="name-selector">
+                <div class="player-grid">
+                    <button class="player-name-btn" onclick="selectPlayerName('Luke')">LUKE</button>
+                    <button class="player-name-btn" onclick="selectPlayerName('Martin')">MARTIN</button>
+                    <button class="player-name-btn" onclick="selectPlayerName('Jared')">JARED</button>
+                    <button class="player-name-btn" onclick="selectPlayerName('Tony')">TONY</button>
+                    <button class="player-name-btn" onclick="selectPlayerName('Chris')">CHRIS</button>
+                    <button class="player-name-btn" onclick="selectPlayerName('Weston')">WESTON</button>
+                    <button class="player-name-btn" onclick="selectPlayerName('Conor')">CONOR</button>
+                    <button class="player-name-btn" onclick="selectPlayerName('Brian')">BRIAN</button>
+                    <button class="player-name-btn" onclick="selectPlayerName('Ethan')">ETHAN</button>
+                    <button class="player-name-btn" onclick="selectPlayerName('Pat')">PAT</button>
+                    <button class="player-name-btn" onclick="selectPlayerName('Scott')">SCOTT</button>
+                    <button class="player-name-btn" onclick="selectPlayerName('Danny')">DANNY</button>
+                    <button class="player-name-btn" onclick="selectPlayerName('George')">GEORGE</button>
+                </div>
+                <button class="pixel-button" onclick="verifyPlayer()">VERIFY</button>
+            </div>
+            <div class="game-response" id="game-response"></div>
         </div>
     </div>
 
     <!-- Player Stats Modal -->
     <div class="game-modal" id="player-modal">
         <div class="game-screen">
+            <button class="modal-close" onclick="closePlayerModal()">✕</button>
             <div class="game-title" id="player-name" style="animation: blink 1.5s infinite, pulse 2s infinite;"></div>
             <div id="player-icon" style="font-size: 64px; margin: 20px 0; animation: float 3s ease-in-out infinite;"></div>
             <div class="game-response" id="player-stats" style="white-space: pre-line;"></div>
@@ -2234,12 +2348,33 @@
         });
 
         // Game Modal Functions
+        let selectedClaim = ''; // 'champion' or 'loser'
+        let selectedPlayerName = '';
+
         function startGame() {
             const modal = document.getElementById('game-modal');
             modal.classList.add('active');
             // Reset the game state
             document.getElementById('game-response').textContent = '';
             document.getElementById('game-buttons').style.display = 'flex';
+            document.getElementById('name-selector').style.display = 'none';
+            document.getElementById('game-question').style.display = 'block';
+            selectedClaim = '';
+            selectedPlayerName = '';
+            // Remove selected class from all player buttons
+            document.querySelectorAll('.player-name-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+        }
+
+        function selectPlayerName(name) {
+            selectedPlayerName = name;
+            // Remove selected class from all buttons
+            document.querySelectorAll('.player-name-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            // Add selected class to clicked button
+            event.target.classList.add('selected');
         }
 
         function closeGame() {
@@ -2247,44 +2382,81 @@
             modal.classList.remove('active');
         }
 
-        const championResponses = [
-            "LEGENDARY! A TRUE HALL OF FAMER!\n\nPREPARE TO WITNESS GREATNESS...",
-            "RESPECT! YOU'VE EARNED YOUR PLACE!\n\nENTERING CHAMPIONS GALLERY...",
-            "GLORY AWAITS!\n\nTHE THRONE IS YOURS!",
-            "EXCELLENCE RECOGNIZED!\n\nYOU ARE A FANTASY FOOTBALL GOD!",
-            "DOMINATION MODE ACTIVATED!\n\nLET'S SEE YOUR VICTORIES..."
-        ];
-
-        const loserResponses = [
-            "LOL! TOILET BOWL CHAMPION!\n\nEMBRACE THE SHAME...",
-            "OUCH! BETTER LUCK NEXT YEAR!\n\nWELCOME TO THE HALL OF SHAME...",
-            "YIKES! THAT'S ROUGH BUDDY!\n\nLET'S VISIT YOUR FELLOW LOSERS...",
-            "THE GADKE AWAITS YOU!\n\nTIME TO FACE THE MUSIC...",
-            "PINK TOILET SEAT INCOMING!\n\nLOADING HALL OF SHAME..."
-        ];
-
         function selectChampion() {
-            const response = championResponses[Math.floor(Math.random() * championResponses.length)];
-            document.getElementById('game-response').textContent = response;
+            selectedClaim = 'champion';
             document.getElementById('game-buttons').style.display = 'none';
-
-            // Navigate to champions section after delay
-            setTimeout(() => {
-                closeGame();
-                document.getElementById('champions').scrollIntoView({ behavior: 'smooth' });
-            }, 3000);
+            document.getElementById('game-question').textContent = 'SELECT YOUR NAME TO VERIFY...';
+            document.getElementById('name-selector').style.display = 'block';
         }
 
         function selectLoser() {
-            const response = loserResponses[Math.floor(Math.random() * loserResponses.length)];
-            document.getElementById('game-response').textContent = response;
+            selectedClaim = 'loser';
             document.getElementById('game-buttons').style.display = 'none';
+            document.getElementById('game-question').textContent = 'SELECT YOUR NAME TO VERIFY...';
+            document.getElementById('name-selector').style.display = 'block';
+        }
 
-            // Navigate to losers section after delay
+        function verifyPlayer() {
+            if (!selectedPlayerName) {
+                document.getElementById('game-response').textContent = 'PICK A NAME FIRST!';
+                return;
+            }
+
+            const player = playerData[selectedPlayerName];
+            const isChampion = player.championships > 0;
+            const isLoser = player.toiletBowls > 0;
+
+            document.getElementById('name-selector').style.display = 'none';
+            document.getElementById('game-question').style.display = 'none';
+
+            let response = '';
+            let navigateTo = '';
+
+            if (selectedClaim === 'champion') {
+                if (isChampion && !isLoser) {
+                    // Pure champion - telling the truth!
+                    response = `TRUTH DETECTED!\n\n${selectedPlayerName.toUpperCase()} IS A CHAMPION!\n${player.championships}X WINNER!\n\nENTERING HALL OF GLORY...`;
+                    navigateTo = 'champions';
+                } else if (isChampion && isLoser) {
+                    // Both - technically true but...
+                    response = `TECHNICALLY CORRECT...\n\nBUT ${selectedPlayerName.toUpperCase()} IS ALSO A\n${player.toiletBowls}X TOILET BOWL LOSER!\n\nCOMPLICATED CAREER!`;
+                    navigateTo = 'champions';
+                } else if (isLoser && !isChampion) {
+                    // Liar! Only a loser
+                    response = `LIAR DETECTED!\n\n${selectedPlayerName.toUpperCase()} HAS NEVER WON!\n\nYOU'RE A ${player.toiletBowls}X LOSER!\n\nTO THE HALL OF SHAME!`;
+                    navigateTo = 'losers';
+                } else {
+                    // Never won or lost
+                    response = `DREAMER DETECTED!\n\n${selectedPlayerName.toUpperCase()} HAS NEVER WON!\n\nSTILL CHASING GLORY!\n\nVISIT THE ROSTER INSTEAD...`;
+                    navigateTo = 'members';
+                }
+            } else { // selectedClaim === 'loser'
+                if (isLoser && !isChampion) {
+                    // Pure loser - telling the truth!
+                    response = `HONESTY RESPECTED!\n\n${selectedPlayerName.toUpperCase()} IS A\n${player.toiletBowls}X TOILET BOWL LOSER!\n\nEMBRACING THE SHAME!`;
+                    navigateTo = 'losers';
+                } else if (isLoser && isChampion) {
+                    // Both - technically true but...
+                    response = `HUMBLE TRUTH...\n\nBUT ${selectedPlayerName.toUpperCase()} IS ALSO A\n${player.championships}X CHAMPION!\n\nSEEN BOTH SIDES!`;
+                    navigateTo = 'losers';
+                } else if (isChampion && !isLoser) {
+                    // Liar! Only a champion
+                    response = `FALSE MODESTY!\n\n${selectedPlayerName.toUpperCase()} IS A\n${player.championships}X CHAMPION!\n\nQUIT THE ACT!\n\nTO THE HALL OF GLORY!`;
+                    navigateTo = 'champions';
+                } else {
+                    // Never won or lost
+                    response = `INTERESTING CLAIM...\n\n${selectedPlayerName.toUpperCase()} HAS NEVER LOST!\n\nBUT NEVER WON EITHER!\n\nPERFECTLY AVERAGE!`;
+                    navigateTo = 'members';
+                }
+            }
+
+            document.getElementById('game-response').textContent = response;
+
+            // Navigate after delay
             setTimeout(() => {
                 closeGame();
-                document.getElementById('losers').scrollIntoView({ behavior: 'smooth' });
-            }, 3000);
+                document.getElementById(navigateTo).scrollIntoView({ behavior: 'smooth' });
+            }, 4000);
         }
 
         // Player Stats Data
