@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!-- Retro Pixel Font -->
@@ -2652,6 +2652,9 @@
                     if (i < text.length) {
                         element.textContent += text.charAt(i);
                         i++;
+                        // Auto-scroll as text is being typed
+                        const terminalBody = document.getElementById('terminal-body');
+                        terminalBody.scrollTop = terminalBody.scrollHeight;
                     } else {
                         clearInterval(interval);
                         resolve();
@@ -2688,6 +2691,7 @@
             line2.className = 'terminal-line';
             line2.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text"></span>';
             output.appendChild(line2);
+            document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight;
             await typeText(line2.querySelector('.terminal-text'), 'The keeper approaches and asks...');
 
             await new Promise(resolve => setTimeout(resolve, 800));
@@ -2695,6 +2699,7 @@
             line3.className = 'terminal-line';
             line3.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text"></span>';
             output.appendChild(line3);
+            document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight;
             await typeText(line3.querySelector('.terminal-text'), 'What brings you to these halls?');
 
             await new Promise(resolve => setTimeout(resolve, 500));
@@ -2702,6 +2707,7 @@
             line4.className = 'terminal-line';
             line4.innerHTML = '<span class="terminal-text" style="margin-left: 20px;"></span>';
             output.appendChild(line4);
+            document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight;
             await typeText(line4.querySelector('.terminal-text'), '1. I seek the Hall of Champions');
 
             await new Promise(resolve => setTimeout(resolve, 300));
@@ -2709,6 +2715,7 @@
             line5.className = 'terminal-line';
             line5.innerHTML = '<span class="terminal-text" style="margin-left: 20px;"></span>';
             output.appendChild(line5);
+            document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight;
             await typeText(line5.querySelector('.terminal-text'), '2. I belong in the Hall of Shame');
 
             terminalState = 'asking-status';
@@ -2765,6 +2772,7 @@
                     response.className = 'terminal-line';
                     response.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text"></span>';
                     output.appendChild(response);
+                    document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight;
                     await typeText(response.querySelector('.terminal-text'), status === 'champion' ? 'A bold claim indeed...' : 'Honesty is a rare virtue...');
 
                     await new Promise(resolve => setTimeout(resolve, 800));
@@ -2772,6 +2780,7 @@
                     question.className = 'terminal-line';
                     question.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text"></span>';
                     output.appendChild(question);
+                    document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight;
                     await typeText(question.querySelector('.terminal-text'), 'The keeper must verify your identity.');
 
                     await new Promise(resolve => setTimeout(resolve, 500));
@@ -2779,6 +2788,7 @@
                     namePrompt.className = 'terminal-line';
                     namePrompt.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text"></span>';
                     output.appendChild(namePrompt);
+                    document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight;
                     await typeText(namePrompt.querySelector('.terminal-text'), 'What is your name, traveler?');
 
                     terminalState = 'asking-name';
@@ -2804,6 +2814,7 @@
                     error.className = 'terminal-line';
                     error.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text terminal-error"></span>';
                     output.appendChild(error);
+                    document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight;
                     await typeText(error.querySelector('.terminal-text'), `The keeper searches the records...`);
 
                     await new Promise(resolve => setTimeout(resolve, 700));
@@ -2811,6 +2822,7 @@
                     error2.className = 'terminal-line';
                     error2.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text terminal-error"></span>';
                     output.appendChild(error2);
+                    document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight;
                     await typeText(error2.querySelector('.terminal-text'), `No traveler by the name "${value}" found in the archives.`);
 
                     showInput();
@@ -2833,13 +2845,15 @@
             verifying.className = 'terminal-line';
             verifying.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text"></span>';
             output.appendChild(verifying);
-            await typeText(verifying.querySelector('.terminal-text'), 'The keeper opens an ancient tome...');
+            document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight;
+            await typeText(verifying.querySelector('.terminal-text'), 'The keeper opens an ancient tomb...');
 
             await new Promise(resolve => setTimeout(resolve, 800));
             const verifying2 = document.createElement('div');
             verifying2.className = 'terminal-line';
             verifying2.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text"></span>';
             output.appendChild(verifying2);
+            document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight;
             await typeText(verifying2.querySelector('.terminal-text'), 'Searching the records for ' + selectedPlayerName + '...');
 
             await new Promise(resolve => setTimeout(resolve, 1000));
@@ -2854,7 +2868,7 @@
                     navigateTo = 'champions';
                     colorClass = 'terminal-success';
                 } else if (isChampion && isLoser) {
-                    response = `The keeper nods knowingly...\n\n${selectedPlayerName.toUpperCase()} has ${player.championships} championship${player.championships > 1 ? 's' : ''}\nBut also ${player.toiletBowls} toilet bowl defeat${player.toiletBowls > 1 ? 's' : ''}...\n\nYou have seen both triumph and failure.\nThe Hall of Glory awaits.`;
+                    response = `The keeper nods knowingly...\n\n${selectedPlayerName.toUpperCase()} has ${player.championships} championship${player.championships > 1 ? 's' : ''}\n\nBut also ${player.toiletBowls} toilet bowl defeat${player.toiletBowls > 1 ? 's' : ''}...\n\nYou have seen both triumph and failure.\n\nThe Hall of Glory awaits.`;
                     navigateTo = 'champions';
                     colorClass = 'terminal-warning';
                 } else if (isLoser && !isChampion) {
@@ -2862,7 +2876,7 @@
                     navigateTo = 'losers';
                     colorClass = 'terminal-error';
                 } else {
-                    response = `The keeper closes the tome.\n\n"${selectedPlayerName.toUpperCase()} has no championships recorded."\n\nPerhaps one day you will return in glory.\nFor now, visit the roster of hopefuls.`;
+                    response = `The keeper closes the tomb.\n\n"${selectedPlayerName.toUpperCase()} has no championships recorded."\n\nPerhaps one day you will return in glory.\n\nFor now, visit the roster of hopefuls.`;
                     navigateTo = 'members';
                     colorClass = 'terminal-warning';
                 }
@@ -2872,15 +2886,15 @@
                     navigateTo = 'losers';
                     colorClass = 'terminal-success';
                 } else if (isLoser && isChampion) {
-                    response = `The keeper smiles...\n\n"Humility from one who has tasted victory."\n\n${selectedPlayerName.toUpperCase()} - ${player.championships}X Champion, ${player.toiletBowls}X Loser\n\nYou choose to remember your defeats.\nThe Hall of Shame opens its doors.`;
+                    response = `The keeper smiles...\n\n"Humility from one who has tasted victory."\n\n${selectedPlayerName.toUpperCase()} - ${player.championships}X Champion, ${player.toiletBowls}X Loser\n\nYou choose to remember your defeats.\n\nThe Hall of Shame opens its doors.`;
                     navigateTo = 'losers';
                     colorClass = 'terminal-warning';
                 } else if (isChampion && !isLoser) {
-                    response = `The keeper laughs!\n\n"False modesty will not work here!"\n\n${selectedPlayerName.toUpperCase()} - ${player.championships}X CHAMPION\nNever once defeated!\n\nYou belong in the Hall of Glory, champion.`;
+                    response = `The keeper laughs!\n\n"False modesty will not work here!"\n\n${selectedPlayerName.toUpperCase()} - ${player.championships}X CHAMPION\n\nNever once defeated!\n\nYou belong in the Hall of Glory, champion.`;
                     navigateTo = 'champions';
                     colorClass = 'terminal-error';
                 } else {
-                    response = `The keeper looks puzzled...\n\n"${selectedPlayerName.toUpperCase()} has neither won nor lost."\n\nYou walk a middle path, traveler.\nPerhaps the roster is where you belong.`;
+                    response = `The keeper looks puzzled...\n\n"${selectedPlayerName.toUpperCase()} has neither won nor lost."\n\nYou walk a middle path, traveler.\n\nPerhaps the roster is where you belong.`;
                     navigateTo = 'members';
                     colorClass = 'terminal-warning';
                 }
@@ -2890,25 +2904,27 @@
             result.className = 'terminal-line';
             result.innerHTML = `<span class="terminal-prompt">></span><span class="terminal-text ${colorClass}"></span>`;
             output.appendChild(result);
+            document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight;
 
             // Type multi-line response
             const lines = response.split('\n');
             for (let i = 0; i < lines.length; i++) {
                 if (i > 0) {
                     result.querySelector('.terminal-text').innerHTML += '<br>';
+                    document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight;
                 }
                 await typeText(result.querySelector('.terminal-text'), lines[i], 20);
             }
 
             // Show Space Invaders animation
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            await new Promise(resolve => setTimeout(resolve, 5000));
             await showSpaceInvaders();
 
             // Navigate after animation
             setTimeout(() => {
                 closeGame();
                 document.getElementById(navigateTo).scrollIntoView({ behavior: 'smooth' });
-            }, 500);
+            }, 2000);
         }
 
         async function showSpaceInvaders() {
@@ -2972,6 +2988,12 @@
             autocomplete.innerHTML = matches.map((name, index) =>
                 `<div class="suggestion-item ${index === selectedSuggestionIndex ? 'selected' : ''}" onclick="selectSuggestion('${name}')">${name}</div>`
             ).join('');
+
+            // Scroll to show autocomplete suggestions
+            setTimeout(() => {
+                const terminalBody = document.getElementById('terminal-body');
+                terminalBody.scrollTop = terminalBody.scrollHeight;
+            }, 10);
         }
 
         function selectSuggestion(name) {
