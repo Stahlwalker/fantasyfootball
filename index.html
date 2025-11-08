@@ -1525,6 +1525,17 @@
         </div>
     </div>
 
+    <!-- Player Stats Modal -->
+    <div class="game-modal" id="player-modal">
+        <div class="game-screen">
+            <div class="game-title" id="player-name" style="animation: blink 1.5s infinite, pulse 2s infinite;"></div>
+            <div id="player-icon" style="font-size: 64px; margin: 20px 0; animation: float 3s ease-in-out infinite;"></div>
+            <div class="game-response" id="player-stats" style="white-space: pre-line;"></div>
+            <div class="game-response" id="player-message" style="color: var(--text-primary); font-size: 11px; line-height: 1.8;"></div>
+            <button class="pixel-button" onclick="closePlayerModal()" style="margin-top: 30px;">CLOSE</button>
+        </div>
+    </div>
+
     <!-- Scorecard Section -->
     <section id="scorecard">
         <div class="container">
@@ -2114,45 +2125,60 @@
             </div>
 
             <div class="members-list">
-                <div class="member-item">
-                    <a href="http://fantasy.espn.com/football/team?leagueId=133887&seasonId=2019&teamId=5">Jared Reardon</a>
+                <div class="member-item" onclick="showPlayerStats('Jared')" style="cursor: pointer;">
+                    <span style="color: var(--text-primary); text-decoration: none; font-size: 11px;">Jared Reardon</span>
                     <p style="font-size: 10px; color: var(--text-accent); margin-top: 10px; text-shadow: 0 0 10px var(--text-accent);">$1,300</p>
                 </div>
-                <div class="member-item">
-                    <a href="http://fantasy.espn.com/football/team?leagueId=133887&seasonId=2019&teamId=8">Ethan Reardon</a>
+                <div class="member-item" onclick="showPlayerStats('Ethan')" style="cursor: pointer;">
+                    <span style="color: var(--text-primary); text-decoration: none; font-size: 11px;">Ethan Reardon</span>
                     <p style="font-size: 10px; color: var(--text-secondary); margin-top: 10px; opacity: 0.6;">$0</p>
                 </div>
-                <div class="member-item">
-                    <a href="http://fantasy.espn.com/football/team?leagueId=133887&seasonId=2019&teamId=1">Luke Stahl</a>
+                <div class="member-item" onclick="showPlayerStats('Luke')" style="cursor: pointer;">
+                    <span style="color: var(--text-primary); text-decoration: none; font-size: 11px;">Luke Stahl</span>
                     <p style="font-size: 10px; color: var(--text-accent); margin-top: 10px; text-shadow: 0 0 10px var(--text-accent);">$3,750</p>
                 </div>
-                <div class="member-item">
-                    <a href="http://fantasy.espn.com/football/team?leagueId=133887&seasonId=2019&teamId=4">Pat Worklan</a>
+                <div class="member-item" onclick="showPlayerStats('Pat')" style="cursor: pointer;">
+                    <span style="color: var(--text-primary); text-decoration: none; font-size: 11px;">Pat Worklan</span>
                     <p style="font-size: 10px; color: var(--text-secondary); margin-top: 10px; opacity: 0.6;">$0</p>
                 </div>
-                <div class="member-item">
-                    <a href="http://fantasy.espn.com/football/team?leagueId=133887&seasonId=2019&teamId=6">Brian Clark</a>
+                <div class="member-item" onclick="showPlayerStats('Brian')" style="cursor: pointer;">
+                    <span style="color: var(--text-primary); text-decoration: none; font-size: 11px;">Brian Clark</span>
                     <p style="font-size: 10px; color: var(--text-secondary); margin-top: 10px; opacity: 0.6;">$0</p>
                 </div>
-                <div class="member-item">
-                    <a href="http://fantasy.espn.com/football/team?leagueId=133887&seasonId=2019&teamId=2">Chris Wold</a>
+                <div class="member-item" onclick="showPlayerStats('Chris')" style="cursor: pointer;">
+                    <span style="color: var(--text-primary); text-decoration: none; font-size: 11px;">Chris Wold</span>
                     <p style="font-size: 10px; color: var(--text-accent); margin-top: 10px; text-shadow: 0 0 10px var(--text-accent);">$500</p>
                 </div>
-                <div class="member-item">
-                    <a href="http://fantasy.espn.com/football/team?leagueId=133887&seasonId=2019&teamId=3">Conor Poore</a>
+                <div class="member-item" onclick="showPlayerStats('Conor')" style="cursor: pointer;">
+                    <span style="color: var(--text-primary); text-decoration: none; font-size: 11px;">Conor Poore</span>
                     <p style="font-size: 10px; color: var(--text-accent); margin-top: 10px; text-shadow: 0 0 10px var(--text-accent);">$400</p>
                 </div>
-                <div class="member-item">
-                    <a href="http://fantasy.espn.com/football/team?leagueId=133887&seasonId=2019&teamId=10">Tony Selvaggio</a>
+                <div class="member-item" onclick="showPlayerStats('Tony')" style="cursor: pointer;">
+                    <span style="color: var(--text-primary); text-decoration: none; font-size: 11px;">Tony Selvaggio</span>
                     <p style="font-size: 10px; color: var(--text-accent); margin-top: 10px; text-shadow: 0 0 10px var(--text-accent);">$1,800</p>
                 </div>
-                <div class="member-item">
-                    <a href="http://fantasy.espn.com/football/team?leagueId=133887&seasonId=2019&teamId=9">Scott Brzezinski</a>
+                <div class="member-item" onclick="showPlayerStats('Scott')" style="cursor: pointer;">
+                    <span style="color: var(--text-primary); text-decoration: none; font-size: 11px;">Scott Brzezinski</span>
                     <p style="font-size: 10px; color: var(--text-secondary); margin-top: 10px; opacity: 0.6;">$0</p>
                 </div>
-                <div class="member-item">
-                    <a href="http://fantasy.espn.com/football/team?leagueId=133887&seasonId=2019&teamId=7">Weston Steinberg</a>
+                <div class="member-item" onclick="showPlayerStats('Weston')" style="cursor: pointer;">
+                    <span style="color: var(--text-primary); text-decoration: none; font-size: 11px;">Weston Steinberg</span>
                     <p style="font-size: 10px; color: var(--text-accent); margin-top: 10px; text-shadow: 0 0 10px var(--text-accent);">$350</p>
+                </div>
+            </div>
+
+            <!-- Retired Section Divider -->
+            <div style="margin: 60px auto; max-width: 600px;">
+                <div style="height: 2px; background: linear-gradient(90deg, transparent 0%, var(--border-primary) 20%, var(--text-accent) 50%, var(--border-primary) 80%, transparent 100%); box-shadow: 0 0 10px var(--text-accent);"></div>
+                <h3 style="text-align: center; font-size: 16px; color: var(--border-primary); margin: 20px 0; text-shadow: 0 0 15px var(--border-primary);">RETIRED LEGENDS</h3>
+                <div style="height: 2px; background: linear-gradient(90deg, transparent 0%, var(--border-primary) 20%, var(--text-accent) 50%, var(--border-primary) 80%, transparent 100%); box-shadow: 0 0 10px var(--text-accent);"></div>
+            </div>
+
+            <div class="members-list">
+                <div class="member-item" onclick="showPlayerStats('Martin')" style="opacity: 0.8; border-color: var(--text-accent); cursor: pointer;">
+                    <span style="color: var(--text-primary); text-decoration: none; font-size: 11px;">Martin</span>
+                    <p style="font-size: 10px; color: var(--text-accent); margin-top: 10px; text-shadow: 0 0 10px var(--text-accent);">$2,950</p>
+                    <p style="font-size: 8px; color: var(--border-primary); margin-top: 5px; text-shadow: 0 0 5px var(--border-primary);">3X CHAMPION</p>
                 </div>
             </div>
         </div>
@@ -2169,7 +2195,7 @@
                 <h5>CONNECT</h5>
                 <ul>
                     <li><a href="https://www.facebook.com/lucas.stahl.75">Facebook</a></li>
-                    <li><a href="https://twitter.com/LucasStahl11">Twitter</a></li>
+                    <li><a href="https://twitter.com/LucasStahl11">X</a></li>
                     <li><a href="https://www.instagram.com/stahlwalker11/">Instagram</a></li>
                 </ul>
             </div>
@@ -2234,26 +2260,166 @@
             }, 3000);
         }
 
+        // Player Stats Data
+        const playerData = {
+            'Luke': {
+                icon: '👑',
+                championships: 3,
+                toiletBowls: 0,
+                earnings: '$3,750',
+                years: ['2017', '2022', '2023'],
+                message: "The KING of the league! 3x champion and league commissioner. Luke's dominance knows no bounds. From sneaking into playoffs on tiebreakers to running the table, this legend prints money like it's his day job."
+            },
+            'Martin': {
+                icon: '⭐',
+                championships: 3,
+                toiletBowls: 1,
+                earnings: '$2,950',
+                years: ['2018', '2019', '2021'],
+                toiletYears: ['2022'],
+                message: "The Ghost of Party Marty! A RETIRED LEGEND who went out on top. 3x champion with back-to-back wins in 2018-2019. Came back for one more run in 2021 and snagged another trophy. But then... the 2022 champ-to-chump special. Left the game a LEGEND!"
+            },
+            'Jared': {
+                icon: '🎭',
+                championships: 2,
+                toiletBowls: 2,
+                earnings: '$1,300',
+                years: ['2013', '2020'],
+                toiletYears: ['2017', '2023'],
+                message: "The BIPOLAR KING! Inaugural champion who set the tone, then came back in 2020 to dominate again. But... also a 2x toilet bowl champion. The highest of highs and the lowest of lows. That's the Zompoc Delivery guarantee!"
+            },
+            'Tony': {
+                icon: '🔥',
+                championships: 1,
+                toiletBowls: 1,
+                earnings: '$1,800',
+                years: ['2024'],
+                toiletYears: ['2020'],
+                message: "THE CURSE BREAKER! Sat in toilet bowl shame for years, but Zimbabwe Space Chickens finally rose from the ashes in 2024 like a phoenix! From last place to first place in epic fashion. The redemption arc we all needed!"
+            },
+            'Chris': {
+                icon: '🎢',
+                championships: 1,
+                toiletBowls: 2,
+                earnings: '$500',
+                years: ['2016'],
+                toiletYears: ['2015', '2024'],
+                message: "The ROLLERCOASTER RIDER! One shining moment in 2016 when Power Bottoms reigned supreme. But bookended by toilet bowl appearances in 2015 AND 2024. The 2x loser club member who tasted glory once... and never forgot it."
+            },
+            'Weston': {
+                icon: '🏈',
+                championships: 1,
+                toiletBowls: 1,
+                earnings: '$350',
+                years: ['2014'],
+                toiletYears: ['2019'],
+                message: "One hit wonder! Dillon Panthers showed everyone what 'clear eyes, full hearts, CAN'T LOSE' really means in 2014. Then came 2019 and lost to a 2-11 team. The definition of feast or famine!"
+            },
+            'Conor': {
+                icon: '⚡',
+                championships: 1,
+                toiletBowls: 0,
+                earnings: '$400',
+                years: ['2015'],
+                message: "The CONSISTENT ONE! Won once with Dirk Digglers in 2015 and never looked back... because he never won again. But hey, at least he's never seen the toilet bowl! That's something, right?"
+            },
+            'Brian': {
+                icon: '😭',
+                championships: 0,
+                toiletBowls: 1,
+                earnings: '$0',
+                toiletYears: ['2021'],
+                message: "SO CLOSE YET SO FAR! Holds the record for highest season total (1,754 pts in 2018) but never won a championship. Instead, Rickety Crickets found the toilet bowl in 2021. Pain."
+            },
+            'Ethan': {
+                icon: '🚽',
+                championships: 0,
+                toiletBowls: 2,
+                earnings: '$0',
+                toiletYears: ['2016', '2018'],
+                message: "THE FRIDGE IS COLD! The first 2x toilet bowl loser in league history. No championships to show for it. The Fridge just can't seem to keep his hands out of the cookie jar... or should we say toilet bowl?"
+            },
+            'Pat': {
+                icon: '👻',
+                championships: 0,
+                toiletBowls: 0,
+                earnings: '$0',
+                message: "THE GHOST! Never won, never lost the toilet bowl. Just... exists. Floating through the seasons like a phantom, always there but never quite making an impact. The most average player in league history!"
+            },
+            'Scott': {
+                icon: '🤷',
+                championships: 0,
+                toiletBowls: 0,
+                earnings: '$0',
+                message: "THE ENIGMA! Like Pat, never won and never lost the toilet bowl. Just vibing in the middle. Every year it's 'maybe this is the year!' and every year it's... not. But hey, at least he's not in last place!"
+            }
+        };
+
+        function showPlayerStats(playerName) {
+            const player = playerData[playerName];
+            const modal = document.getElementById('player-modal');
+
+            // Set player name
+            document.getElementById('player-name').textContent = playerName.toUpperCase();
+
+            // Set icon
+            document.getElementById('player-icon').textContent = player.icon;
+
+            // Build stats string
+            let stats = `💰 CAREER EARNINGS: ${player.earnings}\n`;
+            stats += `🏆 CHAMPIONSHIPS: ${player.championships}\n`;
+            if (player.years && player.years.length > 0) {
+                stats += `   (${player.years.join(', ')})\n`;
+            }
+            stats += `🚽 TOILET BOWLS: ${player.toiletBowls}`;
+            if (player.toiletYears && player.toiletYears.length > 0) {
+                stats += `\n   (${player.toiletYears.join(', ')})`;
+            }
+
+            document.getElementById('player-stats').textContent = stats;
+            document.getElementById('player-message').textContent = player.message;
+
+            // Show modal
+            modal.classList.add('active');
+        }
+
+        function closePlayerModal() {
+            const modal = document.getElementById('player-modal');
+            modal.classList.remove('active');
+        }
+
         // Close modal if clicking outside
         document.addEventListener('click', function(event) {
-            const modal = document.getElementById('game-modal');
-            if (event.target === modal) {
+            const gameModal = document.getElementById('game-modal');
+            const playerModal = document.getElementById('player-modal');
+
+            if (event.target === gameModal) {
                 closeGame();
+            }
+            if (event.target === playerModal) {
+                closePlayerModal();
             }
         });
 
         // Keyboard support for Enter key to start game
         document.addEventListener('keydown', function(event) {
-            const modal = document.getElementById('game-modal');
-            const isModalOpen = modal.classList.contains('active');
+            const gameModal = document.getElementById('game-modal');
+            const playerModal = document.getElementById('player-modal');
+            const isGameModalOpen = gameModal.classList.contains('active');
+            const isPlayerModalOpen = playerModal.classList.contains('active');
 
-            // If Enter key is pressed and modal is not open, start game
-            if (event.key === 'Enter' && !isModalOpen) {
+            // If Enter key is pressed and no modal is open, start game
+            if (event.key === 'Enter' && !isGameModalOpen && !isPlayerModalOpen) {
                 startGame();
             }
-            // If Escape key is pressed and modal is open, close it
-            else if (event.key === 'Escape' && isModalOpen) {
-                closeGame();
+            // If Escape key is pressed, close whichever modal is open
+            else if (event.key === 'Escape') {
+                if (isGameModalOpen) {
+                    closeGame();
+                }
+                if (isPlayerModalOpen) {
+                    closePlayerModal();
+                }
             }
         });
 
