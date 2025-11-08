@@ -886,21 +886,23 @@
             }
 
             .terminal-body {
-                font-size: 12px;
+                font-size: 13px;
                 padding: 15px;
                 height: 300px;
+                letter-spacing: 0.3px;
             }
 
             .terminal-input {
                 font-size: 16px; /* 16px prevents iOS zoom on focus */
+                letter-spacing: 0.3px;
             }
 
             .terminal-prompt {
-                font-size: 12px;
+                font-size: 13px;
             }
 
             .terminal-text {
-                font-size: 12px;
+                font-size: 13px;
             }
 
             .suggestion-item {
@@ -1075,31 +1077,6 @@
             text-align: center;
         }
 
-        .terminal-close-btn {
-            position: absolute;
-            right: 15px;
-            background: none;
-            border: 3px solid var(--text-accent);
-            color: var(--text-accent);
-            font-family: 'Press Start 2P', cursive;
-            font-size: 18px;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-        }
-
-        .terminal-close-btn:hover {
-            background: var(--text-accent);
-            color: var(--bg-primary);
-            box-shadow: 0 0 30px var(--text-accent);
-            transform: rotate(90deg) scale(1.1);
-        }
-
         .terminal-esc-hint {
             position: absolute;
             bottom: 10px;
@@ -1114,12 +1091,15 @@
         .terminal-body {
             background: var(--bg-primary);
             padding: 20px;
-            font-family: 'Courier New', monospace;
+            font-family: 'Courier New', 'Courier', monospace;
             font-size: 14px;
             color: var(--border-secondary);
             height: 400px;
             overflow-y: auto;
             line-height: 1.8;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 2px var(--border-secondary);
         }
 
         .terminal-body::-webkit-scrollbar {
@@ -1162,10 +1142,12 @@
             border: none;
             outline: none;
             color: var(--text-primary);
-            font-family: 'Courier New', monospace;
+            font-family: 'Courier New', 'Courier', monospace;
             font-size: 14px;
             flex: 1;
             padding: 0 5px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
 
         .terminal-cursor {
@@ -1189,8 +1171,10 @@
             color: var(--text-secondary);
             cursor: pointer;
             transition: all 0.2s;
-            font-family: 'Courier New', monospace;
+            font-family: 'Courier New', 'Courier', monospace;
             border-bottom: 1px solid var(--bg-primary);
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
 
         .suggestion-item:hover,
@@ -1221,8 +1205,9 @@
             flex-direction: column;
             gap: 10px;
             margin: 20px 0;
-            font-family: 'Courier New', monospace;
+            font-family: 'Courier New', 'Courier', monospace;
             font-size: 16px;
+            letter-spacing: 0.5px;
         }
 
         .invader-row {
@@ -1923,13 +1908,12 @@
                     <span class="terminal-btn minimize"></span>
                     <span class="terminal-btn maximize"></span>
                 </div>
-                <div class="terminal-title">fantasy-football-terminal</div>
-                <button class="terminal-close-btn" onclick="closeGame()">✕</button>
+                <div class="terminal-title">fantasy-football-legends</div>
             </div>
             <div class="terminal-body" id="terminal-body">
                 <div class="terminal-line">
                     <span class="terminal-prompt">$</span>
-                    <span class="terminal-text">Welcome to Fantasy Football Legends Terminal v1.0</span>
+                    <span class="terminal-text">Welcome to Fantasy Football Legends</span>
                 </div>
                 <div class="terminal-line">
                     <span class="terminal-prompt">$</span>
@@ -2697,7 +2681,35 @@
             line1.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text"></span>';
             output.appendChild(line1);
 
-            await typeText(line1.querySelector('.terminal-text'), 'Are you a CHAMPION or LOSER? (type: champion/loser)');
+            await typeText(line1.querySelector('.terminal-text'), 'You have arrived at the Fantasy Football Hall of Records.');
+
+            await new Promise(resolve => setTimeout(resolve, 800));
+            const line2 = document.createElement('div');
+            line2.className = 'terminal-line';
+            line2.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text"></span>';
+            output.appendChild(line2);
+            await typeText(line2.querySelector('.terminal-text'), 'The keeper approaches and asks...');
+
+            await new Promise(resolve => setTimeout(resolve, 800));
+            const line3 = document.createElement('div');
+            line3.className = 'terminal-line';
+            line3.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text"></span>';
+            output.appendChild(line3);
+            await typeText(line3.querySelector('.terminal-text'), 'What brings you to these halls?');
+
+            await new Promise(resolve => setTimeout(resolve, 500));
+            const line4 = document.createElement('div');
+            line4.className = 'terminal-line';
+            line4.innerHTML = '<span class="terminal-text" style="margin-left: 20px;"></span>';
+            output.appendChild(line4);
+            await typeText(line4.querySelector('.terminal-text'), '1. I seek the Hall of Champions');
+
+            await new Promise(resolve => setTimeout(resolve, 300));
+            const line5 = document.createElement('div');
+            line5.className = 'terminal-line';
+            line5.innerHTML = '<span class="terminal-text" style="margin-left: 20px;"></span>';
+            output.appendChild(line5);
+            await typeText(line5.querySelector('.terminal-text'), '2. I belong in the Hall of Shame');
 
             terminalState = 'asking-status';
             showInput();
@@ -2736,31 +2748,47 @@
             document.getElementById('autocomplete').innerHTML = '';
 
             if (terminalState === 'asking-status') {
-                const status = value.toLowerCase();
-                if (status === 'champion' || status === 'loser') {
+                const choice = value.trim();
+                let status = '';
+
+                if (choice === '1') {
+                    status = 'champion';
+                } else if (choice === '2') {
+                    status = 'loser';
+                }
+
+                if (status) {
                     selectedClaim = status;
 
+                    await new Promise(resolve => setTimeout(resolve, 500));
                     const response = document.createElement('div');
                     response.className = 'terminal-line';
-                    response.innerHTML = '<span class="terminal-prompt">$</span><span class="terminal-text terminal-success"></span>';
+                    response.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text"></span>';
                     output.appendChild(response);
-                    await typeText(response.querySelector('.terminal-text'), `Claim registered: ${status.toUpperCase()}`);
+                    await typeText(response.querySelector('.terminal-text'), status === 'champion' ? 'A bold claim indeed...' : 'Honesty is a rare virtue...');
 
-                    await new Promise(resolve => setTimeout(resolve, 300));
+                    await new Promise(resolve => setTimeout(resolve, 800));
                     const question = document.createElement('div');
                     question.className = 'terminal-line';
                     question.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text"></span>';
                     output.appendChild(question);
-                    await typeText(question.querySelector('.terminal-text'), 'Enter your name to verify:');
+                    await typeText(question.querySelector('.terminal-text'), 'The keeper must verify your identity.');
+
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                    const namePrompt = document.createElement('div');
+                    namePrompt.className = 'terminal-line';
+                    namePrompt.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text"></span>';
+                    output.appendChild(namePrompt);
+                    await typeText(namePrompt.querySelector('.terminal-text'), 'What is your name, traveler?');
 
                     terminalState = 'asking-name';
                     showInput();
                 } else {
                     const error = document.createElement('div');
                     error.className = 'terminal-line';
-                    error.innerHTML = '<span class="terminal-prompt">$</span><span class="terminal-text terminal-error"></span>';
+                    error.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text terminal-error"></span>';
                     output.appendChild(error);
-                    await typeText(error.querySelector('.terminal-text'), 'Error: Invalid input. Please type "champion" or "loser"');
+                    await typeText(error.querySelector('.terminal-text'), 'You must choose 1 or 2.');
 
                     showInput();
                 }
@@ -2771,11 +2799,19 @@
                     selectedPlayerName = name;
                     await verifyPlayer();
                 } else {
+                    await new Promise(resolve => setTimeout(resolve, 500));
                     const error = document.createElement('div');
                     error.className = 'terminal-line';
-                    error.innerHTML = '<span class="terminal-prompt">$</span><span class="terminal-text terminal-error"></span>';
+                    error.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text terminal-error"></span>';
                     output.appendChild(error);
-                    await typeText(error.querySelector('.terminal-text'), `Error: Player "${value}" not found. Try again.`);
+                    await typeText(error.querySelector('.terminal-text'), `The keeper searches the records...`);
+
+                    await new Promise(resolve => setTimeout(resolve, 700));
+                    const error2 = document.createElement('div');
+                    error2.className = 'terminal-line';
+                    error2.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text terminal-error"></span>';
+                    output.appendChild(error2);
+                    await typeText(error2.querySelector('.terminal-text'), `No traveler by the name "${value}" found in the archives.`);
 
                     showInput();
                 }
@@ -2792,13 +2828,21 @@
             const isLoser = player.toiletBowls > 0;
 
             // Verification animation
+            await new Promise(resolve => setTimeout(resolve, 500));
             const verifying = document.createElement('div');
             verifying.className = 'terminal-line';
-            verifying.innerHTML = '<span class="terminal-prompt">$</span><span class="terminal-text"></span>';
+            verifying.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text"></span>';
             output.appendChild(verifying);
-            await typeText(verifying.querySelector('.terminal-text'), 'Verifying against database...');
+            await typeText(verifying.querySelector('.terminal-text'), 'The keeper opens an ancient tome...');
 
             await new Promise(resolve => setTimeout(resolve, 800));
+            const verifying2 = document.createElement('div');
+            verifying2.className = 'terminal-line';
+            verifying2.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text"></span>';
+            output.appendChild(verifying2);
+            await typeText(verifying2.querySelector('.terminal-text'), 'Searching the records for ' + selectedPlayerName + '...');
+
+            await new Promise(resolve => setTimeout(resolve, 1000));
 
             let response = '';
             let navigateTo = '';
@@ -2806,37 +2850,37 @@
 
             if (selectedClaim === 'champion') {
                 if (isChampion && !isLoser) {
-                    response = `✓ VERIFICATION SUCCESSFUL\n${selectedPlayerName.toUpperCase()} is ${player.championships}X CHAMPION\nAccess granted to Hall of Glory...`;
+                    response = `The records confirm your claim!\n\n${selectedPlayerName.toUpperCase()} - ${player.championships}X CHAMPION\n\nThe gates to the Hall of Glory open before you...`;
                     navigateTo = 'champions';
                     colorClass = 'terminal-success';
                 } else if (isChampion && isLoser) {
-                    response = `⚠ PARTIAL MATCH\n${selectedPlayerName.toUpperCase()} is ${player.championships}X champion BUT also ${player.toiletBowls}X toilet bowl loser\nComplicated record detected...`;
+                    response = `The keeper nods knowingly...\n\n${selectedPlayerName.toUpperCase()} has ${player.championships} championship${player.championships > 1 ? 's' : ''}\nBut also ${player.toiletBowls} toilet bowl defeat${player.toiletBowls > 1 ? 's' : ''}...\n\nYou have seen both triumph and failure.\nThe Hall of Glory awaits.`;
                     navigateTo = 'champions';
                     colorClass = 'terminal-warning';
                 } else if (isLoser && !isChampion) {
-                    response = `✗ VERIFICATION FAILED\n${selectedPlayerName.toUpperCase()} has NEVER won a championship\n${player.toiletBowls}X toilet bowl loser detected\nRedirecting to Hall of Shame...`;
+                    response = `The keeper shakes his head...\n\n"You claim glory, but the records show only shame."\n\n${selectedPlayerName.toUpperCase()} - ${player.toiletBowls}X TOILET BOWL LOSER\n\nYou are escorted to the Hall of Shame.`;
                     navigateTo = 'losers';
                     colorClass = 'terminal-error';
                 } else {
-                    response = `✗ VERIFICATION FAILED\n${selectedPlayerName.toUpperCase()} has never won\nNo championship record found\nRedirecting to roster...`;
+                    response = `The keeper closes the tome.\n\n"${selectedPlayerName.toUpperCase()} has no championships recorded."\n\nPerhaps one day you will return in glory.\nFor now, visit the roster of hopefuls.`;
                     navigateTo = 'members';
                     colorClass = 'terminal-warning';
                 }
             } else {
                 if (isLoser && !isChampion) {
-                    response = `✓ VERIFICATION SUCCESSFUL\n${selectedPlayerName.toUpperCase()} is ${player.toiletBowls}X TOILET BOWL LOSER\nHonesty appreciated. Accessing Hall of Shame...`;
+                    response = `The keeper nods with respect.\n\n"Few admit their failures so openly."\n\n${selectedPlayerName.toUpperCase()} - ${player.toiletBowls}X TOILET BOWL LOSER\n\nYou are led to the Hall of Shame.`;
                     navigateTo = 'losers';
                     colorClass = 'terminal-success';
                 } else if (isLoser && isChampion) {
-                    response = `⚠ PARTIAL MATCH\n${selectedPlayerName.toUpperCase()} is ${player.toiletBowls}X loser BUT also ${player.championships}X champion\nHumble claim accepted...`;
+                    response = `The keeper smiles...\n\n"Humility from one who has tasted victory."\n\n${selectedPlayerName.toUpperCase()} - ${player.championships}X Champion, ${player.toiletBowls}X Loser\n\nYou choose to remember your defeats.\nThe Hall of Shame opens its doors.`;
                     navigateTo = 'losers';
                     colorClass = 'terminal-warning';
                 } else if (isChampion && !isLoser) {
-                    response = `✗ FALSE MODESTY DETECTED\n${selectedPlayerName.toUpperCase()} is ${player.championships}X CHAMPION\nNever lost toilet bowl\nRedirecting to Hall of Glory...`;
+                    response = `The keeper laughs!\n\n"False modesty will not work here!"\n\n${selectedPlayerName.toUpperCase()} - ${player.championships}X CHAMPION\nNever once defeated!\n\nYou belong in the Hall of Glory, champion.`;
                     navigateTo = 'champions';
                     colorClass = 'terminal-error';
                 } else {
-                    response = `⚠ INTERESTING CLAIM\n${selectedPlayerName.toUpperCase()} has never won OR lost\nPerfectly average record\nRedirecting to roster...`;
+                    response = `The keeper looks puzzled...\n\n"${selectedPlayerName.toUpperCase()} has neither won nor lost."\n\nYou walk a middle path, traveler.\nPerhaps the roster is where you belong.`;
                     navigateTo = 'members';
                     colorClass = 'terminal-warning';
                 }
@@ -2844,7 +2888,7 @@
 
             const result = document.createElement('div');
             result.className = 'terminal-line';
-            result.innerHTML = `<span class="terminal-prompt">$</span><span class="terminal-text ${colorClass}"></span>`;
+            result.innerHTML = `<span class="terminal-prompt">></span><span class="terminal-text ${colorClass}"></span>`;
             output.appendChild(result);
 
             // Type multi-line response
@@ -2903,7 +2947,7 @@
             document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight;
 
             // Wait for animation to complete
-            await new Promise(resolve => setTimeout(resolve, 2500));
+            await new Promise(resolve => setTimeout(resolve, 4000));
         }
 
         function showAutocomplete(value) {
