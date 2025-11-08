@@ -222,6 +222,42 @@
             transform: scale(1.1);
         }
 
+        /* Audio Sword Button */
+        .audio-btn {
+            background: none;
+            border: 2px solid transparent;
+            color: var(--text-primary);
+            font-size: 18px;
+            cursor: pointer;
+            padding: 5px 10px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .audio-btn:hover {
+            color: var(--border-primary);
+            border: 2px solid var(--border-primary);
+            box-shadow: 0 0 15px var(--shadow-color);
+            transform: scale(1.1) rotate(-15deg);
+        }
+
+        .audio-btn.playing {
+            color: var(--text-accent);
+            animation: swordGlow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes swordGlow {
+            from {
+                text-shadow: 0 0 10px var(--text-accent);
+                transform: rotate(-5deg);
+            }
+            to {
+                text-shadow: 0 0 20px var(--text-accent), 0 0 30px var(--text-accent);
+                transform: rotate(5deg);
+            }
+        }
+
         /* Hero Title */
         .hero-title {
             font-size: 32px;
@@ -1073,8 +1109,42 @@
             font-size: 10px;
             color: var(--border-primary);
             text-shadow: 0 0 10px var(--border-primary);
-            flex: 1;
-            text-align: center;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .terminal-audio-btn {
+            background: none;
+            border: none;
+            color: var(--border-secondary);
+            font-size: 16px;
+            cursor: pointer;
+            padding: 0 10px;
+            transition: all 0.3s;
+            text-shadow: 0 0 5px var(--border-secondary);
+        }
+
+        .terminal-audio-btn:hover {
+            color: var(--text-accent);
+            text-shadow: 0 0 15px var(--text-accent);
+            transform: scale(1.2) rotate(-15deg);
+        }
+
+        .terminal-audio-btn.playing {
+            color: var(--text-accent);
+            animation: terminalSwordGlow 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes terminalSwordGlow {
+            from {
+                text-shadow: 0 0 10px var(--text-accent);
+                transform: rotate(-5deg);
+            }
+            to {
+                text-shadow: 0 0 25px var(--text-accent), 0 0 35px var(--text-accent);
+                transform: rotate(5deg);
+            }
         }
 
         .terminal-esc-hint {
@@ -1882,6 +1952,7 @@
                 <li><a href="#losers">LOSERS</a></li>
                 <li><a href="#stats">STATS</a></li>
                 <li><a href="#members">MEMBERS</a></li>
+                <li><button class="audio-btn" id="audio-toggle" onclick="toggleAudio()" title="Toggle Music">⚔️</button></li>
             </ul>
         </div>
     </nav>
@@ -1908,6 +1979,7 @@
                     <span class="terminal-btn minimize"></span>
                     <span class="terminal-btn maximize"></span>
                 </div>
+                <button class="terminal-audio-btn" id="terminal-audio-toggle" onclick="toggleTerminalAudio()" title="Toggle Music">🏈</button>
                 <div class="terminal-title">fantasy-football-legends</div>
             </div>
             <div class="terminal-body" id="terminal-body">
@@ -2601,6 +2673,17 @@
         </div>
     </section>
 
+    <!-- Hidden Audio Elements -->
+    <audio id="zelda-audio" loop>
+        <source src="zelda-link.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <audio id="tecmo-audio" loop>
+        <source src="tecmo.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <!-- Footer -->
     <footer>
         <div class="footer-grid container">
@@ -2704,6 +2787,13 @@
 
             // Re-attach input event listeners after rebuilding HTML
             setupInputListeners();
+
+            // Sync terminal audio button state with current tecmo audio status
+            const tecmoAudio = document.getElementById('tecmo-audio');
+            const terminalButton = document.getElementById('terminal-audio-toggle');
+            if (terminalButton && !tecmoAudio.paused) {
+                terminalButton.classList.add('playing');
+            }
 
             // Type out initial question
             await new Promise(resolve => setTimeout(resolve, 500));
@@ -3283,6 +3373,46 @@
         // Mobile Menu Toggle
         function toggleMenu() {
             document.getElementById('nav-menu').classList.toggle('open');
+        }
+
+        // Navbar Sword Audio Toggle Function (zelda-link.mp3)
+        function toggleAudio() {
+            const audio = document.getElementById('zelda-audio');
+            const navButton = document.getElementById('audio-toggle');
+
+            if (audio.paused) {
+                // Start from beginning
+                audio.currentTime = 0;
+                audio.play().catch(err => {
+                    console.log('Audio play failed:', err);
+                });
+                navButton.classList.add('playing');
+            } else {
+                // Stop and reset
+                audio.pause();
+                audio.currentTime = 0;
+                navButton.classList.remove('playing');
+            }
+        }
+
+        // Terminal Football Audio Toggle Function (tecmo.mp3)
+        function toggleTerminalAudio() {
+            const audio = document.getElementById('tecmo-audio');
+            const terminalButton = document.getElementById('terminal-audio-toggle');
+
+            if (audio.paused) {
+                // Start from beginning
+                audio.currentTime = 0;
+                audio.play().catch(err => {
+                    console.log('Audio play failed:', err);
+                });
+                terminalButton.classList.add('playing');
+            } else {
+                // Stop and reset
+                audio.pause();
+                audio.currentTime = 0;
+                terminalButton.classList.remove('playing');
+            }
         }
 
         // Smooth Scrolling
