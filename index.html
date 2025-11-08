@@ -1018,6 +1018,7 @@
             padding: 20px;
             transition: all 0.3s;
             align-items: start;
+            overflow: hidden;
         }
 
         .timeline-year:hover {
@@ -1080,9 +1081,10 @@
 
         .year-prize {
             font-size: 11px;
-            color: var(--text-accent);
+            color: var(--border-primary);
             margin-top: 10px;
-            text-shadow: 0 0 10px var(--text-accent);
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px var(--border-primary);
             font-weight: bold;
         }
 
@@ -1194,6 +1196,7 @@
             .year-prize {
                 font-size: 9px;
                 margin-top: 8px;
+                margin-bottom: 8px;
             }
 
             .year-content {
@@ -1538,8 +1541,8 @@
                     <div class="timeline-year">
                         <div class="year-marker">
                             <div class="year-number">2024</div>
-                            <div class="year-dot"></div>
                             <div class="year-prize">$1,800</div>
+                            <div class="year-dot"></div>
                         </div>
                         <div class="year-content">
                             <div class="year-entry winner">
@@ -1565,8 +1568,8 @@
                     <div class="timeline-year">
                         <div class="year-marker">
                             <div class="year-number">2023</div>
-                            <div class="year-dot"></div>
                             <div class="year-prize">$1,600</div>
+                            <div class="year-dot"></div>
                         </div>
                         <div class="year-content">
                             <div class="year-entry winner">
@@ -1593,8 +1596,8 @@
                     <div class="timeline-year">
                         <div class="year-marker">
                             <div class="year-number">2022</div>
-                            <div class="year-dot"></div>
                             <div class="year-prize">$1,400</div>
+                            <div class="year-dot"></div>
                         </div>
                         <div class="year-content">
                             <div class="year-entry winner">
@@ -1620,8 +1623,8 @@
                     <div class="timeline-year">
                         <div class="year-marker">
                             <div class="year-number">2021</div>
-                            <div class="year-dot"></div>
                             <div class="year-prize">$1,150</div>
+                            <div class="year-dot"></div>
                         </div>
                         <div class="year-content">
                             <div class="year-entry winner">
@@ -1646,8 +1649,8 @@
                     <div class="timeline-year">
                         <div class="year-marker">
                             <div class="year-number">2020</div>
-                            <div class="year-dot"></div>
                             <div class="year-prize">$1,050</div>
+                            <div class="year-dot"></div>
                         </div>
                         <div class="year-content">
                             <div class="year-entry winner">
@@ -1670,8 +1673,8 @@
                     <div class="timeline-year">
                         <div class="year-marker">
                             <div class="year-number">2019</div>
-                            <div class="year-dot"></div>
                             <div class="year-prize">$950</div>
+                            <div class="year-dot"></div>
                         </div>
                         <div class="year-content">
                             <div class="year-entry winner">
@@ -1695,8 +1698,8 @@
                     <div class="timeline-year">
                         <div class="year-marker">
                             <div class="year-number">2018</div>
-                            <div class="year-dot"></div>
                             <div class="year-prize">$850</div>
+                            <div class="year-dot"></div>
                         </div>
                         <div class="year-content">
                             <div class="year-entry winner">
@@ -1722,8 +1725,8 @@
                     <div class="timeline-year">
                         <div class="year-marker">
                             <div class="year-number">2017</div>
-                            <div class="year-dot"></div>
                             <div class="year-prize">$750</div>
+                            <div class="year-dot"></div>
                         </div>
                         <div class="year-content">
                             <div class="year-entry winner">
@@ -1746,8 +1749,8 @@
                     <div class="timeline-year">
                         <div class="year-marker">
                             <div class="year-number">2016</div>
-                            <div class="year-dot"></div>
                             <div class="year-prize">$500</div>
+                            <div class="year-dot"></div>
                         </div>
                         <div class="year-content">
                             <div class="year-entry winner">
@@ -1770,8 +1773,8 @@
                     <div class="timeline-year">
                         <div class="year-marker">
                             <div class="year-number">2015</div>
-                            <div class="year-dot"></div>
                             <div class="year-prize">$400</div>
+                            <div class="year-dot"></div>
                         </div>
                         <div class="year-content">
                             <div class="year-entry winner">
@@ -1794,8 +1797,8 @@
                     <div class="timeline-year">
                         <div class="year-marker">
                             <div class="year-number">2014</div>
-                            <div class="year-dot"></div>
                             <div class="year-prize">$350</div>
+                            <div class="year-dot"></div>
                         </div>
                         <div class="year-content">
                             <div class="year-entry winner">
@@ -1818,8 +1821,8 @@
                     <div class="timeline-year">
                         <div class="year-marker">
                             <div class="year-number">2013</div>
-                            <div class="year-dot"></div>
                             <div class="year-prize">$250</div>
+                            <div class="year-dot"></div>
                         </div>
                         <div class="year-content">
                             <div class="year-entry winner">
@@ -2084,6 +2087,15 @@
                     <div class="stat-player">WESTON</div>
                     <div class="stat-year">(2020)</div>
                 </div>
+
+                <!-- Most Money Earned -->
+                <div class="stat-card high-score">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-label">MOST MONEY EARNED</div>
+                    <div class="stat-value">$3,750</div>
+                    <div class="stat-player">LUKE</div>
+                    <div class="stat-year">(3 WINS)</div>
+                </div>
             </div>
         </div>
     </section>
@@ -2104,33 +2116,43 @@
             <div class="members-list">
                 <div class="member-item">
                     <a href="http://fantasy.espn.com/football/team?leagueId=133887&seasonId=2019&teamId=5">Jared Reardon</a>
+                    <p style="font-size: 10px; color: var(--text-accent); margin-top: 10px; text-shadow: 0 0 10px var(--text-accent);">$1,300</p>
                 </div>
                 <div class="member-item">
                     <a href="http://fantasy.espn.com/football/team?leagueId=133887&seasonId=2019&teamId=8">Ethan Reardon</a>
+                    <p style="font-size: 10px; color: var(--text-secondary); margin-top: 10px; opacity: 0.6;">$0</p>
                 </div>
                 <div class="member-item">
                     <a href="http://fantasy.espn.com/football/team?leagueId=133887&seasonId=2019&teamId=1">Luke Stahl</a>
+                    <p style="font-size: 10px; color: var(--text-accent); margin-top: 10px; text-shadow: 0 0 10px var(--text-accent);">$3,750</p>
                 </div>
                 <div class="member-item">
                     <a href="http://fantasy.espn.com/football/team?leagueId=133887&seasonId=2019&teamId=4">Pat Worklan</a>
+                    <p style="font-size: 10px; color: var(--text-secondary); margin-top: 10px; opacity: 0.6;">$0</p>
                 </div>
                 <div class="member-item">
                     <a href="http://fantasy.espn.com/football/team?leagueId=133887&seasonId=2019&teamId=6">Brian Clark</a>
+                    <p style="font-size: 10px; color: var(--text-secondary); margin-top: 10px; opacity: 0.6;">$0</p>
                 </div>
                 <div class="member-item">
                     <a href="http://fantasy.espn.com/football/team?leagueId=133887&seasonId=2019&teamId=2">Chris Wold</a>
+                    <p style="font-size: 10px; color: var(--text-accent); margin-top: 10px; text-shadow: 0 0 10px var(--text-accent);">$500</p>
                 </div>
                 <div class="member-item">
                     <a href="http://fantasy.espn.com/football/team?leagueId=133887&seasonId=2019&teamId=3">Conor Poore</a>
+                    <p style="font-size: 10px; color: var(--text-accent); margin-top: 10px; text-shadow: 0 0 10px var(--text-accent);">$400</p>
                 </div>
                 <div class="member-item">
                     <a href="http://fantasy.espn.com/football/team?leagueId=133887&seasonId=2019&teamId=10">Tony Selvaggio</a>
+                    <p style="font-size: 10px; color: var(--text-accent); margin-top: 10px; text-shadow: 0 0 10px var(--text-accent);">$1,800</p>
                 </div>
                 <div class="member-item">
                     <a href="http://fantasy.espn.com/football/team?leagueId=133887&seasonId=2019&teamId=9">Scott Brzezinski</a>
+                    <p style="font-size: 10px; color: var(--text-secondary); margin-top: 10px; opacity: 0.6;">$0</p>
                 </div>
                 <div class="member-item">
                     <a href="http://fantasy.espn.com/football/team?leagueId=133887&seasonId=2019&teamId=7">Weston Steinberg</a>
+                    <p style="font-size: 10px; color: var(--text-accent); margin-top: 10px; text-shadow: 0 0 10px var(--text-accent);">$350</p>
                 </div>
             </div>
         </div>
