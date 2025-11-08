@@ -1501,7 +1501,7 @@
     <header>
         <div class="content">
             <h1 class="hero-title">FANTASY FOOTBALL<br>LEGENDS</h1>
-            <p class="hero-subtitle" onclick="startGame()">PRESS ENTER</p>
+            <p class="hero-subtitle" id="start-prompt" onclick="startGame()">PRESS ENTER</p>
 
             <div class="countdown-container">
                 <p class="countdown-title">CURRENT SEASON 2025</p>
@@ -2216,6 +2216,21 @@
     </footer>
 
     <script>
+        // Detect mobile/touch device and update start prompt
+        function isTouchDevice() {
+            return (('ontouchstart' in window) ||
+                   (navigator.maxTouchPoints > 0) ||
+                   (navigator.msMaxTouchPoints > 0));
+        }
+
+        // Update the start prompt text based on device type
+        window.addEventListener('DOMContentLoaded', function() {
+            const startPrompt = document.getElementById('start-prompt');
+            if (isTouchDevice()) {
+                startPrompt.textContent = 'PRESS START';
+            }
+        });
+
         // Game Modal Functions
         function startGame() {
             const modal = document.getElementById('game-modal');
@@ -2427,15 +2442,15 @@
             }
         });
 
-        // Keyboard support for Enter key to start game
+        // Keyboard support for Enter key to start game (desktop only)
         document.addEventListener('keydown', function(event) {
             const gameModal = document.getElementById('game-modal');
             const playerModal = document.getElementById('player-modal');
             const isGameModalOpen = gameModal.classList.contains('active');
             const isPlayerModalOpen = playerModal.classList.contains('active');
 
-            // If Enter key is pressed and no modal is open, start game
-            if (event.key === 'Enter' && !isGameModalOpen && !isPlayerModalOpen) {
+            // If Enter key is pressed and no modal is open, start game (desktop only)
+            if (event.key === 'Enter' && !isGameModalOpen && !isPlayerModalOpen && !isTouchDevice()) {
                 startGame();
             }
             // If Escape key is pressed, close whichever modal is open
