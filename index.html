@@ -954,6 +954,15 @@
                 width: 16px;
                 height: 16px;
             }
+
+            .terminal-audio-btn {
+                font-size: 14px;
+                padding: 0 5px;
+            }
+
+            .terminal-title {
+                font-size: 7px;
+            }
         }
 
         /* Score Animation */
@@ -1123,6 +1132,8 @@
             padding: 0 10px;
             transition: all 0.3s;
             text-shadow: 0 0 5px var(--border-secondary);
+            position: absolute;
+            right: 15px;
         }
 
         .terminal-audio-btn:hover {
@@ -1979,8 +1990,8 @@
                     <span class="terminal-btn minimize"></span>
                     <span class="terminal-btn maximize"></span>
                 </div>
-                <button class="terminal-audio-btn" id="terminal-audio-toggle" onclick="toggleTerminalAudio()" title="Toggle Music">🏈</button>
                 <div class="terminal-title">fantasy-football-legends</div>
+                <button class="terminal-audio-btn" id="terminal-audio-toggle" onclick="toggleTerminalAudio()" title="Toggle Music">🏈</button>
             </div>
             <div class="terminal-body" id="terminal-body">
                 <div class="terminal-line">
@@ -3392,6 +3403,12 @@
                 audio.pause();
                 audio.currentTime = 0;
                 navButton.classList.remove('playing');
+            }
+
+            // Close mobile menu after clicking audio button
+            const navMenu = document.getElementById('nav-menu');
+            if (navMenu && navMenu.classList.contains('open')) {
+                navMenu.classList.remove('open');
             }
         }
 
