@@ -3152,6 +3152,15 @@
             gameRunning = false; // Stop any ongoing game animations
             const modal = document.getElementById('game-modal');
             modal.classList.remove('active');
+
+            // Stop tecmo audio when closing terminal
+            const tecmoAudio = document.getElementById('tecmo-audio');
+            const terminalButton = document.getElementById('terminal-audio-toggle');
+            if (!tecmoAudio.paused) {
+                tecmoAudio.pause();
+                tecmoAudio.currentTime = 0;
+                terminalButton.classList.remove('playing');
+            }
         }
 
         // Setup terminal input event listeners
