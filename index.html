@@ -668,9 +668,11 @@
                 backdrop-filter: blur(10px);
                 padding: 20px;
                 position: absolute;
-                top: 60px;
+                top: 100%;
                 left: 0;
                 border-bottom: 2px solid var(--border-primary);
+                z-index: 99;
+                margin-top: 0;
             }
 
             nav ul.open {
@@ -2482,6 +2484,11 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
+                    // Close mobile menu after clicking a nav link
+                    const navMenu = document.getElementById('nav-menu');
+                    if (navMenu && navMenu.classList.contains('open')) {
+                        navMenu.classList.remove('open');
+                    }
                 }
             });
         });
