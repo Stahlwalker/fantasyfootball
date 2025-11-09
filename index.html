@@ -2045,7 +2045,7 @@
         }
 
         .map-container {
-            padding: 40px 20px !important;
+            padding: 20px 15px !important;
         }
 
         @media screen and (max-width: 768px) {
@@ -2060,11 +2060,11 @@
             }
 
             .map-container {
-                padding: 20px 10px !important;
+                padding: 15px 8px !important;
             }
 
             #current-year {
-                font-size: 24px !important;
+                font-size: 16px !important;
             }
         }
 
@@ -2080,11 +2080,11 @@
             }
 
             .map-container {
-                padding: 15px 5px !important;
+                padding: 12px 5px !important;
             }
 
             #current-year {
-                font-size: 20px !important;
+                font-size: 14px !important;
             }
         }
 
@@ -3092,7 +3092,7 @@
             </div>
 
             <!-- Year Selector -->
-            <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin: 40px 0;">
+            <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 30px 0 20px 0;">
                 <button class="year-selector-btn active" onclick="selectYear(2013)" data-year="2013">2013</button>
                 <button class="year-selector-btn" onclick="selectYear(2014)" data-year="2014">2014</button>
                 <button class="year-selector-btn" onclick="selectYear(2015)" data-year="2015">2015</button>
@@ -3108,26 +3108,27 @@
             </div>
 
             <!-- Map Container -->
-            <div class="map-container" style="background: var(--bg-panel); border: 4px solid var(--border-primary); padding: 40px 20px; margin: 20px 0; box-shadow: 0 0 30px var(--shadow-color), inset 0 0 30px var(--shadow-color);">
-                <!-- Year Display -->
-                <div style="text-align: center; margin-bottom: 30px;">
-                    <div style="font-size: 32px; color: var(--text-accent); text-shadow: 0 0 20px var(--text-accent); animation: blink 1.5s infinite;" id="current-year">2013</div>
-                </div>
+            <div class="map-container" style="background: var(--bg-panel); border: 4px solid var(--border-primary); padding: 20px 15px; margin: 20px 0; box-shadow: 0 0 30px var(--shadow-color), inset 0 0 30px var(--shadow-color);">
+                <!-- Compact Header: Year + Arrows + Trophy Info -->
+                <div style="display: flex; justify-content: center; align-items: center; gap: 25px; margin-bottom: 20px; flex-wrap: wrap;">
+                    <!-- Left Arrow -->
+                    <button onclick="navigateYear('prev')" style="background: none; border: 2px solid var(--border-secondary); color: var(--border-secondary); font-size: 10px; padding: 4px 8px; cursor: pointer; transition: all 0.3s; font-family: 'Press Start 2P', cursive; flex-shrink: 0;" onmouseover="this.style.background='var(--border-secondary)'; this.style.color='var(--bg-primary)';" onmouseout="this.style.background='none'; this.style.color='var(--border-secondary)';">◄</button>
 
-                <!-- Trophy Info Display -->
-                <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;">
-                    <div style="background: rgba(0, 230, 230, 0.1); border: 2px solid var(--border-secondary); padding: 10px 15px; text-align: center; min-width: 150px;">
-                        <div style="font-size: 24px; display: inline-block; margin-right: 8px;">🏆</div>
-                        <div style="display: inline-block; text-align: left;">
-                            <div style="font-size: 8px; color: var(--text-primary);">CHAMPIONSHIP</div>
-                            <div style="font-size: 12px; color: var(--text-accent); text-shadow: 0 0 10px var(--text-accent);" id="champ-location">Illinois</div>
+                    <!-- Year Display -->
+                    <div style="font-size: 20px; color: var(--text-accent); text-shadow: 0 0 20px var(--text-accent); animation: blink 1.5s infinite; flex-shrink: 0;" id="current-year">2013</div>
+
+                    <!-- Right Arrow -->
+                    <button onclick="navigateYear('next')" style="background: none; border: 2px solid var(--border-secondary); color: var(--border-secondary); font-size: 10px; padding: 4px 8px; cursor: pointer; transition: all 0.3s; font-family: 'Press Start 2P', cursive; flex-shrink: 0;" onmouseover="this.style.background='var(--border-secondary)'; this.style.color='var(--bg-primary)';" onmouseout="this.style.background='none'; this.style.color='var(--border-secondary)';">►</button>
+
+                    <!-- Trophy Info - Compact -->
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
+                        <div style="background: rgba(0, 230, 230, 0.1); border: 2px solid var(--border-secondary); padding: 5px 10px; display: flex; align-items: center; gap: 6px;">
+                            <div style="font-size: 16px;">🏆</div>
+                            <div style="font-size: 10px; color: var(--text-accent); text-shadow: 0 0 10px var(--text-accent);" id="champ-location">Illinois</div>
                         </div>
-                    </div>
-                    <div style="background: rgba(255, 0, 128, 0.1); border: 2px solid var(--border-primary); padding: 10px 15px; text-align: center; min-width: 150px;">
-                        <div style="font-size: 24px; display: inline-block; margin-right: 8px;">🚽</div>
-                        <div style="display: inline-block; text-align: left;">
-                            <div style="font-size: 8px; color: var(--text-primary);">TOILET BOWL</div>
-                            <div style="font-size: 12px; color: var(--border-primary); text-shadow: 0 0 10px var(--border-primary);" id="toilet-location">Illinois</div>
+                        <div style="background: rgba(255, 0, 128, 0.1); border: 2px solid var(--border-primary); padding: 5px 10px; display: flex; align-items: center; gap: 6px;">
+                            <div style="font-size: 16px;">🚽</div>
+                            <div style="font-size: 10px; color: var(--border-primary); text-shadow: 0 0 10px var(--border-primary);" id="toilet-location">Illinois</div>
                         </div>
                     </div>
                 </div>
@@ -4024,12 +4025,12 @@
 
         // State positions on the map (as percentages)
         const statePositions = {
-            'Illinois': { left: 61, top: 42 },
+            'Illinois': { left: 64, top: 42 },
             'Texas': { left: 44, top: 70 },
-            'Colorado': { left: 35, top: 50 },
-            'New York': { left: 82, top: 28 },
-            'Mississippi': { left: 58, top: 62 },
-            'Wisconsin': { left: 60, top: 32 }
+            'Colorado': { left: 39, top: 47 },
+            'New York': { left: 85, top: 28 },
+            'Mississippi': { left: 65, top: 64 },
+            'Wisconsin': { left: 63, top: 32 }
         };
 
         function selectYear(year) {
@@ -4049,6 +4050,21 @@
 
             // Update map colors
             updateMap(data.championship, data.toilet);
+        }
+
+        function navigateYear(direction) {
+            const years = [2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+            const currentYear = parseInt(document.getElementById('current-year').textContent);
+            const currentIndex = years.indexOf(currentYear);
+
+            let newIndex;
+            if (direction === 'prev') {
+                newIndex = currentIndex > 0 ? currentIndex - 1 : years.length - 1; // Wrap to last year
+            } else {
+                newIndex = currentIndex < years.length - 1 ? currentIndex + 1 : 0; // Wrap to first year
+            }
+
+            selectYear(years[newIndex]);
         }
 
         function updateMap(champState, toiletState) {
