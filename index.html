@@ -2091,11 +2091,42 @@
         /* Arcade Leaderboard Styles */
         .leaderboard-entry {
             transition: all 0.3s ease;
+            position: relative;
+            overflow: visible;
         }
 
         .leaderboard-entry:hover {
             transform: scale(1.02) translateX(5px);
             box-shadow: 0 0 20px rgba(0, 230, 230, 0.5);
+        }
+
+        /* Sparkle effect */
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--text-accent);
+            box-shadow: 0 0 8px var(--text-accent), 0 0 12px var(--text-accent);
+            pointer-events: none;
+            animation: sparkleFloat 1s ease-out forwards;
+            z-index: 10;
+        }
+
+        @keyframes sparkleFloat {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) scale(0);
+            }
+        }
+
+        /* Add sparkle container to rank area */
+        .rank-sparkle-container {
+            position: relative;
+            display: inline-block;
         }
 
         /* Scrollbar styling for leaderboard */
@@ -4085,6 +4116,69 @@
         // Initialize map on page load
         document.addEventListener('DOMContentLoaded', function() {
             initializeMap();
+        });
+
+        // Arcade Leaderboard Sparkle Effect
+        document.addEventListener('DOMContentLoaded', function() {
+            const leaderboardEntries = document.querySelectorAll('.leaderboard-entry');
+
+            leaderboardEntries.forEach(entry => {
+                let sparkleInterval;
+
+                entry.addEventListener('mouseenter', function() {
+                    // Create sparkles continuously while hovering
+                    sparkleInterval = setInterval(() => {
+                        createSparkle(entry);
+                    }, 150); // Create a sparkle every 150ms
+                });
+
+                entry.addEventListener('mouseleave', function() {
+                    // Stop creating sparkles when mouse leaves
+                    clearInterval(sparkleInterval);
+                });
+            });
+
+            function createSparkle(entry) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+
+                // Position sparkle near the rank number (left side)
+                const randomX = Math.random() * 60 - 10; // -10 to 50px from left
+                const randomY = Math.random() * 30 - 10; // -10 to 20px from top
+
+                sparkle.style.left = randomX + 'px';
+                sparkle.style.top = '50%';
+                sparkle.style.marginTop = randomY + 'px';
+
+                // Random float direction
+                const tx = (Math.random() - 0.5) * 40; // -20 to 20px
+                const ty = (Math.random() - 0.5) * 40; // -20 to 20px
+                sparkle.style.setProperty('--tx', tx + 'px');
+                sparkle.style.setProperty('--ty', ty + 'px');
+
+                // Vary sparkle color slightly for gold/silver/bronze entries
+                const borderColor = window.getComputedStyle(entry).borderLeftColor;
+                if (borderColor.includes('255, 215, 0')) {
+                    // Gold
+                    sparkle.style.background = '#FFD700';
+                    sparkle.style.boxShadow = '0 0 8px #FFD700, 0 0 12px #FFD700';
+                } else if (borderColor.includes('192, 192, 192')) {
+                    // Silver
+                    sparkle.style.background = '#C0C0C0';
+                    sparkle.style.boxShadow = '0 0 8px #C0C0C0, 0 0 12px #C0C0C0';
+                } else if (borderColor.includes('205, 127, 50')) {
+                    // Bronze
+                    sparkle.style.background = '#CD7F32';
+                    sparkle.style.boxShadow = '0 0 8px #CD7F32, 0 0 12px #CD7F32';
+                }
+
+                entry.appendChild(sparkle);
+
+                // Remove sparkle after animation completes
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 1000);
+            }
         });
 
         // OLD UNUSED SVG DATA (kept for reference only)
