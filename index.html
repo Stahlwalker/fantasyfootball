@@ -1969,6 +1969,124 @@
                 padding: 12px 20px;
             }
         }
+
+        /* Year Selector Buttons */
+        .year-selector-btn {
+            background: var(--bg-panel);
+            border: 3px solid var(--border-secondary);
+            color: var(--border-secondary);
+            padding: 10px 20px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-width: 80px;
+        }
+
+        .year-selector-btn:hover {
+            background: var(--border-secondary);
+            color: var(--bg-primary);
+            box-shadow: 0 0 20px var(--border-secondary);
+            transform: translateY(-3px);
+        }
+
+        .year-selector-btn.active {
+            background: var(--text-accent);
+            color: var(--bg-primary);
+            border-color: var(--text-accent);
+            box-shadow: 0 0 30px var(--text-accent);
+        }
+
+        /* Trophy Map Styles */
+        .state-path {
+            stroke: var(--border-secondary);
+            stroke-width: 2;
+            fill: rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .state-path:hover {
+            stroke-width: 3;
+            filter: brightness(1.3);
+        }
+
+        .state-path.championship {
+            fill: rgba(0, 230, 230, 0.15);
+            stroke: var(--border-secondary);
+            stroke-width: 3;
+            filter: drop-shadow(0 0 10px rgba(0, 230, 230, 0.6));
+        }
+
+        .state-path.toilet {
+            fill: rgba(255, 0, 128, 0.15);
+            stroke: var(--border-primary);
+            stroke-width: 3;
+            filter: drop-shadow(0 0 10px rgba(255, 0, 128, 0.6));
+        }
+
+        .state-path.both {
+            fill: rgba(0, 230, 230, 0.15);
+            stroke: var(--border-secondary);
+            stroke-width: 3;
+            filter: drop-shadow(0 0 10px rgba(0, 230, 230, 0.6));
+        }
+
+        .trophy-icon {
+            font-size: 40px;
+            pointer-events: none;
+            animation: float 3s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(255, 255, 0, 0.8);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .map-container {
+            padding: 40px 20px !important;
+        }
+
+        @media screen and (max-width: 768px) {
+            .year-selector-btn {
+                font-size: 8px;
+                padding: 8px 12px;
+                min-width: 55px;
+            }
+
+            .trophy-icon {
+                font-size: 28px !important;
+            }
+
+            .map-container {
+                padding: 20px 10px !important;
+            }
+
+            #current-year {
+                font-size: 24px !important;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .year-selector-btn {
+                font-size: 7px;
+                padding: 6px 10px;
+                min-width: 50px;
+            }
+
+            .trophy-icon {
+                font-size: 20px !important;
+            }
+
+            .map-container {
+                padding: 15px 5px !important;
+            }
+
+            #current-year {
+                font-size: 20px !important;
+            }
+        }
     </style>
 </head>
 
@@ -1984,6 +2102,7 @@
                 <li><a href="#losers">LOSERS</a></li>
                 <li><a href="#stats">STATS</a></li>
                 <li><a href="#members">MEMBERS</a></li>
+                <li><a href="#trophy-map">MAP</a></li>
                 <li><button class="audio-btn" id="audio-toggle" onclick="toggleAudio()" title="Toggle Music"><img src="img/Magical_sword.png" alt="Sword" style="height: 28px; width: auto; display: inline-block; vertical-align: middle;"></button></li>
             </ul>
         </div>
@@ -1995,9 +2114,9 @@
             <h1 class="hero-title">FANTASY FOOTBALL<br>LEGENDS</h1>
             <p class="hero-subtitle" id="start-prompt" onclick="startGame()">PRESS ENTER</p>
 
-            <div class="countdown-container">
-                <p class="countdown-title">CURRENT SEASON 2025</p>
-                <p id="season-status">IN PROGRESS</p>
+            <div class="countdown-container" style="padding: 20px; margin: 20px auto; max-width: 400px;">
+                <p class="countdown-title" style="font-size: 12px; margin-bottom: 10px;">CURRENT SEASON 2025</p>
+                <p id="season-status" style="font-size: 16px; margin-top: 10px;">IN PROGRESS</p>
             </div>
         </div>
     </header>
@@ -2737,6 +2856,70 @@
                     <p style="font-size: 8px; color: var(--text-secondary); margin-top: 5px; opacity: 0.6;">ONE & DONE</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Trophy Map Section -->
+    <section id="trophy-map" style="background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);">
+        <div class="container">
+            <h2 class="section-title">TROPHY TRAVEL MAP</h2>
+
+            <div class="arcade-panel" style="text-align: center; margin-bottom: 40px;">
+                <h2>THE JOURNEY</h2>
+                <p>Follow the championship trophy and toilet bowl as they travel across America, changing hands from victor to victim.</p>
+            </div>
+
+            <!-- Year Selector -->
+            <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin: 40px 0;">
+                <button class="year-selector-btn active" onclick="selectYear(2013)" data-year="2013">2013</button>
+                <button class="year-selector-btn" onclick="selectYear(2014)" data-year="2014">2014</button>
+                <button class="year-selector-btn" onclick="selectYear(2015)" data-year="2015">2015</button>
+                <button class="year-selector-btn" onclick="selectYear(2016)" data-year="2016">2016</button>
+                <button class="year-selector-btn" onclick="selectYear(2017)" data-year="2017">2017</button>
+                <button class="year-selector-btn" onclick="selectYear(2018)" data-year="2018">2018</button>
+                <button class="year-selector-btn" onclick="selectYear(2019)" data-year="2019">2019</button>
+                <button class="year-selector-btn" onclick="selectYear(2020)" data-year="2020">2020</button>
+                <button class="year-selector-btn" onclick="selectYear(2021)" data-year="2021">2021</button>
+                <button class="year-selector-btn" onclick="selectYear(2022)" data-year="2022">2022</button>
+                <button class="year-selector-btn" onclick="selectYear(2023)" data-year="2023">2023</button>
+                <button class="year-selector-btn" onclick="selectYear(2024)" data-year="2024">2024</button>
+            </div>
+
+            <!-- Map Container -->
+            <div class="map-container" style="background: var(--bg-panel); border: 4px solid var(--border-primary); padding: 40px 20px; margin: 20px 0; box-shadow: 0 0 30px var(--shadow-color), inset 0 0 30px var(--shadow-color);">
+                <!-- Year Display -->
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <div style="font-size: 32px; color: var(--text-accent); text-shadow: 0 0 20px var(--text-accent); animation: blink 1.5s infinite;" id="current-year">2013</div>
+                </div>
+
+                <!-- Trophy Info Display -->
+                <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;">
+                    <div style="background: rgba(0, 230, 230, 0.1); border: 2px solid var(--border-secondary); padding: 10px 15px; text-align: center; min-width: 150px;">
+                        <div style="font-size: 24px; display: inline-block; margin-right: 8px;">🏆</div>
+                        <div style="display: inline-block; text-align: left;">
+                            <div style="font-size: 8px; color: var(--text-primary);">CHAMPIONSHIP</div>
+                            <div style="font-size: 12px; color: var(--text-accent); text-shadow: 0 0 10px var(--text-accent);" id="champ-location">Illinois</div>
+                        </div>
+                    </div>
+                    <div style="background: rgba(255, 0, 128, 0.1); border: 2px solid var(--border-primary); padding: 10px 15px; text-align: center; min-width: 150px;">
+                        <div style="font-size: 24px; display: inline-block; margin-right: 8px;">🚽</div>
+                        <div style="display: inline-block; text-align: left;">
+                            <div style="font-size: 8px; color: var(--text-primary);">TOILET BOWL</div>
+                            <div style="font-size: 12px; color: var(--border-primary); text-shadow: 0 0 10px var(--border-primary);" id="toilet-location">Illinois</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- US Map -->
+                <div id="us-map" style="max-width: 900px; margin: 0 auto; position: relative;">
+                    <img src="img/Map.jpg"
+                         alt="United States Map"
+                         style="width: 100%; height: auto; display: block; border: 2px solid var(--border-secondary); opacity: 0.8;">
+                    <!-- Trophy icons will be positioned absolutely over the map -->
+                    <div id="trophy-icons-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></div>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -3600,6 +3783,275 @@
                 }
             });
         });
+
+        // Trophy Map Data and Functions
+        const trophyData = {
+            2013: { championship: 'Illinois', toilet: 'Illinois' },
+            2014: { championship: 'Colorado', toilet: 'Mississippi' },
+            2015: { championship: 'Illinois', toilet: 'Illinois' },
+            2016: { championship: 'Illinois', toilet: 'Illinois' },
+            2017: { championship: 'Illinois', toilet: 'Illinois' },
+            2018: { championship: 'Texas', toilet: 'New York' },
+            2019: { championship: 'Texas', toilet: 'Colorado' },
+            2020: { championship: 'Illinois', toilet: 'Illinois' },
+            2021: { championship: 'Texas', toilet: 'Texas' },
+            2022: { championship: 'Illinois', toilet: 'Texas' },
+            2023: { championship: 'Illinois', toilet: 'Illinois' },
+            2024: { championship: 'Illinois', toilet: 'Wisconsin' }
+        };
+
+        // State positions on the map (as percentages)
+        const statePositions = {
+            'Illinois': { left: 61, top: 42 },
+            'Texas': { left: 44, top: 70 },
+            'Colorado': { left: 35, top: 50 },
+            'New York': { left: 82, top: 28 },
+            'Mississippi': { left: 58, top: 62 },
+            'Wisconsin': { left: 60, top: 32 }
+        };
+
+        function selectYear(year) {
+            // Update year display
+            document.getElementById('current-year').textContent = year;
+
+            // Update active button
+            document.querySelectorAll('.year-selector-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-year="${year}"]`).classList.add('active');
+
+            // Update trophy locations
+            const data = trophyData[year];
+            document.getElementById('champ-location').textContent = data.championship;
+            document.getElementById('toilet-location').textContent = data.toilet;
+
+            // Update map colors
+            updateMap(data.championship, data.toilet);
+        }
+
+        function updateMap(champState, toiletState) {
+            const container = document.getElementById('trophy-icons-container');
+
+            // Clear existing icons
+            container.innerHTML = '';
+
+            // Add icons based on trophy locations
+            if (champState === toiletState) {
+                // Both trophies in same state
+                const pos = statePositions[champState];
+                if (pos) {
+                    // Create container for both icons
+                    const iconPair = document.createElement('div');
+                    iconPair.style.position = 'absolute';
+                    iconPair.style.left = pos.left + '%';
+                    iconPair.style.top = pos.top + '%';
+                    iconPair.style.transform = 'translate(-50%, -50%)';
+                    iconPair.style.display = 'flex';
+                    iconPair.style.gap = '10px';
+                    iconPair.style.filter = 'drop-shadow(0 0 15px rgba(0, 230, 230, 0.9))';
+                    iconPair.innerHTML = '🏆🚽';
+                    iconPair.className = 'trophy-icon';
+                    container.appendChild(iconPair);
+                }
+            } else {
+                // Different states - add championship trophy
+                const champPos = statePositions[champState];
+                if (champPos) {
+                    const trophyIcon = document.createElement('div');
+                    trophyIcon.style.position = 'absolute';
+                    trophyIcon.style.left = champPos.left + '%';
+                    trophyIcon.style.top = champPos.top + '%';
+                    trophyIcon.style.transform = 'translate(-50%, -50%)';
+                    trophyIcon.style.filter = 'drop-shadow(0 0 15px rgba(0, 230, 230, 0.9))';
+                    trophyIcon.textContent = '🏆';
+                    trophyIcon.className = 'trophy-icon';
+                    container.appendChild(trophyIcon);
+                }
+
+                // Add toilet bowl icon
+                const toiletPos = statePositions[toiletState];
+                if (toiletPos) {
+                    const toiletIcon = document.createElement('div');
+                    toiletIcon.style.position = 'absolute';
+                    toiletIcon.style.left = toiletPos.left + '%';
+                    toiletIcon.style.top = toiletPos.top + '%';
+                    toiletIcon.style.transform = 'translate(-50%, -50%)';
+                    toiletIcon.style.filter = 'drop-shadow(0 0 15px rgba(255, 0, 128, 0.9))';
+                    toiletIcon.textContent = '🚽';
+                    toiletIcon.className = 'trophy-icon';
+                    container.appendChild(toiletIcon);
+                }
+            }
+        }
+
+        function initializeMap() {
+            // Map now uses image instead of SVG
+            // Icons are positioned with updateMap() function
+            // Initialize with 2013
+            selectYear(2013);
+        }
+
+        // Initialize map on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeMap();
+        });
+
+        // OLD UNUSED SVG DATA (kept for reference only)
+        /*
+        const OLD_stateAbbreviations = {
+                'Washington': { abbr: 'WA', x: 80, y: 70 },
+                'Oregon': { abbr: 'OR', x: 75, y: 120 },
+                'California': { abbr: 'CA', x: 65, y: 210 },
+                'Nevada': { abbr: 'NV', x: 118, y: 205 },
+                'Idaho': { abbr: 'ID', x: 140, y: 110 },
+                'Montana': { abbr: 'MT', x: 220, y: 70 },
+                'Wyoming': { abbr: 'WY', x: 218, y: 138 },
+                'Utah': { abbr: 'UT', x: 148, y: 200 },
+                'Arizona': { abbr: 'AZ', x: 113, y: 318 },
+                'New Mexico': { abbr: 'NM', x: 178, y: 310 },
+                'North Dakota': { abbr: 'ND', x: 340, y: 70 },
+                'South Dakota': { abbr: 'SD', x: 342, y: 127 },
+                'Nebraska': { abbr: 'NE', x: 343, y: 186 },
+                'Kansas': { abbr: 'KS', x: 345, y: 240 },
+                'Colorado': { abbr: 'CO', x: 220, y: 215 },
+                'Oklahoma': { abbr: 'OK', x: 345, y: 295 },
+                'Texas': { abbr: 'TX', x: 315, y: 410 },
+                'Minnesota': { abbr: 'MN', x: 437, y: 100 },
+                'Iowa': { abbr: 'IA', x: 442, y: 185 },
+                'Missouri': { abbr: 'MO', x: 442, y: 245 },
+                'Wisconsin': { abbr: 'WI', x: 507, y: 100 },
+                'Illinois': { abbr: 'IL', x: 510, y: 195 },
+                'Michigan': { abbr: 'MI', x: 560, y: 105 },
+                'Indiana': { abbr: 'IN', x: 557, y: 185 },
+                'Ohio': { abbr: 'OH', x: 598, y: 185 },
+                'Arkansas': { abbr: 'AR', x: 443, y: 305 },
+                'Louisiana': { abbr: 'LA', x: 430, y: 365 },
+                'Mississippi': { abbr: 'MS', x: 475, y: 340 },
+                'Alabama': { abbr: 'AL', x: 512, y: 340 },
+                'Tennessee': { abbr: 'TN', x: 542, y: 255 },
+                'Kentucky': { abbr: 'KY', x: 572, y: 240 },
+                'West Virginia': { abbr: 'WV', x: 645, y: 210 },
+                'Virginia': { abbr: 'VA', x: 685, y: 255 },
+                'North Carolina': { abbr: 'NC', x: 650, y: 298 },
+                'South Carolina': { abbr: 'SC', x: 645, y: 350 },
+                'Georgia': { abbr: 'GA', x: 570, y: 370 },
+                'Florida': { abbr: 'FL', x: 590, y: 465 },
+                'Pennsylvania': { abbr: 'PA', x: 662, y: 175 },
+                'New York': { abbr: 'NY', x: 695, y: 148 },
+                'Vermont': { abbr: 'VT', x: 732, y: 103 },
+                'New Hampshire': { abbr: 'NH', x: 755, y: 100 },
+                'Maine': { abbr: 'ME', x: 785, y: 80 },
+                'Massachusetts': { abbr: 'MA', x: 775, y: 133 },
+                'Rhode Island': { abbr: 'RI', x: 802, y: 131 },
+                'Connecticut': { abbr: 'CT', x: 790, y: 153 },
+                'New Jersey': { abbr: 'NJ', x: 707, y: 198 },
+                'Delaware': { abbr: 'DE', x: 712, y: 228 },
+                'Maryland': { abbr: 'MD', x: 705, y: 218 }
+            };
+
+            // Add all US states with realistic outlines
+            const allStates = {
+                // West Coast
+                'Washington': 'M40,45 L42,48 L45,50 L50,52 L55,50 L58,48 L62,48 L68,50 L75,52 L82,52 L90,50 L95,48 L100,47 L105,48 L108,50 L110,55 L112,60 L115,65 L117,70 L118,75 L117,80 L115,85 L110,90 L105,92 L100,93 L95,95 L90,97 L85,98 L80,97 L75,95 L70,92 L65,88 L60,85 L55,82 L50,78 L45,72 L42,65 L40,58 L38,52 Z',
+                'Oregon': 'M42,100 L45,102 L50,105 L55,107 L60,108 L68,108 L75,107 L82,107 L90,108 L95,110 L100,112 L105,112 L110,110 L115,108 L117,115 L118,122 L117,128 L115,133 L110,137 L105,140 L100,142 L95,143 L90,143 L85,142 L80,140 L75,138 L70,135 L65,132 L60,128 L55,125 L50,122 L45,118 L42,113 L40,108 Z',
+                'California': 'M35,150 L38,155 L40,162 L42,170 L45,178 L48,188 L50,198 L52,208 L55,220 L57,230 L58,240 L58,250 L57,260 L55,268 L52,275 L48,280 L45,283 L80,280 L85,277 L90,272 L95,265 L98,258 L100,250 L102,242 L103,232 L103,222 L102,212 L100,202 L98,192 L95,182 L92,172 L88,165 L85,160 L82,156 L78,153 L73,151 L68,150 L62,150 L55,150 L48,150 Z',
+                'Nevada': 'M103,150 L108,152 L112,155 L115,160 L117,167 L118,175 L120,185 L122,195 L123,205 L123,215 L122,225 L120,235 L118,242 L115,248 L112,253 L108,257 L103,260 L98,258 L100,250 L102,242 L103,232 L103,222 L102,212 L100,202 L98,192 L95,182 L92,172 L88,165 L85,160 L88,155 L92,152 L97,150 Z',
+                'Idaho': 'M118,75 L122,78 L127,82 L132,87 L137,93 L142,100 L147,107 L152,115 L155,123 L157,132 L158,140 L157,147 L155,153 L152,158 L148,162 L143,165 L138,167 L133,168 L128,167 L123,165 L118,162 L115,158 L112,153 L110,147 L108,140 L107,132 L107,123 L108,115 L110,107 L112,100 L115,93 L117,87 L118,82 Z',
+                'Montana': 'M160,40 L270,38 L272,42 L274,48 L275,55 L277,62 L278,70 L278,78 L277,86 L275,93 L272,98 L268,102 L263,105 L257,107 L250,108 L242,108 L233,107 L223,105 L213,103 L203,102 L193,102 L183,103 L173,105 L165,107 L160,105 L157,100 L155,93 L153,85 L152,77 L152,68 L153,60 L155,52 L157,45 Z',
+                'Wyoming': 'M160,110 L162,113 L165,117 L168,122 L170,128 L172,135 L173,142 L174,150 L175,158 L175,166 L174,173 L172,180 L170,186 L168,192 L165,197 L162,202 L160,206 L270,204 L272,200 L274,194 L275,186 L277,178 L278,170 L278,162 L277,154 L275,147 L272,140 L268,135 L263,131 L257,128 L250,126 L242,125 L233,125 L223,126 L213,128 L203,130 L193,131 L183,131 L173,130 L165,128 L162,123 L160,117 Z',
+                'Utah': 'M133,170 L138,172 L143,175 L147,180 L150,186 L152,193 L153,201 L153,209 L152,217 L150,225 L147,232 L143,238 L138,243 L133,246 L128,247 L123,246 L118,243 L115,238 L112,232 L110,225 L108,217 L107,209 L107,201 L108,193 L110,186 L112,180 L115,175 L118,172 L123,170 Z',
+                'Arizona': 'M80,285 L85,288 L92,292 L98,297 L105,303 L112,310 L118,318 L123,327 L127,337 L130,347 L132,357 L133,367 L132,377 L130,385 L127,392 L123,398 L118,403 L112,407 L105,410 L98,412 L92,412 L85,410 L80,407 L75,403 L72,398 L70,392 L68,385 L67,377 L67,367 L68,357 L70,347 L72,337 L75,327 L78,318 L80,310 L82,303 L83,297 L83,292 Z',
+                'New Mexico': 'M143,280 L148,282 L153,285 L158,289 L163,294 L168,300 L173,307 L177,315 L180,324 L183,334 L185,344 L186,354 L186,364 L185,374 L183,384 L180,393 L177,401 L173,408 L168,414 L163,419 L158,423 L153,426 L148,428 L143,428 L138,426 L133,423 L128,419 L123,414 L118,408 L115,401 L112,393 L110,384 L108,374 L107,364 L107,354 L108,344 L110,334 L112,324 L115,315 L118,307 L123,300 L128,294 L133,289 L138,285 Z',
+
+                // Mountain & Plains
+                'North Dakota': 'M280,48 L390,46 L392,50 L393,56 L394,63 L395,71 L395,79 L394,87 L392,94 L388,100 L383,105 L377,108 L370,110 L362,111 L353,111 L343,110 L333,108 L323,106 L313,105 L303,105 L293,106 L285,108 L280,105 L278,100 L277,93 L275,86 L274,78 L274,70 L275,62 L277,55 Z',
+                'South Dakota': 'M280,110 L285,112 L293,115 L303,117 L313,118 L323,118 L333,117 L343,115 L353,114 L362,114 L370,115 L377,117 L383,120 L388,124 L392,129 L394,135 L395,142 L395,150 L394,157 L392,163 L388,168 L383,172 L377,175 L370,177 L362,178 L353,178 L343,177 L333,175 L323,173 L313,172 L303,172 L293,173 L285,175 L280,172 L278,167 L277,160 L275,153 L274,145 L274,137 L275,129 L277,122 L278,117 Z',
+                'Nebraska': 'M280,177 L285,179 L293,182 L303,184 L313,185 L323,185 L333,184 L343,182 L353,181 L362,181 L370,182 L377,184 L383,187 L388,191 L392,196 L394,202 L395,209 L395,217 L394,224 L392,230 L388,235 L383,239 L377,242 L370,244 L362,245 L353,245 L343,244 L333,242 L323,240 L313,239 L303,239 L293,240 L285,242 L280,239 L278,234 L277,227 L275,220 L274,212 L274,204 L275,196 L277,189 L278,184 Z',
+                'Kansas': 'M280,245 L285,247 L293,250 L303,252 L313,253 L323,253 L333,252 L343,250 L353,249 L362,249 L370,250 L377,252 L383,255 L388,259 L392,264 L394,270 L395,277 L395,285 L394,292 L392,298 L388,303 L383,307 L377,310 L370,312 L362,313 L353,313 L343,312 L333,310 L323,308 L313,307 L303,307 L293,308 L285,310 L280,307 L278,302 L277,295 L275,288 L274,280 L274,272 L275,264 L277,257 L278,252 Z',
+                'Colorado': 'M160,175 L165,177 L173,180 L183,182 L193,183 L203,183 L213,182 L223,180 L233,179 L242,179 L250,180 L257,182 L263,185 L268,189 L272,194 L274,200 L275,207 L275,215 L274,222 L272,228 L268,233 L263,237 L257,240 L250,242 L242,243 L233,243 L223,242 L213,240 L203,238 L193,237 L183,237 L173,238 L165,240 L160,237 L158,232 L157,225 L155,218 L154,210 L154,202 L155,194 L157,187 L158,182 Z',
+                'Oklahoma': 'M280,315 L285,317 L293,320 L303,322 L313,323 L323,323 L333,322 L343,320 L353,319 L362,319 L370,320 L377,322 L383,325 L388,329 L392,334 L394,340 L395,347 L395,355 L394,362 L392,368 L388,373 L383,377 L377,380 L370,382 L362,383 L353,383 L343,382 L333,380 L323,378 L313,377 L303,377 L293,378 L285,380 L280,377 L278,372 L277,365 L275,358 L274,350 L274,342 L275,334 L277,327 L278,322 Z',
+                'Texas': 'M280,385 L285,387 L293,390 L303,392 L313,393 L323,393 L333,392 L343,390 L353,389 L362,389 L370,392 L377,397 L383,403 L388,410 L392,418 L394,427 L395,437 L395,448 L394,459 L392,469 L388,478 L383,486 L377,492 L370,497 L362,500 L353,502 L343,502 L333,500 L323,497 L313,493 L303,488 L293,483 L285,477 L278,470 L272,462 L267,453 L263,443 L260,432 L258,420 L257,408 L257,396 L258,386 L260,378 L263,371 L267,365 L272,360 L277,356 Z',
+
+                // Midwest
+                'Minnesota': 'M395,48 L400,50 L407,53 L415,57 L423,62 L432,68 L440,75 L447,83 L453,92 L458,102 L462,113 L465,125 L467,138 L468,151 L467,164 L465,176 L462,187 L458,197 L453,205 L447,212 L440,218 L432,223 L423,227 L415,230 L407,232 L400,233 L395,230 L393,225 L392,217 L390,208 L389,198 L389,187 L390,175 L392,163 L393,150 L393,137 L392,123 L390,109 L389,95 L389,80 L390,65 L392,53 Z',
+                'Iowa': 'M400,235 L407,237 L415,240 L423,243 L432,245 L440,246 L447,246 L453,245 L458,243 L462,240 L465,236 L467,231 L468,225 L470,218 L472,211 L473,203 L473,195 L472,188 L470,181 L467,175 L462,170 L458,166 L453,163 L447,161 L440,160 L432,160 L423,161 L415,163 L407,166 L400,170 L395,175 L393,180 L392,187 L390,195 L389,203 L389,211 L390,218 L392,225 Z',
+                'Missouri': 'M400,245 L407,247 L415,250 L423,253 L432,255 L440,256 L447,256 L453,255 L458,253 L462,250 L467,246 L472,241 L477,235 L480,228 L482,220 L483,212 L483,203 L482,195 L480,188 L477,182 L472,177 L467,173 L462,170 L458,168 L453,167 L447,167 L440,168 L432,170 L423,173 L415,177 L407,182 L400,188 L395,195 L393,202 L392,210 L390,218 L389,227 L389,236 Z',
+                'Wisconsin': 'M475,50 L480,52 L487,55 L495,59 L503,64 L512,70 L520,77 L527,85 L533,94 L538,104 L542,115 L545,127 L547,140 L548,153 L547,166 L545,178 L542,189 L538,199 L533,208 L527,216 L520,223 L512,229 L503,234 L495,238 L487,241 L480,243 L475,240 L473,235 L472,227 L470,218 L469,208 L469,197 L470,185 L472,173 L473,160 L473,147 L472,133 L470,119 L469,105 L469,90 L470,75 L472,63 Z',
+                'Illinois': 'M475,155 L480,157 L487,160 L495,164 L503,169 L512,175 L520,182 L527,190 L533,199 L538,209 L542,220 L545,232 L547,245 L548,258 L547,271 L545,283 L542,294 L538,304 L533,313 L527,321 L520,328 L512,334 L503,339 L495,343 L487,346 L480,348 L475,345 L473,340 L472,332 L470,323 L469,313 L469,302 L470,290 L472,278 L473,265 L473,252 L472,238 L470,224 L469,210 L469,195 L470,180 L472,168 Z',
+                'Michigan': 'M535,55 L540,57 L547,60 L555,64 L563,69 L572,75 L580,82 L587,90 L593,99 L598,109 L602,120 L605,132 L607,145 L608,158 L607,171 L605,183 L602,194 L598,204 L593,213 L587,221 L580,228 L572,234 L563,239 L555,243 L547,246 L540,248 L535,245 L533,240 L532,232 L530,223 L529,213 L529,202 L530,190 L532,178 L533,165 L533,152 L532,138 L530,124 L529,110 L529,95 L530,80 L532,68 Z',
+                'Indiana': 'M535,160 L540,162 L547,165 L555,169 L563,174 L572,180 L580,187 L587,195 L593,204 L598,214 L602,225 L605,237 L607,250 L608,263 L607,276 L605,288 L602,299 L598,309 L593,318 L587,326 L580,333 L572,339 L563,344 L555,348 L547,351 L540,353 L535,350 L533,345 L532,337 L530,328 L529,318 L529,307 L530,295 L532,283 L533,270 L533,257 L532,243 L530,229 L529,215 L529,200 L530,185 L532,173 Z',
+                'Ohio': 'M572,155 L577,157 L584,160 L592,164 L600,169 L609,175 L617,182 L624,190 L630,199 L635,209 L639,220 L642,232 L644,245 L645,258 L644,271 L642,283 L639,294 L635,304 L630,313 L624,321 L617,328 L609,334 L600,339 L592,343 L584,346 L577,348 L572,345 L570,340 L569,332 L567,323 L566,313 L566,302 L567,290 L569,278 L570,265 L570,252 L569,238 L567,224 L566,210 L566,195 L567,180 L569,168 Z',
+
+                // South
+                'Arkansas': 'M405,280 L410,282 L417,285 L425,288 L433,290 L440,291 L447,291 L453,290 L458,288 L462,285 L467,281 L472,276 L477,270 L480,263 L482,255 L483,247 L483,238 L482,230 L480,223 L477,217 L472,212 L467,208 L462,205 L458,203 L453,202 L447,202 L440,203 L433,205 L425,208 L417,212 L410,217 L405,223 L403,230 L402,238 L400,247 L399,256 L399,265 L400,274 Z',
+                'Louisiana': 'M405,293 L410,295 L417,298 L425,301 L433,303 L440,304 L447,304 L453,303 L458,301 L462,298 L467,294 L472,289 L477,283 L480,276 L482,268 L483,260 L483,251 L482,243 L480,236 L477,230 L472,225 L467,221 L462,218 L458,216 L453,215 L447,215 L440,216 L433,218 L425,221 L417,225 L410,230 L405,236 L403,243 L402,251 L400,260 L399,269 L399,278 L400,287 Z',
+                'Mississippi': 'M455,280 L460,282 L467,285 L475,288 L483,290 L490,291 L497,291 L503,290 L508,288 L512,285 L516,281 L520,276 L524,270 L527,263 L529,255 L530,247 L530,238 L529,230 L527,223 L524,217 L520,212 L516,208 L512,205 L508,203 L503,202 L497,202 L490,203 L483,205 L475,208 L467,212 L460,217 L455,223 L453,230 L452,238 L450,247 L449,256 L449,265 L450,274 Z',
+                'Alabama': 'M490,280 L495,282 L502,285 L510,288 L518,290 L525,291 L532,291 L538,290 L543,288 L547,285 L551,281 L555,276 L559,270 L562,263 L564,255 L565,247 L565,238 L564,230 L562,223 L559,217 L555,212 L551,208 L547,205 L543,203 L538,202 L532,202 L525,203 L518,205 L510,208 L502,212 L495,217 L490,223 L488,230 L487,238 L485,247 L484,256 L484,265 L485,274 Z',
+                'Tennessee': 'M480,230 L485,232 L492,235 L500,238 L508,240 L515,241 L522,241 L528,240 L533,238 L537,235 L541,231 L545,226 L549,220 L552,213 L554,205 L555,197 L555,188 L554,180 L552,173 L549,167 L545,162 L541,158 L537,155 L533,153 L528,152 L522,152 L515,153 L508,155 L500,158 L492,162 L485,167 L480,173 L478,180 L477,188 L475,197 L474,206 L474,215 L475,224 Z',
+                'Kentucky': 'M540,220 L545,222 L552,225 L560,228 L568,230 L575,231 L582,231 L588,230 L593,228 L597,225 L601,221 L605,216 L609,210 L612,203 L614,195 L615,187 L615,178 L614,170 L612,163 L609,157 L605,152 L601,148 L597,145 L593,143 L588,142 L582,142 L575,143 L568,145 L560,148 L552,152 L545,157 L540,163 L538,170 L537,178 L535,187 L534,196 L534,205 L535,214 Z',
+                'West Virginia': 'M620,182 L625,184 L632,187 L640,190 L648,192 L655,193 L662,193 L668,192 L673,190 L677,187 L681,183 L685,178 L689,172 L692,165 L694,157 L695,149 L695,140 L694,132 L692,125 L689,119 L685,114 L681,110 L677,107 L673,105 L668,104 L662,104 L655,105 L648,107 L640,110 L632,114 L625,119 L620,125 L618,132 L617,140 L615,149 L614,158 L614,167 L615,176 Z',
+                'Virginia': 'M645,235 L650,237 L657,240 L665,243 L673,245 L680,246 L687,246 L693,245 L698,243 L702,240 L706,236 L710,231 L714,225 L717,218 L719,210 L720,202 L720,193 L719,185 L717,178 L714,172 L710,167 L706,163 L702,160 L698,158 L693,157 L687,157 L680,158 L673,160 L665,163 L657,167 L650,172 L645,178 L643,185 L642,193 L640,202 L639,211 L639,220 L640,229 Z',
+                'North Carolina': 'M600,275 L605,277 L612,280 L620,283 L628,285 L635,286 L642,286 L648,285 L653,283 L657,280 L661,276 L665,271 L669,265 L672,258 L674,250 L675,242 L675,233 L674,225 L672,218 L669,212 L665,207 L661,203 L657,200 L653,198 L648,197 L642,197 L635,198 L628,200 L620,203 L612,207 L605,212 L600,218 L598,225 L597,233 L595,242 L594,251 L594,260 L595,269 Z',
+                'South Carolina': 'M605,330 L610,332 L617,335 L625,338 L633,340 L640,341 L647,341 L653,340 L658,338 L662,335 L666,331 L670,326 L674,320 L677,313 L679,305 L680,297 L680,288 L679,280 L677,273 L674,267 L670,262 L666,258 L662,255 L658,253 L653,252 L647,252 L640,253 L633,255 L625,258 L617,262 L610,267 L605,273 L603,280 L602,288 L600,297 L599,306 L599,315 L600,324 Z',
+                'Georgia': 'M525,330 L530,332 L537,335 L545,338 L553,340 L560,341 L567,341 L573,340 L578,338 L582,335 L586,331 L590,326 L594,320 L597,313 L599,305 L600,297 L600,288 L599,280 L597,273 L594,267 L590,262 L586,258 L582,255 L578,253 L573,252 L567,252 L560,253 L553,255 L545,258 L537,262 L530,267 L525,273 L523,280 L522,288 L520,297 L519,306 L519,315 L520,324 Z',
+                'Florida': 'M570,420 L575,422 L582,425 L590,428 L598,430 L605,431 L612,431 L618,430 L623,428 L627,425 L631,421 L635,416 L639,410 L642,403 L644,395 L645,387 L645,378 L644,370 L642,363 L639,357 L635,352 L631,348 L627,345 L623,343 L618,342 L612,342 L605,343 L598,345 L590,348 L582,352 L575,357 L570,363 L568,370 L567,378 L565,387 L564,396 L564,405 L565,414 Z',
+
+                // Northeast
+                'Pennsylvania': 'M620,155 L625,157 L632,160 L640,163 L648,165 L655,166 L662,166 L668,165 L673,163 L677,160 L681,156 L685,151 L689,145 L692,138 L694,130 L695,122 L695,113 L694,105 L692,98 L689,92 L685,87 L681,83 L677,80 L673,78 L668,77 L662,77 L655,78 L648,80 L640,83 L632,87 L625,92 L620,98 L618,105 L617,113 L615,122 L614,131 L614,140 L615,149 Z',
+                'New York': 'M660,115 L665,117 L672,120 L680,123 L688,125 L695,126 L702,126 L708,125 L713,123 L717,120 L721,116 L725,111 L729,105 L732,98 L734,90 L735,82 L735,73 L734,65 L732,58 L729,52 L725,47 L721,43 L717,40 L713,38 L708,37 L702,37 L695,38 L688,40 L680,43 L672,47 L665,52 L660,58 L658,65 L657,73 L655,82 L654,91 L654,100 L655,109 Z',
+                'Vermont': 'M715,80 L720,82 L727,85 L735,88 L743,90 L750,91 L757,91 L763,90 L768,88 L772,85 L776,81 L780,76 L784,70 L787,63 L789,55 L790,47 L790,38 L789,30 L787,23 L784,17 L780,12 L776,8 L772,5 L768,3 L763,2 L757,2 L750,3 L743,5 L735,8 L727,12 L720,17 L715,23 L713,30 L712,38 L710,47 L709,56 L709,65 L710,74 Z',
+                'New Hampshire': 'M740,80 L745,82 L752,85 L760,88 L768,90 L775,91 L782,91 L788,90 L793,88 L797,85 L801,81 L805,76 L809,70 L812,63 L814,55 L815,47 L815,38 L814,30 L812,23 L809,17 L805,12 L801,8 L797,5 L793,3 L788,2 L782,2 L775,3 L768,5 L760,8 L752,12 L745,17 L740,23 L738,30 L737,38 L735,47 L734,56 L734,65 L735,74 Z',
+                'Maine': 'M760,45 L765,47 L772,50 L780,53 L788,55 L795,56 L802,56 L808,55 L813,53 L817,50 L821,46 L825,41 L829,35 L832,28 L834,20 L835,12 L835,3 L834,-5 L832,-12 L829,-18 L825,-23 L821,-27 L817,-30 L813,-32 L808,-33 L802,-33 L795,-32 L788,-30 L780,-27 L772,-23 L765,-18 L760,-12 L758,-5 L757,3 L755,12 L754,21 L754,30 L755,39 Z',
+                'Massachusetts': 'M745,120 L750,122 L757,125 L765,128 L773,130 L780,131 L787,131 L793,130 L798,128 L802,125 L806,121 L810,116 L814,110 L817,103 L819,95 L820,87 L820,78 L819,70 L817,63 L814,57 L810,52 L806,48 L802,45 L798,43 L793,42 L787,42 L780,43 L773,45 L765,48 L757,52 L750,57 L745,63 L743,70 L742,78 L740,87 L739,96 L739,105 L740,114 Z',
+                'Rhode Island': 'M790,120 L795,122 L802,125 L810,128 L818,130 L825,131 L832,131 L838,130 L843,128 L847,125 L851,121 L855,116 L859,110 L862,103 L864,95 L865,87 L865,78 L864,70 L862,63 L859,57 L855,52 L851,48 L847,45 L843,43 L838,42 L832,42 L825,43 L818,45 L810,48 L802,52 L795,57 L790,63 L788,70 L787,78 L785,87 L784,96 L784,105 L785,114 Z',
+                'Connecticut': 'M770,140 L775,142 L782,145 L790,148 L798,150 L805,151 L812,151 L818,150 L823,148 L827,145 L831,141 L835,136 L839,130 L842,123 L844,115 L845,107 L845,98 L844,90 L842,83 L839,77 L835,72 L831,68 L827,65 L823,63 L818,62 L812,62 L805,63 L798,65 L790,68 L782,72 L775,77 L770,83 L768,90 L767,98 L765,107 L764,116 L764,125 L765,134 Z',
+                'New Jersey': 'M690,177 L695,179 L702,182 L710,185 L718,187 L725,188 L732,188 L738,187 L743,185 L747,182 L751,178 L755,173 L759,167 L762,160 L764,152 L765,144 L765,135 L764,127 L762,120 L759,114 L755,109 L751,105 L747,102 L743,100 L738,99 L732,99 L725,100 L718,102 L710,105 L702,109 L695,114 L690,120 L688,127 L687,135 L685,144 L684,153 L684,162 L685,171 Z',
+                'Delaware': 'M700,217 L705,219 L712,222 L720,225 L728,227 L735,228 L742,228 L748,227 L753,225 L757,222 L761,218 L765,213 L769,207 L772,200 L774,192 L775,184 L775,175 L774,167 L772,160 L769,154 L765,149 L761,145 L757,142 L753,140 L748,139 L742,139 L735,140 L728,142 L720,145 L712,149 L705,154 L700,160 L698,167 L697,175 L695,184 L694,193 L694,202 L695,211 Z',
+                'Maryland': 'M680,197 L685,199 L692,202 L700,205 L708,207 L715,208 L722,208 L728,207 L733,205 L737,202 L741,198 L745,193 L749,187 L752,180 L754,172 L755,164 L755,155 L754,147 L752,140 L749,134 L745,129 L741,125 L737,122 L733,120 L728,119 L722,119 L715,120 L708,122 L700,125 L692,129 L685,134 L680,140 L678,147 L677,155 L675,164 L674,173 L674,182 L675,191 Z'
+            };
+
+            // Add all state outlines first (background layer)
+            Object.keys(allStates).forEach(state => {
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', allStates[state]);
+                path.setAttribute('class', 'state-path');
+                path.setAttribute('fill', 'rgba(0, 0, 0, 0.2)');
+                path.setAttribute('stroke', 'rgba(0, 230, 230, 0.3)');
+                path.setAttribute('stroke-width', '1');
+                svg.appendChild(path);
+            });
+
+            // Add trophy-traveled state paths on top
+            Object.keys(statePaths).forEach(state => {
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', statePaths[state]);
+                path.setAttribute('class', 'state-path');
+                path.setAttribute('id', `state-${state}`);
+
+                // Add tooltip on hover
+                const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+                title.textContent = state;
+                path.appendChild(title);
+
+                svg.appendChild(path);
+            });
+
+            // Add state labels for ALL states
+            Object.keys(stateAbbreviations).forEach(state => {
+                const stateInfo = stateAbbreviations[state];
+                const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                label.setAttribute('x', stateInfo.x);
+                label.setAttribute('y', stateInfo.y);
+                label.setAttribute('fill', 'var(--text-primary)');
+                label.setAttribute('font-size', '8');
+                label.setAttribute('font-family', 'Press Start 2P, cursive');
+                label.setAttribute('text-anchor', 'middle');
+                label.setAttribute('pointer-events', 'none');
+                label.setAttribute('opacity', '0.7');
+                label.textContent = stateInfo.abbr;
+                svg.appendChild(label);
+            });
+        */
     </script>
 </body>
 
