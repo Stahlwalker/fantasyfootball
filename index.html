@@ -585,6 +585,19 @@
             color: var(--text-accent);
         }
 
+        /* Retired Members - Centered Layout */
+        .members-list.retired {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 40px auto;
+        }
+
+        .members-list.retired .member-item {
+            flex: 0 1 250px;
+        }
+
         /* Footer */
         footer {
             background: var(--bg-primary);
@@ -1963,7 +1976,7 @@
                 <li><a href="#losers">LOSERS</a></li>
                 <li><a href="#stats">STATS</a></li>
                 <li><a href="#members">MEMBERS</a></li>
-                <li><button class="audio-btn" id="audio-toggle" onclick="toggleAudio()" title="Toggle Music">⚔️</button></li>
+                <li><button class="audio-btn" id="audio-toggle" onclick="toggleAudio()" title="Toggle Music"><img src="img/Magical_sword.png" alt="Sword" style="height: 28px; width: auto; display: inline-block; vertical-align: middle;"></button></li>
             </ul>
         </div>
     </nav>
@@ -2017,7 +2030,6 @@
     <!-- Player Stats Modal -->
     <div class="game-modal" id="player-modal">
         <div class="game-screen">
-            <button class="modal-close" onclick="closePlayerModal()">✕</button>
             <div class="game-title" id="player-name" style="animation: blink 1.5s infinite, pulse 2s infinite;"></div>
             <div id="player-icon" style="font-size: 64px; margin: 20px 0; animation: float 3s ease-in-out infinite;"></div>
             <div class="game-response" id="player-stats" style="white-space: pre-line;"></div>
@@ -2449,7 +2461,7 @@
                 <div class="champion-card loser-card" data-count="2">
                     <img src="img/JaredToilet2023.png" alt="2023 Loser">
                     <h3>2023 LOSER</h3>
-                    <p>After a strong push midseason his team take a turn for the worse and Zompoc Delivery snagged his second toilet bowl victory!</p>
+                    <p>After a strong push midseason his team took a turn for the worse and Zompoc Delivery snagged his second toilet bowl victory!</p>
                 </div>
 
                 <div class="champion-card loser-card">
@@ -2597,6 +2609,42 @@
                     <div class="stat-player">LUKE</div>
                     <div class="stat-year">(3 WINS)</div>
                 </div>
+
+                <!-- Best Season Record -->
+                <div class="stat-card champion-stat">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-label">BEST SEASON RECORD</div>
+                    <div class="stat-value">12-2</div>
+                    <div class="stat-player">MARTIN</div>
+                    <div class="stat-year">(2024)</div>
+                </div>
+
+                <!-- Worst Season Record -->
+                <div class="stat-card loser-stat">
+                    <div class="stat-icon">📉</div>
+                    <div class="stat-label">WORST SEASON RECORD</div>
+                    <div class="stat-value">2-11</div>
+                    <div class="stat-player">CONOR & PAT</div>
+                    <div class="stat-year">(2018 & 2019)</div>
+                </div>
+
+                <!-- Perfect Season -->
+                <div class="stat-card high-score">
+                    <div class="stat-icon">💎</div>
+                    <div class="stat-label">PERFECT SEASON</div>
+                    <div class="stat-value">14-0</div>
+                    <div class="stat-player">UNCLAIMED</div>
+                    <div class="stat-year">(NEVER)</div>
+                </div>
+
+                <!-- Winless Season -->
+                <div class="stat-card low-score">
+                    <div class="stat-icon">🗑️</div>
+                    <div class="stat-label">WINLESS SEASON</div>
+                    <div class="stat-value">0-14</div>
+                    <div class="stat-player">UNCLAIMED</div>
+                    <div class="stat-year">(NEVER)</div>
+                </div>
             </div>
         </div>
     </section>
@@ -2664,7 +2712,7 @@
                 <div style="height: 2px; background: linear-gradient(90deg, transparent 0%, var(--border-primary) 20%, var(--text-accent) 50%, var(--border-primary) 80%, transparent 100%); box-shadow: 0 0 10px var(--text-accent);"></div>
             </div>
 
-            <div class="members-list">
+            <div class="members-list retired">
                 <div class="member-item" onclick="showPlayerStats('Martin')" style="opacity: 0.8; border-color: var(--text-accent); cursor: pointer;">
                     <span style="color: var(--text-primary); text-decoration: none; font-size: 11px;">Martin</span>
                     <p style="font-size: 10px; color: var(--text-accent); margin-top: 10px; text-shadow: 0 0 10px var(--text-accent);">$2,950</p>
@@ -2695,12 +2743,20 @@
         Your browser does not support the audio element.
     </audio>
 
+    <audio id="triforce-audio" loop>
+        <source src="zelda.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <!-- Footer -->
     <footer>
         <div class="footer-grid container">
             <div>
                 <h5>ABOUT</h5>
                 <p>My name is Luke Stahl and I'm the Commissioner and 3x Fantasy Football Champion.</p>
+                <button class="audio-btn" id="triforce-toggle-1" onclick="toggleTriforceAudio()" title="Toggle Music" style="margin-top: 15px; border: none; padding: 5px; background: none;">
+                    <img src="img/triforce.png" alt="Triforce" style="width: 30px; height: 24px; display: block;">
+                </button>
             </div>
             <div>
                 <h5>CONNECT</h5>
@@ -3401,6 +3457,8 @@
             const navButton = document.getElementById('audio-toggle');
             const tecmoAudio = document.getElementById('tecmo-audio');
             const terminalButton = document.getElementById('terminal-audio-toggle');
+            const triforceAudio = document.getElementById('triforce-audio');
+            const triforceButton = document.getElementById('triforce-toggle-1');
 
             if (audio.paused) {
                 // Stop tecmo audio if playing
@@ -3408,6 +3466,13 @@
                     tecmoAudio.pause();
                     tecmoAudio.currentTime = 0;
                     terminalButton.classList.remove('playing');
+                }
+
+                // Stop triforce audio if playing
+                if (!triforceAudio.paused) {
+                    triforceAudio.pause();
+                    triforceAudio.currentTime = 0;
+                    triforceButton.classList.remove('playing');
                 }
 
                 // Start from beginning
@@ -3436,6 +3501,8 @@
             const terminalButton = document.getElementById('terminal-audio-toggle');
             const zeldaAudio = document.getElementById('zelda-audio');
             const navButton = document.getElementById('audio-toggle');
+            const triforceAudio = document.getElementById('triforce-audio');
+            const triforceButton = document.getElementById('triforce-toggle-1');
 
             if (audio.paused) {
                 // Stop zelda audio if playing
@@ -3443,6 +3510,13 @@
                     zeldaAudio.pause();
                     zeldaAudio.currentTime = 0;
                     navButton.classList.remove('playing');
+                }
+
+                // Stop triforce audio if playing
+                if (!triforceAudio.paused) {
+                    triforceAudio.pause();
+                    triforceAudio.currentTime = 0;
+                    triforceButton.classList.remove('playing');
                 }
 
                 // Start from beginning
@@ -3456,6 +3530,44 @@
                 audio.pause();
                 audio.currentTime = 0;
                 terminalButton.classList.remove('playing');
+            }
+        }
+
+        // Footer Triforce Audio Toggle Function (zelda.mp3)
+        function toggleTriforceAudio() {
+            const audio = document.getElementById('triforce-audio');
+            const triforceButton = document.getElementById('triforce-toggle-1');
+            const zeldaAudio = document.getElementById('zelda-audio');
+            const navButton = document.getElementById('audio-toggle');
+            const tecmoAudio = document.getElementById('tecmo-audio');
+            const terminalButton = document.getElementById('terminal-audio-toggle');
+
+            if (audio.paused) {
+                // Stop zelda-link audio if playing
+                if (!zeldaAudio.paused) {
+                    zeldaAudio.pause();
+                    zeldaAudio.currentTime = 0;
+                    navButton.classList.remove('playing');
+                }
+
+                // Stop tecmo audio if playing
+                if (!tecmoAudio.paused) {
+                    tecmoAudio.pause();
+                    tecmoAudio.currentTime = 0;
+                    terminalButton.classList.remove('playing');
+                }
+
+                // Start from beginning
+                audio.currentTime = 0;
+                audio.play().catch(err => {
+                    console.log('Audio play failed:', err);
+                });
+                triforceButton.classList.add('playing');
+            } else {
+                // Stop and reset
+                audio.pause();
+                audio.currentTime = 0;
+                triforceButton.classList.remove('playing');
             }
         }
 
