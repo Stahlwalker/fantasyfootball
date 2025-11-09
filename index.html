@@ -2087,6 +2087,42 @@
                 font-size: 20px !important;
             }
         }
+
+        /* Arcade Leaderboard Styles */
+        .leaderboard-entry {
+            transition: all 0.3s ease;
+        }
+
+        .leaderboard-entry:hover {
+            transform: scale(1.02) translateX(5px);
+            box-shadow: 0 0 20px rgba(0, 230, 230, 0.5);
+        }
+
+        /* Scrollbar styling for leaderboard */
+        #arcade-leaderboard::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #arcade-leaderboard::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        #arcade-leaderboard::-webkit-scrollbar-thumb {
+            background: var(--border-secondary);
+            box-shadow: 0 0 10px var(--border-secondary);
+        }
+
+        #arcade-leaderboard::-webkit-scrollbar-thumb:hover {
+            background: var(--text-accent);
+            box-shadow: 0 0 15px var(--text-accent);
+        }
+
+        /* Mobile leaderboard adjustments */
+        @media screen and (max-width: 768px) {
+            .leaderboard-entry {
+                padding: 6px 10px !important;
+            }
+        }
     </style>
 </head>
 
@@ -2714,14 +2750,14 @@
                 <div class="stat-card high-score">
                     <div class="stat-icon">⚡</div>
                     <div class="stat-label">HIGHEST SEASON TOTAL</div>
-                    <div class="stat-value">1754</div>
-                    <div class="stat-player">BRIAN</div>
-                    <div class="stat-year">(2018)</div>
+                    <div class="stat-value">1725.1</div>
+                    <div class="stat-player">MARTIN</div>
+                    <div class="stat-year">(2024)</div>
                 </div>
 
                 <!-- Lowest Points Allowed -->
                 <div class="stat-card champion-stat">
-                    <div class="stat-icon">🛡️</div>
+                    <div class="stat-icon">🍀</div>
                     <div class="stat-label">LOWEST POINTS ALLOWED</div>
                     <div class="stat-value">1275.5</div>
                     <div class="stat-player">WESTON</div>
@@ -2771,6 +2807,161 @@
                     <div class="stat-value">0-14</div>
                     <div class="stat-player">UNCLAIMED</div>
                     <div class="stat-year">(NEVER)</div>
+                </div>
+            </div>
+
+            <!-- High Score Arcade Leaderboard -->
+            <div style="margin-top: 60px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                <div class="arcade-panel" style="background: var(--bg-secondary); position: relative;">
+                    <h2 style="text-align: center; font-size: 14px; color: var(--text-accent); margin-bottom: 20px; text-shadow: 0 0 20px var(--text-accent); animation: blink 1.5s infinite;">HIGH SCORE LEADERBOARD</h2>
+
+                    <div id="arcade-leaderboard" style="max-height: 300px; overflow-y: auto; overflow-x: hidden; position: relative; background: rgba(0, 0, 0, 0.5); border: 3px solid var(--border-secondary); box-shadow: inset 0 0 20px rgba(0, 230, 230, 0.3);">
+                        <div id="leaderboard-scroll" style="padding: 10px;">
+                        <!-- Rank 1 -->
+                        <div class="leaderboard-entry" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; margin: 5px 0; background: linear-gradient(90deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.05)); border-left: 4px solid #FFD700;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <span style="font-size: 10px; color: #FFD700; text-shadow: 0 0 15px #FFD700; min-width: 35px;">1ST</span>
+                                <span style="color: var(--text-primary); font-size: 11px; text-shadow: 0 0 8px var(--text-primary);">MARTIN</span>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="color: var(--text-accent); font-size: 12px; text-shadow: 0 0 10px var(--text-accent); font-weight: bold;">1725.1</div>
+                                <div style="color: var(--text-secondary); font-size: 8px; opacity: 0.7;">(2024)</div>
+                            </div>
+                        </div>
+
+                        <!-- Rank 2 -->
+                        <div class="leaderboard-entry" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; margin: 5px 0; background: linear-gradient(90deg, rgba(192, 192, 192, 0.2), rgba(192, 192, 192, 0.05)); border-left: 4px solid #C0C0C0;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <span style="font-size: 10px; color: #C0C0C0; text-shadow: 0 0 15px #C0C0C0; min-width: 35px;">2ND</span>
+                                <span style="color: var(--text-primary); font-size: 11px; text-shadow: 0 0 8px var(--text-primary);">BRIAN</span>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="color: var(--text-accent); font-size: 12px; text-shadow: 0 0 10px var(--text-accent); font-weight: bold;">1673.4</div>
+                                <div style="color: var(--text-secondary); font-size: 8px; opacity: 0.7;">(2023)</div>
+                            </div>
+                        </div>
+
+                        <!-- Rank 3 -->
+                        <div class="leaderboard-entry" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; margin: 5px 0; background: linear-gradient(90deg, rgba(205, 127, 50, 0.2), rgba(205, 127, 50, 0.05)); border-left: 4px solid #CD7F32;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <span style="font-size: 10px; color: #CD7F32; text-shadow: 0 0 15px #CD7F32; min-width: 35px;">3RD</span>
+                                <span style="color: var(--text-primary); font-size: 11px; text-shadow: 0 0 8px var(--text-primary);">CONOR</span>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="color: var(--text-accent); font-size: 12px; text-shadow: 0 0 10px var(--text-accent); font-weight: bold;">1671.3</div>
+                                <div style="color: var(--text-secondary); font-size: 8px; opacity: 0.7;">(2024)</div>
+                            </div>
+                        </div>
+
+                        <!-- Rank 4 -->
+                        <div class="leaderboard-entry" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; margin: 5px 0; background: linear-gradient(90deg, rgba(0, 230, 230, 0.12), rgba(0, 230, 230, 0.03)); border-left: 3px solid var(--border-secondary);">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <span style="font-size: 9px; color: var(--border-secondary); text-shadow: 0 0 12px var(--border-secondary); min-width: 35px;">4TH</span>
+                                <span style="color: var(--text-primary); font-size: 10px; text-shadow: 0 0 8px var(--text-primary);">WESTON</span>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="color: var(--text-accent); font-size: 11px; text-shadow: 0 0 10px var(--text-accent); font-weight: bold;">1629.7</div>
+                                <div style="color: var(--text-secondary); font-size: 8px; opacity: 0.7;">(2021)</div>
+                            </div>
+                        </div>
+
+                        <!-- Rank 5 -->
+                        <div class="leaderboard-entry" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; margin: 5px 0; background: linear-gradient(90deg, rgba(0, 230, 230, 0.12), rgba(0, 230, 230, 0.03)); border-left: 3px solid var(--border-secondary);">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <span style="font-size: 9px; color: var(--border-secondary); text-shadow: 0 0 12px var(--border-secondary); min-width: 35px;">5TH</span>
+                                <span style="color: var(--text-primary); font-size: 10px; text-shadow: 0 0 8px var(--text-primary);">ETHAN</span>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="color: var(--text-accent); font-size: 11px; text-shadow: 0 0 10px var(--text-accent); font-weight: bold;">1622.2</div>
+                                <div style="color: var(--text-secondary); font-size: 8px; opacity: 0.7;">(2022)</div>
+                            </div>
+                        </div>
+
+                        <!-- Rank 6 -->
+                        <div class="leaderboard-entry" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; margin: 5px 0; background: linear-gradient(90deg, rgba(0, 230, 230, 0.12), rgba(0, 230, 230, 0.03)); border-left: 3px solid var(--border-secondary);">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <span style="font-size: 9px; color: var(--border-secondary); text-shadow: 0 0 12px var(--border-secondary); min-width: 35px;">6TH</span>
+                                <span style="color: var(--text-primary); font-size: 10px; text-shadow: 0 0 8px var(--text-primary);">PAT</span>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="color: var(--text-accent); font-size: 11px; text-shadow: 0 0 10px var(--text-accent); font-weight: bold;">1612.0</div>
+                                <div style="color: var(--text-secondary); font-size: 8px; opacity: 0.7;">(2024)</div>
+                            </div>
+                        </div>
+
+                        <!-- Rank 7 -->
+                        <div class="leaderboard-entry" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; margin: 5px 0; background: linear-gradient(90deg, rgba(0, 230, 230, 0.12), rgba(0, 230, 230, 0.03)); border-left: 3px solid var(--border-secondary);">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <span style="font-size: 9px; color: var(--border-secondary); text-shadow: 0 0 12px var(--border-secondary); min-width: 35px;">7TH</span>
+                                <span style="color: var(--text-primary); font-size: 10px; text-shadow: 0 0 8px var(--text-primary);">TONY</span>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="color: var(--text-accent); font-size: 11px; text-shadow: 0 0 10px var(--text-accent); font-weight: bold;">1569.5</div>
+                                <div style="color: var(--text-secondary); font-size: 8px; opacity: 0.7;">(2024)</div>
+                            </div>
+                        </div>
+
+                        <!-- Rank 8 -->
+                        <div class="leaderboard-entry" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; margin: 5px 0; background: linear-gradient(90deg, rgba(0, 230, 230, 0.12), rgba(0, 230, 230, 0.03)); border-left: 3px solid var(--border-secondary);">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <span style="font-size: 9px; color: var(--border-secondary); text-shadow: 0 0 12px var(--border-secondary); min-width: 35px;">8TH</span>
+                                <span style="color: var(--text-primary); font-size: 10px; text-shadow: 0 0 8px var(--text-primary);">JARED</span>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="color: var(--text-accent); font-size: 11px; text-shadow: 0 0 10px var(--text-accent); font-weight: bold;">1564.3</div>
+                                <div style="color: var(--text-secondary); font-size: 8px; opacity: 0.7;">(2020)</div>
+                            </div>
+                        </div>
+
+                        <!-- Rank 9 -->
+                        <div class="leaderboard-entry" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; margin: 5px 0; background: linear-gradient(90deg, rgba(0, 230, 230, 0.12), rgba(0, 230, 230, 0.03)); border-left: 3px solid var(--border-secondary);">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <span style="font-size: 9px; color: var(--border-secondary); text-shadow: 0 0 12px var(--border-secondary); min-width: 35px;">9TH</span>
+                                <span style="color: var(--text-primary); font-size: 10px; text-shadow: 0 0 8px var(--text-primary);">LUKE</span>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="color: var(--text-accent); font-size: 11px; text-shadow: 0 0 10px var(--text-accent); font-weight: bold;">1562.9</div>
+                                <div style="color: var(--text-secondary); font-size: 8px; opacity: 0.7;">(2022)</div>
+                            </div>
+                        </div>
+
+                        <!-- Rank 10 -->
+                        <div class="leaderboard-entry" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; margin: 5px 0; background: linear-gradient(90deg, rgba(0, 230, 230, 0.12), rgba(0, 230, 230, 0.03)); border-left: 3px solid var(--border-secondary);">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <span style="font-size: 9px; color: var(--border-secondary); text-shadow: 0 0 12px var(--border-secondary); min-width: 35px;">10TH</span>
+                                <span style="color: var(--text-primary); font-size: 10px; text-shadow: 0 0 8px var(--text-primary);">CHRIS</span>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="color: var(--text-accent); font-size: 11px; text-shadow: 0 0 10px var(--text-accent); font-weight: bold;">1535.7</div>
+                                <div style="color: var(--text-secondary); font-size: 8px; opacity: 0.7;">(2021)</div>
+                            </div>
+                        </div>
+
+                        <!-- Rank 11 -->
+                        <div class="leaderboard-entry" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; margin: 5px 0; background: linear-gradient(90deg, rgba(255, 0, 128, 0.12), rgba(255, 0, 128, 0.03)); border-left: 3px solid var(--border-primary); opacity: 0.7;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <span style="font-size: 9px; color: var(--border-primary); text-shadow: 0 0 12px var(--border-primary); min-width: 35px;">11TH</span>
+                                <span style="color: var(--text-primary); font-size: 10px; text-shadow: 0 0 8px var(--text-primary);">DANNY</span>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="color: var(--text-accent); font-size: 11px; text-shadow: 0 0 10px var(--text-accent); font-weight: bold;">1053.0</div>
+                                <div style="color: var(--text-secondary); font-size: 8px; opacity: 0.7;">(2014)</div>
+                            </div>
+                        </div>
+
+                        <!-- Rank 12 -->
+                        <div class="leaderboard-entry" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; margin: 5px 0; background: linear-gradient(90deg, rgba(255, 0, 128, 0.12), rgba(255, 0, 128, 0.03)); border-left: 3px solid var(--border-primary); opacity: 0.7;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <span style="font-size: 9px; color: var(--border-primary); text-shadow: 0 0 12px var(--border-primary); min-width: 35px;">12TH</span>
+                                <span style="color: var(--text-primary); font-size: 10px; text-shadow: 0 0 8px var(--text-primary);">GEORGE</span>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="color: var(--text-accent); font-size: 11px; text-shadow: 0 0 10px var(--text-accent); font-weight: bold;">984.0</div>
+                                <div style="color: var(--text-secondary); font-size: 8px; opacity: 0.7;">(2013)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
