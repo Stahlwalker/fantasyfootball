@@ -2123,6 +2123,198 @@
             }
         }
 
+        @keyframes heartBlink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        /* Pixel Heart Styles - Zelda inspired */
+        .pixel-heart {
+            width: 6px;
+            height: 6px;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Full Heart (Red) */
+        .full-heart {
+            background: #E74856;
+            box-shadow:
+                /* Row 1 - top */
+                -6px -15px 0 0 #000, -3px -15px 0 0 #000, 0px -15px 0 0 #000,
+                3px -15px 0 0 #000, 6px -15px 0 0 #000,
+                /* Row 2 */
+                -9px -12px 0 0 #000, -6px -12px 0 0 #E74856, -3px -12px 0 0 #E74856, 0px -12px 0 0 #000,
+                3px -12px 0 0 #E74856, 6px -12px 0 0 #E74856, 9px -12px 0 0 #000,
+                /* Row 3 */
+                -12px -9px 0 0 #000, -9px -9px 0 0 #E74856, -6px -9px 0 0 #E74856, -3px -9px 0 0 #E74856,
+                0px -9px 0 0 #E74856, 3px -9px 0 0 #E74856, 6px -9px 0 0 #E74856, 9px -9px 0 0 #E74856, 12px -9px 0 0 #000,
+                /* Row 4 */
+                -12px -6px 0 0 #000, -9px -6px 0 0 #E74856, -6px -6px 0 0 #E74856, -3px -6px 0 0 #E74856,
+                0px -6px 0 0 #E74856, 3px -6px 0 0 #E74856, 6px -6px 0 0 #E74856, 9px -6px 0 0 #E74856, 12px -6px 0 0 #000,
+                /* Row 5 - middle */
+                -12px -3px 0 0 #000, -9px -3px 0 0 #E74856, -6px -3px 0 0 #E74856, -3px -3px 0 0 #E74856,
+                0px -3px 0 0 #E74856, 3px -3px 0 0 #E74856, 6px -3px 0 0 #E74856, 9px -3px 0 0 #E74856, 12px -3px 0 0 #000,
+                /* Row 6 */
+                -9px 0px 0 0 #000, -6px 0px 0 0 #E74856, -3px 0px 0 0 #E74856,
+                0px 0px 0 0 #E74856, 3px 0px 0 0 #E74856, 6px 0px 0 0 #E74856, 9px 0px 0 0 #000,
+                /* Row 7 */
+                -6px 3px 0 0 #000, -3px 3px 0 0 #E74856, 0px 3px 0 0 #E74856, 3px 3px 0 0 #E74856, 6px 3px 0 0 #000,
+                /* Row 8 */
+                -3px 6px 0 0 #000, 0px 6px 0 0 #E74856, 3px 6px 0 0 #000,
+                /* Row 9 - bottom point */
+                0px 9px 0 0 #000;
+        }
+
+        /* Depleted Full Heart (White fill) */
+        .depleted-full-heart {
+            background: #FFFFFF;
+            box-shadow:
+                /* Row 1 - top */
+                -6px -15px 0 0 #000, -3px -15px 0 0 #000, 0px -15px 0 0 #000,
+                3px -15px 0 0 #000, 6px -15px 0 0 #000,
+                /* Row 2 */
+                -9px -12px 0 0 #000, -6px -12px 0 0 #FFFFFF, -3px -12px 0 0 #FFFFFF, 0px -12px 0 0 #000,
+                3px -12px 0 0 #FFFFFF, 6px -12px 0 0 #FFFFFF, 9px -12px 0 0 #000,
+                /* Row 3 */
+                -12px -9px 0 0 #000, -9px -9px 0 0 #FFFFFF, -6px -9px 0 0 #FFFFFF, -3px -9px 0 0 #FFFFFF,
+                0px -9px 0 0 #FFFFFF, 3px -9px 0 0 #FFFFFF, 6px -9px 0 0 #FFFFFF, 9px -9px 0 0 #FFFFFF, 12px -9px 0 0 #000,
+                /* Row 4 */
+                -12px -6px 0 0 #000, -9px -6px 0 0 #FFFFFF, -6px -6px 0 0 #FFFFFF, -3px -6px 0 0 #FFFFFF,
+                0px -6px 0 0 #FFFFFF, 3px -6px 0 0 #FFFFFF, 6px -6px 0 0 #FFFFFF, 9px -6px 0 0 #FFFFFF, 12px -6px 0 0 #000,
+                /* Row 5 - middle */
+                -12px -3px 0 0 #000, -9px -3px 0 0 #FFFFFF, -6px -3px 0 0 #FFFFFF, -3px -3px 0 0 #FFFFFF,
+                0px -3px 0 0 #FFFFFF, 3px -3px 0 0 #FFFFFF, 6px -3px 0 0 #FFFFFF, 9px -3px 0 0 #FFFFFF, 12px -3px 0 0 #000,
+                /* Row 6 */
+                -9px 0px 0 0 #000, -6px 0px 0 0 #FFFFFF, -3px 0px 0 0 #FFFFFF,
+                0px 0px 0 0 #FFFFFF, 3px 0px 0 0 #FFFFFF, 6px 0px 0 0 #FFFFFF, 9px 0px 0 0 #000,
+                /* Row 7 */
+                -6px 3px 0 0 #000, -3px 3px 0 0 #FFFFFF, 0px 3px 0 0 #FFFFFF, 3px 3px 0 0 #FFFFFF, 6px 3px 0 0 #000,
+                /* Row 8 */
+                -3px 6px 0 0 #000, 0px 6px 0 0 #FFFFFF, 3px 6px 0 0 #000,
+                /* Row 9 - bottom point */
+                0px 9px 0 0 #000;
+        }
+
+        /* Depleted Half Heart (Left half white) */
+        .depleted-half-heart {
+            background: #FFFFFF;
+            box-shadow:
+                /* Row 1 - top */
+                -6px -15px 0 0 #000, -3px -15px 0 0 #000, 0px -15px 0 0 #000,
+                3px -15px 0 0 #000, 6px -15px 0 0 #000,
+                /* Row 2 - left side white */
+                -9px -12px 0 0 #000, -6px -12px 0 0 #FFFFFF, -3px -12px 0 0 #FFFFFF, 0px -12px 0 0 #000,
+                3px -12px 0 0 transparent, 6px -12px 0 0 transparent, 9px -12px 0 0 #000,
+                /* Row 3 */
+                -12px -9px 0 0 #000, -9px -9px 0 0 #FFFFFF, -6px -9px 0 0 #FFFFFF, -3px -9px 0 0 #FFFFFF,
+                0px -9px 0 0 #FFFFFF, 3px -9px 0 0 transparent, 6px -9px 0 0 transparent, 9px -9px 0 0 transparent, 12px -9px 0 0 #000,
+                /* Row 4 */
+                -12px -6px 0 0 #000, -9px -6px 0 0 #FFFFFF, -6px -6px 0 0 #FFFFFF, -3px -6px 0 0 #FFFFFF,
+                0px -6px 0 0 #FFFFFF, 3px -6px 0 0 transparent, 6px -6px 0 0 transparent, 9px -6px 0 0 transparent, 12px -6px 0 0 #000,
+                /* Row 5 - middle */
+                -12px -3px 0 0 #000, -9px -3px 0 0 #FFFFFF, -6px -3px 0 0 #FFFFFF, -3px -3px 0 0 #FFFFFF,
+                0px -3px 0 0 #FFFFFF, 3px -3px 0 0 transparent, 6px -3px 0 0 transparent, 9px -3px 0 0 transparent, 12px -3px 0 0 #000,
+                /* Row 6 */
+                -9px 0px 0 0 #000, -6px 0px 0 0 #FFFFFF, -3px 0px 0 0 #FFFFFF,
+                0px 0px 0 0 #FFFFFF, 3px 0px 0 0 transparent, 6px 0px 0 0 transparent, 9px 0px 0 0 #000,
+                /* Row 7 */
+                -6px 3px 0 0 #000, -3px 3px 0 0 #FFFFFF, 0px 3px 0 0 #FFFFFF, 3px 3px 0 0 transparent, 6px 3px 0 0 #000,
+                /* Row 8 */
+                -3px 6px 0 0 #000, 0px 6px 0 0 #FFFFFF, 3px 6px 0 0 #000,
+                /* Row 9 - bottom point */
+                0px 9px 0 0 #000;
+        }
+
+        /* Half Red Heart (Left half red) */
+        .half-red-heart {
+            background: #E74856;
+            box-shadow:
+                /* Row 1 - top */
+                -6px -15px 0 0 #000, -3px -15px 0 0 #000, 0px -15px 0 0 #000,
+                3px -15px 0 0 #000, 6px -15px 0 0 #000,
+                /* Row 2 - left side red */
+                -9px -12px 0 0 #000, -6px -12px 0 0 #E74856, -3px -12px 0 0 #E74856, 0px -12px 0 0 #000,
+                3px -12px 0 0 transparent, 6px -12px 0 0 transparent, 9px -12px 0 0 #000,
+                /* Row 3 */
+                -12px -9px 0 0 #000, -9px -9px 0 0 #E74856, -6px -9px 0 0 #E74856, -3px -9px 0 0 #E74856,
+                0px -9px 0 0 #E74856, 3px -9px 0 0 transparent, 6px -9px 0 0 transparent, 9px -9px 0 0 transparent, 12px -9px 0 0 #000,
+                /* Row 4 */
+                -12px -6px 0 0 #000, -9px -6px 0 0 #E74856, -6px -6px 0 0 #E74856, -3px -6px 0 0 #E74856,
+                0px -6px 0 0 #E74856, 3px -6px 0 0 transparent, 6px -6px 0 0 transparent, 9px -6px 0 0 transparent, 12px -6px 0 0 #000,
+                /* Row 5 - middle */
+                -12px -3px 0 0 #000, -9px -3px 0 0 #E74856, -6px -3px 0 0 #E74856, -3px -3px 0 0 #E74856,
+                0px -3px 0 0 #E74856, 3px -3px 0 0 transparent, 6px -3px 0 0 transparent, 9px -3px 0 0 transparent, 12px -3px 0 0 #000,
+                /* Row 6 */
+                -9px 0px 0 0 #000, -6px 0px 0 0 #E74856, -3px 0px 0 0 #E74856,
+                0px 0px 0 0 #E74856, 3px 0px 0 0 transparent, 6px 0px 0 0 transparent, 9px 0px 0 0 #000,
+                /* Row 7 */
+                -6px 3px 0 0 #000, -3px 3px 0 0 #E74856, 0px 3px 0 0 #E74856, 3px 3px 0 0 transparent, 6px 3px 0 0 #000,
+                /* Row 8 */
+                -3px 6px 0 0 #000, 0px 6px 0 0 #E74856, 3px 6px 0 0 #000,
+                /* Row 9 - bottom point */
+                0px 9px 0 0 #000;
+        }
+
+        /* Half Red/White Heart (Left half red, right half white) */
+        .half-red-white-heart {
+            background: #E74856;
+            box-shadow:
+                /* Row 1 - top */
+                -6px -15px 0 0 #000, -3px -15px 0 0 #000, 0px -15px 0 0 #000,
+                3px -15px 0 0 #000, 6px -15px 0 0 #000,
+                /* Row 2 - left red, right white */
+                -9px -12px 0 0 #000, -6px -12px 0 0 #E74856, -3px -12px 0 0 #E74856, 0px -12px 0 0 #000,
+                3px -12px 0 0 #FFFFFF, 6px -12px 0 0 #FFFFFF, 9px -12px 0 0 #000,
+                /* Row 3 */
+                -12px -9px 0 0 #000, -9px -9px 0 0 #E74856, -6px -9px 0 0 #E74856, -3px -9px 0 0 #E74856,
+                0px -9px 0 0 #E74856, 3px -9px 0 0 #FFFFFF, 6px -9px 0 0 #FFFFFF, 9px -9px 0 0 #FFFFFF, 12px -9px 0 0 #000,
+                /* Row 4 */
+                -12px -6px 0 0 #000, -9px -6px 0 0 #E74856, -6px -6px 0 0 #E74856, -3px -6px 0 0 #E74856,
+                0px -6px 0 0 #E74856, 3px -6px 0 0 #FFFFFF, 6px -6px 0 0 #FFFFFF, 9px -6px 0 0 #FFFFFF, 12px -6px 0 0 #000,
+                /* Row 5 - middle */
+                -12px -3px 0 0 #000, -9px -3px 0 0 #E74856, -6px -3px 0 0 #E74856, -3px -3px 0 0 #E74856,
+                0px -3px 0 0 #E74856, 3px -3px 0 0 #FFFFFF, 6px -3px 0 0 #FFFFFF, 9px -3px 0 0 #FFFFFF, 12px -3px 0 0 #000,
+                /* Row 6 */
+                -9px 0px 0 0 #000, -6px 0px 0 0 #E74856, -3px 0px 0 0 #E74856,
+                0px 0px 0 0 #E74856, 3px 0px 0 0 #FFFFFF, 6px 0px 0 0 #FFFFFF, 9px 0px 0 0 #000,
+                /* Row 7 */
+                -6px 3px 0 0 #000, -3px 3px 0 0 #E74856, 0px 3px 0 0 #E74856, 3px 3px 0 0 #FFFFFF, 6px 3px 0 0 #000,
+                /* Row 8 */
+                -3px 6px 0 0 #000, 0px 6px 0 0 #E74856, 3px 6px 0 0 #000,
+                /* Row 9 - bottom point */
+                0px 9px 0 0 #000;
+        }
+
+        /* Empty Heart */
+        .empty-heart {
+            background: transparent;
+            box-shadow:
+                /* Row 1 - top */
+                -6px -15px 0 0 #000, -3px -15px 0 0 #000, 0px -15px 0 0 #000,
+                3px -15px 0 0 #000, 6px -15px 0 0 #000,
+                /* Row 2 */
+                -9px -12px 0 0 #000, 0px -12px 0 0 #000, 9px -12px 0 0 #000,
+                /* Row 3 */
+                -12px -9px 0 0 #000, 12px -9px 0 0 #000,
+                /* Row 4 */
+                -12px -6px 0 0 #000, 12px -6px 0 0 #000,
+                /* Row 5 - middle */
+                -12px -3px 0 0 #000, 12px -3px 0 0 #000,
+                /* Row 6 */
+                -9px 0px 0 0 #000, 9px 0px 0 0 #000,
+                /* Row 7 */
+                -6px 3px 0 0 #000, 6px 3px 0 0 #000,
+                /* Row 8 */
+                -3px 6px 0 0 #000, 3px 6px 0 0 #000,
+                /* Row 9 - bottom point */
+                0px 9px 0 0 #000;
+        }
+
         /* Add sparkle container to rank area */
         .rank-sparkle-container {
             position: relative;
@@ -2559,7 +2751,18 @@
     <!-- Champions Section -->
     <section id="champions">
         <div class="container">
-            <h2 class="section-title">CHAMPION GALLERY</h2>
+            <h2 class="section-title" style="display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                <span>CHAMPION GALLERY</span>
+                <!-- Zelda Hearts - Full (3 full hearts) -->
+                <div style="display: flex; gap: 24px; align-items: center;">
+                    <!-- Full Heart 1 -->
+                    <div class="pixel-heart full-heart"></div>
+                    <!-- Full Heart 2 -->
+                    <div class="pixel-heart full-heart"></div>
+                    <!-- Full Heart 3 -->
+                    <div class="pixel-heart full-heart"></div>
+                </div>
+            </h2>
 
             <div class="champion-grid">
                 <div class="champion-card">
@@ -2643,7 +2846,18 @@
     <!-- Losers Section -->
     <section id="losers">
         <div class="container">
-            <h2 class="section-title">TOILET BOWL GALLERY</h2>
+            <h2 class="section-title" style="display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                <span>TOILET BOWL GALLERY</span>
+                <!-- Zelda Hearts - 0.5 hearts (half red/white, full white, full white) -->
+                <div style="display: flex; gap: 24px; align-items: center;">
+                    <!-- Half Heart (left red, right white) -->
+                    <div class="pixel-heart half-red-white-heart" style="animation: heartBlink 1.5s infinite;"></div>
+                    <!-- Full White Heart -->
+                    <div class="pixel-heart depleted-full-heart" style="animation: heartBlink 1.5s infinite;"></div>
+                    <!-- Full White Heart -->
+                    <div class="pixel-heart depleted-full-heart" style="animation: heartBlink 1.5s infinite;"></div>
+                </div>
+            </h2>
 
             <div class="champion-grid">
                 <div class="champion-card loser-card" data-count="2">
