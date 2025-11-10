@@ -3549,6 +3549,28 @@
             await typeText(line5.querySelector('.terminal-text'), '2. I belong in the Hall of Shame');
             if (!gameRunning) return;
 
+            await new Promise(resolve => setTimeout(resolve, 300));
+            if (!gameRunning) return;
+
+            const line6 = document.createElement('div');
+            line6.className = 'terminal-line';
+            line6.innerHTML = '<span class="terminal-text" style="margin-left: 20px;"></span>';
+            output.appendChild(line6);
+            document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight;
+            await typeText(line6.querySelector('.terminal-text'), '3. Take me to the Hall of Records');
+            if (!gameRunning) return;
+
+            await new Promise(resolve => setTimeout(resolve, 300));
+            if (!gameRunning) return;
+
+            const line7 = document.createElement('div');
+            line7.className = 'terminal-line';
+            line7.innerHTML = '<span class="terminal-text" style="margin-left: 20px;"></span>';
+            output.appendChild(line7);
+            document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight;
+            await typeText(line7.querySelector('.terminal-text'), '4. Show me the Trophy Journey Map');
+            if (!gameRunning) return;
+
             terminalState = 'asking-status';
             showInput();
         }
@@ -3593,6 +3615,42 @@
                     status = 'champion';
                 } else if (choice === '2') {
                     status = 'loser';
+                } else if (choice === '3') {
+                    // Navigate directly to stats section
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                    const response = document.createElement('div');
+                    response.className = 'terminal-line';
+                    response.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text terminal-success"></span>';
+                    output.appendChild(response);
+                    document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight;
+                    await typeText(response.querySelector('.terminal-text'), 'The keeper opens the ancient doors...\n\nThe Hall of Records awaits!');
+
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    await showSpaceInvaders();
+
+                    setTimeout(() => {
+                        closeGame();
+                        document.getElementById('stats').scrollIntoView({ behavior: 'smooth' });
+                    }, 2000);
+                    return;
+                } else if (choice === '4') {
+                    // Navigate directly to timeline section
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                    const response = document.createElement('div');
+                    response.className = 'terminal-line';
+                    response.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text terminal-success"></span>';
+                    output.appendChild(response);
+                    document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight;
+                    await typeText(response.querySelector('.terminal-text'), 'The keeper unfurls an ancient map...\n\nBehold the Trophy Journey!');
+
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    await showSpaceInvaders();
+
+                    setTimeout(() => {
+                        closeGame();
+                        document.getElementById('timeline').scrollIntoView({ behavior: 'smooth' });
+                    }, 2000);
+                    return;
                 }
 
                 if (status) {
@@ -3629,7 +3687,7 @@
                     error.className = 'terminal-line';
                     error.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text terminal-error"></span>';
                     output.appendChild(error);
-                    await typeText(error.querySelector('.terminal-text'), 'You must choose 1 or 2.');
+                    await typeText(error.querySelector('.terminal-text'), 'You must choose 1, 2, 3, or 4.');
 
                     showInput();
                 }
