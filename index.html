@@ -3695,15 +3695,15 @@
 
             if (selectedClaim === 'champion') {
                 if (isChampion && !isLoser) {
-                    response = `The records confirm your claim!\n\n${selectedPlayerName.toUpperCase()} - ${player.championships}X CHAMPION\n\nThe gates to the Hall of Glory open before you...`;
+                    response = `The records confirm your claim!\n\n${selectedPlayerName.toUpperCase()} - ${player.championships}X CHAMPION.\n\nThe gates to the Hall of Glory open before you...`;
                     navigateTo = 'champions';
                     colorClass = 'terminal-success';
                 } else if (isChampion && isLoser) {
-                    response = `The keeper nods knowingly...\n\n${selectedPlayerName.toUpperCase()} has ${player.championships} championship${player.championships > 1 ? 's' : ''}\n\nBut also ${player.toiletBowls} toilet bowl defeat${player.toiletBowls > 1 ? 's' : ''}...\n\nYou have seen both triumph and failure.\n\nThe Hall of Glory awaits.`;
+                    response = `The keeper nods knowingly...\n\n${selectedPlayerName.toUpperCase()} has ${player.championships} championship${player.championships > 1 ? 's' : ''}.\n\nBut also ${player.toiletBowls} toilet bowl defeat${player.toiletBowls > 1 ? 's' : ''}...\n\nYou have seen both triumph and failure.\n\nThe Hall of Glory awaits.`;
                     navigateTo = 'champions';
                     colorClass = 'terminal-warning';
                 } else if (isLoser && !isChampion) {
-                    response = `The keeper shakes his head...\n\n"You claim glory, but the records show only shame."\n\n${selectedPlayerName.toUpperCase()} - ${player.toiletBowls}X TOILET BOWL LOSER\n\nYou are escorted to the Hall of Shame.`;
+                    response = `The keeper shakes his head...\n\n"You claim glory, but the records show only shame."\n\n${selectedPlayerName.toUpperCase()} - ${player.toiletBowls}X TOILET BOWL LOSER.\n\nYou are escorted to the Hall of Shame.`;
                     navigateTo = 'losers';
                     colorClass = 'terminal-error';
                 } else {
@@ -3713,15 +3713,15 @@
                 }
             } else {
                 if (isLoser && !isChampion) {
-                    response = `The keeper nods with respect.\n\n"Few admit their failures so openly."\n\n${selectedPlayerName.toUpperCase()} - ${player.toiletBowls}X TOILET BOWL LOSER\n\nYou are led to the Hall of Shame.`;
+                    response = `The keeper nods with respect.\n\n"Few admit their failures so openly."\n\n${selectedPlayerName.toUpperCase()} - ${player.toiletBowls}X TOILET BOWL LOSER.\n\nYou are led to the Hall of Shame.`;
                     navigateTo = 'losers';
                     colorClass = 'terminal-success';
                 } else if (isLoser && isChampion) {
-                    response = `The keeper smiles...\n\n"Humility from one who has tasted victory."\n\n${selectedPlayerName.toUpperCase()} - ${player.championships}X Champion, ${player.toiletBowls}X Loser\n\nYou choose to remember your defeats.\n\nThe Hall of Shame opens its doors.`;
+                    response = `The keeper smiles...\n\n"Humility from one who has tasted victory."\n\n${selectedPlayerName.toUpperCase()} - ${player.championships}X Champion, ${player.toiletBowls}X Loser.\n\nYou choose to remember your defeats.\n\nThe Hall of Shame opens its doors.`;
                     navigateTo = 'losers';
                     colorClass = 'terminal-warning';
                 } else if (isChampion && !isLoser) {
-                    response = `The keeper laughs!\n\n"False modesty will not work here!"\n\n${selectedPlayerName.toUpperCase()} - ${player.championships}X CHAMPION\n\nNever once defeated!\n\nYou belong in the Hall of Glory, champion.`;
+                    response = `The keeper laughs!\n\n"False modesty will not work here!"\n\n${selectedPlayerName.toUpperCase()} - ${player.championships}X CHAMPION.\n\nNever once defeated!\n\nYou belong in the Hall of Glory, champion.`;
                     navigateTo = 'champions';
                     colorClass = 'terminal-error';
                 } else {
