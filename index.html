@@ -3634,7 +3634,7 @@
                     }, 2000);
                     return;
                 } else if (choice === '4') {
-                    // Navigate directly to timeline section
+                    // Navigate directly to trophy map section
                     await new Promise(resolve => setTimeout(resolve, 500));
                     const response = document.createElement('div');
                     response.className = 'terminal-line';
@@ -3648,7 +3648,7 @@
 
                     setTimeout(() => {
                         closeGame();
-                        document.getElementById('timeline').scrollIntoView({ behavior: 'smooth' });
+                        document.getElementById('trophy-map').scrollIntoView({ behavior: 'smooth' });
                     }, 2000);
                     return;
                 }
