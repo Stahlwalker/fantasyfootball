@@ -3620,7 +3620,7 @@
                     namePrompt.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text"></span>';
                     output.appendChild(namePrompt);
                     document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight;
-                    await typeText(namePrompt.querySelector('.terminal-text'), 'What is your name, traveler?');
+                    await typeText(namePrompt.querySelector('.terminal-text'), 'League member, what is your name?');
 
                     terminalState = 'asking-name';
                     showInput();
@@ -3654,7 +3654,7 @@
                     error2.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text terminal-error"></span>';
                     output.appendChild(error2);
                     document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight;
-                    await typeText(error2.querySelector('.terminal-text'), `No traveler by the name "${value}" found in the archives.`);
+                    await typeText(error2.querySelector('.terminal-text'), 'You must enter a league member name.');
 
                     showInput();
                 }
