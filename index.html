@@ -3641,7 +3641,7 @@
                     response.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text terminal-success"></span>';
                     output.appendChild(response);
                     document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight;
-                    await typeText(response.querySelector('.terminal-text'), 'The keeper unfurls an ancient map...\n\nBehold the Trophy Journey!');
+                    await typeText(response.querySelector('.terminal-text'), 'You seek trophies? This map shall guide your way.');
 
                     await new Promise(resolve => setTimeout(resolve, 2000));
                     await showSpaceInvaders();
