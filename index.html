@@ -3568,7 +3568,7 @@
             line7.innerHTML = '<span class="terminal-text" style="margin-left: 20px;"></span>';
             output.appendChild(line7);
             document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight;
-            await typeText(line7.querySelector('.terminal-text'), '4. Show me the Trophy Journey Map');
+            await typeText(line7.querySelector('.terminal-text'), '4. You seek trophies? This map shall guide your way.');
             if (!gameRunning) return;
 
             terminalState = 'asking-status';
@@ -3641,7 +3641,7 @@
                     response.innerHTML = '<span class="terminal-prompt">></span><span class="terminal-text terminal-success"></span>';
                     output.appendChild(response);
                     document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight;
-                    await typeText(response.querySelector('.terminal-text'), 'You seek trophies? This map shall guide your way.');
+                    await typeText(response.querySelector('.terminal-text'), 'The keeper unfurls an ancient map...\n\nBehold the Trophy Journey!');
 
                     await new Promise(resolve => setTimeout(resolve, 2000));
                     await showSpaceInvaders();
