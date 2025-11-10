@@ -3868,7 +3868,14 @@
 
                 if (e.key === 'Enter') {
                     e.preventDefault();
-                    if (finalInput.value.trim()) {
+                    // If there are suggestions, auto-fill with selected or first suggestion
+                    if (suggestions.length > 0 && terminalState === 'asking-name') {
+                        if (selectedSuggestionIndex >= 0) {
+                            selectSuggestion(suggestions[selectedSuggestionIndex].textContent);
+                        } else {
+                            selectSuggestion(suggestions[0].textContent);
+                        }
+                    } else if (finalInput.value.trim()) {
                         handleTerminalInput(finalInput.value.trim());
                     }
                 } else if (e.key === 'ArrowDown' && suggestions.length > 0) {
