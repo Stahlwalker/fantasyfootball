@@ -2849,7 +2849,7 @@
             <h2 class="section-title" style="display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap;">
                 <span>TOILET BOWL GALLERY</span>
                 <!-- Zelda Hearts - 0.5 hearts (half red/white, full white, full white) -->
-                <div style="display: flex; gap: 24px; align-items: center;">
+                <div id="loser-hearts" style="display: flex; gap: 24px; align-items: center; cursor: pointer;" onclick="toggleLowHpAudio()" title="Toggle Low HP Sound">
                     <!-- Half Heart (left red, right white) -->
                     <div class="pixel-heart half-red-white-heart" style="animation: heartBlink 1.5s infinite;"></div>
                     <!-- Full White Heart -->
@@ -3373,6 +3373,11 @@
 
     <audio id="triforce-audio" loop>
         <source src="zelda.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <audio id="low-hp-audio" loop>
+        <source src="low-hp.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
@@ -4264,6 +4269,53 @@
                 audio.pause();
                 audio.currentTime = 0;
                 triforceButton.classList.remove('playing');
+            }
+        }
+
+        // Low HP Audio Toggle Function (low-hp.mp3)
+        function toggleLowHpAudio() {
+            const audio = document.getElementById('low-hp-audio');
+            const loserHearts = document.getElementById('loser-hearts');
+            const zeldaAudio = document.getElementById('zelda-audio');
+            const navButton = document.getElementById('audio-toggle');
+            const tecmoAudio = document.getElementById('tecmo-audio');
+            const terminalButton = document.getElementById('terminal-audio-toggle');
+            const triforceAudio = document.getElementById('triforce-audio');
+            const triforceButton = document.getElementById('triforce-toggle-1');
+
+            if (audio.paused) {
+                // Stop zelda-link audio if playing
+                if (!zeldaAudio.paused) {
+                    zeldaAudio.pause();
+                    zeldaAudio.currentTime = 0;
+                    navButton.classList.remove('playing');
+                }
+
+                // Stop tecmo audio if playing
+                if (!tecmoAudio.paused) {
+                    tecmoAudio.pause();
+                    tecmoAudio.currentTime = 0;
+                    terminalButton.classList.remove('playing');
+                }
+
+                // Stop triforce audio if playing
+                if (!triforceAudio.paused) {
+                    triforceAudio.pause();
+                    triforceAudio.currentTime = 0;
+                    triforceButton.classList.remove('playing');
+                }
+
+                // Start from beginning
+                audio.currentTime = 0;
+                audio.play().catch(err => {
+                    console.log('Audio play failed:', err);
+                });
+                loserHearts.classList.add('playing');
+            } else {
+                // Stop and reset
+                audio.pause();
+                audio.currentTime = 0;
+                loserHearts.classList.remove('playing');
             }
         }
 
