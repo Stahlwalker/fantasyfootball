@@ -75,6 +75,18 @@
             overflow-x: hidden;
             position: relative;
             transition: background 0.3s ease, color 0.3s ease;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body > :not(footer) {
+            flex: 0 0 auto;
+        }
+
+        footer {
+            margin-top: auto;
+            width: 100%;
         }
 
         /* Scanline Effect */
@@ -613,6 +625,8 @@
             padding: 60px 20px 20px;
             text-align: center;
             box-shadow: 0 -10px 50px var(--shadow-color);
+            width: 100%;
+            margin: 0;
         }
 
         footer h5 {
@@ -657,7 +671,7 @@
             background: var(--bg-panel);
             border-top: 2px solid var(--border-primary);
             padding: 20px;
-            margin-top: 40px;
+            margin: 40px -20px -20px -20px;
             font-size: 10px;
         }
 
