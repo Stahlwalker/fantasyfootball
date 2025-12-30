@@ -337,6 +337,9 @@
             text-shadow: 0 0 20px var(--text-primary);
             margin-top: 20px;
             letter-spacing: 2px;
+        }
+
+        #season-status.blinking {
             animation: blink 1.5s step-start infinite;
         }
 
@@ -4209,8 +4212,12 @@
 
             if (distance < 0) {
                 statusElement.textContent = 'SEASON STARTED!';
+                statusElement.classList.add('blinking');
                 return;
             }
+
+            // Remove blinking class during countdown
+            statusElement.classList.remove('blinking');
 
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
