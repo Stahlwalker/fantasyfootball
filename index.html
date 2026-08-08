@@ -343,6 +343,15 @@
             animation: blink 1.5s step-start infinite;
         }
 
+        .jackpot-line {
+            font-size: 13px;
+            color: var(--text-accent);
+            margin: 4px 0 16px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px var(--text-accent), 0 0 20px var(--border-primary);
+            animation: blink 1.2s step-start infinite;
+        }
+
         @keyframes blink {
             0%, 50% { opacity: 1; }
             51%, 100% { opacity: 0.5; }
@@ -576,6 +585,20 @@
             border-color: var(--border-primary);
         }
 
+        /* TBD placeholder cards (season not yet complete) */
+        .champion-card-placeholder {
+            border-style: dashed;
+            opacity: 0.7;
+        }
+
+        .champion-card-placeholder::before {
+            content: '❓';
+        }
+
+        .champion-card-placeholder img {
+            filter: grayscale(60%);
+        }
+
         /* Members List */
         .members-list {
             display: grid;
@@ -780,6 +803,10 @@
             }
 
             .countdown-title {
+                font-size: 11px;
+            }
+
+            .jackpot-line {
                 font-size: 11px;
             }
 
@@ -2393,6 +2420,7 @@
 
             <div class="countdown-container" style="padding: 20px; margin: 20px auto; max-width: 400px;">
                 <p class="countdown-title" style="font-size: 12px; margin-bottom: 10px;">NEXT SEASON 2026</p>
+                <p class="jackpot-line">💰 $2,000 JACKPOT 💰</p>
                 <p id="season-status" style="font-size: 16px; margin-top: 10px; line-height: 1.4;">LOADING...</p>
             </div>
         </div>
@@ -2454,6 +2482,27 @@
 
             <div class="timeline-container">
                 <div class="timeline-track">
+                    <!-- 2026 -->
+                    <div class="timeline-year">
+                        <div class="year-marker">
+                            <div class="year-number">2026</div>
+                            <div class="year-prize">$2,000</div>
+                            <div class="year-dot"></div>
+                        </div>
+                        <div class="year-content">
+                            <div class="year-entry winner">
+                                <div class="entry-title">🏆 CHAMPION</div>
+                                <div class="entry-team">TBD</div>
+                                <div class="entry-player">TBD</div>
+                            </div>
+                            <div class="year-entry loser">
+                                <div class="entry-title">🚽 TOILET BOWL</div>
+                                <div class="entry-team">TBD</div>
+                                <div class="entry-player">TBD</div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- 2025 -->
                     <div class="timeline-year">
                         <div class="year-marker">
@@ -2810,6 +2859,12 @@
             </h2>
 
             <div class="champion-grid">
+                <div class="champion-card champion-card-placeholder">
+                    <img src="img/trophy.jpg" alt="2026 Champion — TBD">
+                    <h3>2026 CHAMPION</h3>
+                    <p>TBD! Season kicks off Wednesday, September 9, 2026, with a $2,000 pot on the line. Check back once someone's hoisted the trophy.</p>
+                </div>
+
                 <div class="champion-card" data-count="3">
                     <img src="img/Jared2020Winner.jpeg" alt="2025 Champion">
                     <h3>2025 CHAMPION</h3>
@@ -2911,6 +2966,12 @@
             </h2>
 
             <div class="champion-grid">
+                <div class="champion-card loser-card champion-card-placeholder">
+                    <img src="img/toilet.png" alt="2026 Loser — TBD">
+                    <h3>2026 LOSER</h3>
+                    <p>TBD! Season kicks off Wednesday, September 9, 2026, with a $2,000 pot up for grabs. Somebody's gotta claim the Toilet Bowl.</p>
+                </div>
+
                 <div class="champion-card loser-card" data-count="2">
                     <img src="img/Weston_toilet_2025.JPG" alt="2025 Loser">
                     <h3>2025 LOSER</h3>
@@ -4202,9 +4263,9 @@
             }
         });
 
-        // Countdown to 2026 Season (September 10, 2026)
+        // Countdown to 2026 Season (Wednesday, September 9, 2026, 7:20 PM Central)
         function updateCountdown() {
-            const targetDate = new Date('September 10, 2026 00:00:00').getTime();
+            const targetDate = new Date('2026-09-09T19:20:00-05:00').getTime();
             const now = new Date().getTime();
             const distance = targetDate - now;
 
