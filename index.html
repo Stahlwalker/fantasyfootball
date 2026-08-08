@@ -814,6 +814,23 @@
                 font-size: 16px;
             }
 
+            /* Always pinned to bottom-right on mobile, no roaming */
+            .rainbow-float-button {
+                position: fixed !important;
+                top: auto !important;
+                left: auto !important;
+                bottom: 16px !important;
+                right: 16px !important;
+                width: 44px !important;
+                height: 44px !important;
+                font-size: 20px !important;
+                animation: rainbowShift 3s linear infinite !important;
+            }
+
+            .rainbow-float-button.playing {
+                animation: rainbowShift 3s linear infinite, jaredPulse 1s ease-in-out infinite alternate !important;
+            }
+
             /* Section Titles */
             .section-title {
                 font-size: 16px;
@@ -1059,6 +1076,82 @@
             color: var(--bg-primary);
             box-shadow: 0 0 30px var(--shadow-color);
             transform: translateY(-3px);
+        }
+
+        /* Rainbow Floating Music Button (Jared's music) - pixel arcade badge */
+        .rainbow-float-button {
+            position: absolute;
+            width: 52px;
+            height: 52px;
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            line-height: 1;
+            border: 4px solid var(--border-secondary);
+            background: repeating-linear-gradient(
+                90deg,
+                var(--border-primary) 0%, var(--border-primary) 33.3%,
+                var(--text-accent) 33.3%, var(--text-accent) 66.6%,
+                var(--text-primary) 66.6%, var(--text-primary) 100%
+            );
+            background-size: 300% 100%;
+            box-shadow:
+                3px 3px 0 0 var(--border-primary),
+                0 0 20px var(--shadow-color),
+                inset 0 0 0 3px #000;
+            cursor: pointer;
+            padding: 0;
+            animation: rainbowShift 3s steps(9) infinite;
+            z-index: 50;
+            transition: filter 0.3s, top 3.5s ease-in-out, left 3.5s ease-in-out;
+        }
+
+        .rainbow-float-button:hover {
+            box-shadow:
+                1px 1px 0 0 var(--border-primary),
+                0 0 35px var(--shadow-color),
+                inset 0 0 0 3px #000;
+            transform: translate(2px, 2px) scale(1.1);
+        }
+
+        .rainbow-float-button.playing {
+            animation: rainbowShift 3s steps(9) infinite, jaredPulse 1s ease-in-out infinite alternate;
+        }
+
+        /* Pinned to bottom-right (on scroll away from hero, or always on mobile) */
+        .rainbow-float-button.pinned {
+            position: fixed !important;
+            top: auto !important;
+            left: auto !important;
+            bottom: 20px;
+            right: 20px;
+            animation: rainbowShift 3s steps(9) infinite;
+        }
+
+        .rainbow-float-button.pinned.playing {
+            animation: rainbowShift 3s steps(9) infinite, jaredPulse 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes jaredPulse {
+            from {
+                box-shadow:
+                    3px 3px 0 0 var(--border-primary),
+                    0 0 20px var(--shadow-color),
+                    inset 0 0 0 3px #000;
+            }
+            to {
+                box-shadow:
+                    3px 3px 0 0 var(--border-primary),
+                    0 0 40px var(--text-accent),
+                    inset 0 0 0 3px #000;
+            }
+        }
+
+        @keyframes rainbowShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
         }
 
         /* Player Name Selector */
@@ -2424,6 +2517,8 @@
                 <p id="season-status" style="font-size: 16px; margin-top: 10px; line-height: 1.4;">LOADING...</p>
             </div>
         </div>
+
+        <button class="rainbow-float-button" id="jared-audio-toggle" onclick="toggleMegaManAudio()" title="Toggle Music" aria-label="Toggle music" style="top: 75%; left: 15%;">🎵</button>
     </header>
 
     <!-- Terminal Modal -->
@@ -3500,6 +3595,11 @@
         Your browser does not support the audio element.
     </audio>
 
+    <audio id="megaman-audio" loop>
+        <source src="Mega_Man.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <!-- Footer -->
     <footer>
         <div class="footer-grid container">
@@ -4306,6 +4406,8 @@
             const terminalButton = document.getElementById('terminal-audio-toggle');
             const triforceAudio = document.getElementById('triforce-audio');
             const triforceButton = document.getElementById('triforce-toggle-1');
+            const megamanAudio = document.getElementById('megaman-audio');
+            const jaredButton = document.getElementById('jared-audio-toggle');
 
             if (audio.paused) {
                 // Stop tecmo audio if playing
@@ -4320,6 +4422,13 @@
                     triforceAudio.pause();
                     triforceAudio.currentTime = 0;
                     triforceButton.classList.remove('playing');
+                }
+
+                // Stop mega man audio if playing
+                if (!megamanAudio.paused) {
+                    megamanAudio.pause();
+                    megamanAudio.currentTime = 0;
+                    jaredButton.classList.remove('playing');
                 }
 
                 // Start from beginning
@@ -4350,6 +4459,8 @@
             const navButton = document.getElementById('audio-toggle');
             const triforceAudio = document.getElementById('triforce-audio');
             const triforceButton = document.getElementById('triforce-toggle-1');
+            const megamanAudio = document.getElementById('megaman-audio');
+            const jaredButton = document.getElementById('jared-audio-toggle');
 
             if (audio.paused) {
                 // Stop zelda audio if playing
@@ -4364,6 +4475,13 @@
                     triforceAudio.pause();
                     triforceAudio.currentTime = 0;
                     triforceButton.classList.remove('playing');
+                }
+
+                // Stop mega man audio if playing
+                if (!megamanAudio.paused) {
+                    megamanAudio.pause();
+                    megamanAudio.currentTime = 0;
+                    jaredButton.classList.remove('playing');
                 }
 
                 // Start from beginning
@@ -4388,6 +4506,8 @@
             const navButton = document.getElementById('audio-toggle');
             const tecmoAudio = document.getElementById('tecmo-audio');
             const terminalButton = document.getElementById('terminal-audio-toggle');
+            const megamanAudio = document.getElementById('megaman-audio');
+            const jaredButton = document.getElementById('jared-audio-toggle');
 
             if (audio.paused) {
                 // Stop zelda-link audio if playing
@@ -4404,6 +4524,13 @@
                     terminalButton.classList.remove('playing');
                 }
 
+                // Stop mega man audio if playing
+                if (!megamanAudio.paused) {
+                    megamanAudio.pause();
+                    megamanAudio.currentTime = 0;
+                    jaredButton.classList.remove('playing');
+                }
+
                 // Start from beginning
                 audio.currentTime = 0;
                 audio.play().catch(err => {
@@ -4418,16 +4545,18 @@
             }
         }
 
-        // Low HP Audio Toggle Function (low-hp.mp3)
-        function toggleLowHpAudio() {
-            const audio = document.getElementById('low-hp-audio');
-            const loserHearts = document.getElementById('loser-hearts');
+        // Jared Press Me Audio Toggle Function (Mega_Man.mp3)
+        function toggleMegaManAudio() {
+            const audio = document.getElementById('megaman-audio');
+            const jaredButton = document.getElementById('jared-audio-toggle');
             const zeldaAudio = document.getElementById('zelda-audio');
             const navButton = document.getElementById('audio-toggle');
             const tecmoAudio = document.getElementById('tecmo-audio');
             const terminalButton = document.getElementById('terminal-audio-toggle');
             const triforceAudio = document.getElementById('triforce-audio');
             const triforceButton = document.getElementById('triforce-toggle-1');
+            const lowHpAudio = document.getElementById('low-hp-audio');
+            const loserHearts = document.getElementById('loser-hearts');
 
             if (audio.paused) {
                 // Stop zelda-link audio if playing
@@ -4449,6 +4578,145 @@
                     triforceAudio.pause();
                     triforceAudio.currentTime = 0;
                     triforceButton.classList.remove('playing');
+                }
+
+                // Stop low HP audio if playing
+                if (!lowHpAudio.paused) {
+                    lowHpAudio.pause();
+                    lowHpAudio.currentTime = 0;
+                    loserHearts.classList.remove('playing');
+                }
+
+                // Start from beginning
+                audio.currentTime = 0;
+                audio.play().catch(err => {
+                    console.log('Audio play failed:', err);
+                });
+            } else {
+                // Stop and reset
+                audio.pause();
+                audio.currentTime = 0;
+            }
+        }
+
+        // Jared's music autoplays on load (falling back to first interaction if the
+        // browser blocks autoplay-with-sound) and stays synced via play/pause events
+        (function initJaredMusic() {
+            const audio = document.getElementById('megaman-audio');
+            const jaredButton = document.getElementById('jared-audio-toggle');
+            if (!audio || !jaredButton) return;
+
+            audio.addEventListener('play', () => jaredButton.classList.add('playing'));
+            audio.addEventListener('pause', () => jaredButton.classList.remove('playing'));
+
+            function removeFallbackListeners() {
+                document.removeEventListener('click', resumeOnInteraction);
+                document.removeEventListener('keydown', resumeOnInteraction);
+                document.removeEventListener('touchstart', resumeOnInteraction);
+            }
+
+            // Only unlocks autoplay on the FIRST interaction anywhere else on the page.
+            // Ignores clicks on the button itself so a deliberate "turn it off" press
+            // can never get immediately overridden and restarted by this fallback.
+            function resumeOnInteraction(event) {
+                const clickedButton = event.target && event.target.closest && event.target.closest('#jared-audio-toggle');
+                if (!clickedButton && audio.paused) {
+                    audio.play().catch(() => {});
+                }
+                removeFallbackListeners();
+            }
+
+            audio.play().then(() => {
+                // Autoplay succeeded immediately - no fallback needed, so a later
+                // button press to pause it can never be second-guessed.
+                removeFallbackListeners();
+            }).catch(() => {
+                // Blocked by the browser's autoplay policy - wait for the first
+                // interaction anywhere on the page before trying again.
+                document.addEventListener('click', resumeOnInteraction);
+                document.addEventListener('keydown', resumeOnInteraction);
+                document.addEventListener('touchstart', resumeOnInteraction);
+            });
+        })();
+
+        // Pin Jared's button to the bottom-right once scrolled past the hero
+        function updateJaredPin() {
+            const jaredButton = document.getElementById('jared-audio-toggle');
+            const heroHeader = document.querySelector('header');
+            if (!jaredButton || !heroHeader) return;
+
+            const threshold = heroHeader.offsetHeight - 150;
+            if (window.scrollY > threshold) {
+                jaredButton.classList.add('pinned');
+            } else {
+                jaredButton.classList.remove('pinned');
+            }
+        }
+        window.addEventListener('scroll', updateJaredPin);
+        updateJaredPin();
+
+        // Make Jared's button roam to a new random spot within the hero every few
+        // seconds (CSS transition on top/left glides it there). Skipped once pinned
+        // (scrolled past the hero) or on mobile, where it's always fixed bottom-right.
+        function roamJaredButton() {
+            const jaredButton = document.getElementById('jared-audio-toggle');
+            const heroHeader = document.querySelector('header');
+            if (!jaredButton || !heroHeader) return;
+            if (jaredButton.classList.contains('pinned')) return;
+            if (window.innerWidth <= 768) return;
+
+            const margin = 40;
+            const maxLeft = Math.max(heroHeader.offsetWidth - margin * 2, 0);
+            const maxTop = Math.max(heroHeader.offsetHeight - margin * 2, 0);
+            const newLeft = margin + Math.random() * maxLeft;
+            const newTop = margin + Math.random() * maxTop;
+
+            jaredButton.style.left = newLeft + 'px';
+            jaredButton.style.top = newTop + 'px';
+        }
+        setInterval(roamJaredButton, 4000);
+        roamJaredButton();
+
+        // Low HP Audio Toggle Function (low-hp.mp3)
+        function toggleLowHpAudio() {
+            const audio = document.getElementById('low-hp-audio');
+            const loserHearts = document.getElementById('loser-hearts');
+            const zeldaAudio = document.getElementById('zelda-audio');
+            const navButton = document.getElementById('audio-toggle');
+            const tecmoAudio = document.getElementById('tecmo-audio');
+            const terminalButton = document.getElementById('terminal-audio-toggle');
+            const triforceAudio = document.getElementById('triforce-audio');
+            const triforceButton = document.getElementById('triforce-toggle-1');
+            const megamanAudio = document.getElementById('megaman-audio');
+            const jaredButton = document.getElementById('jared-audio-toggle');
+
+            if (audio.paused) {
+                // Stop zelda-link audio if playing
+                if (!zeldaAudio.paused) {
+                    zeldaAudio.pause();
+                    zeldaAudio.currentTime = 0;
+                    navButton.classList.remove('playing');
+                }
+
+                // Stop tecmo audio if playing
+                if (!tecmoAudio.paused) {
+                    tecmoAudio.pause();
+                    tecmoAudio.currentTime = 0;
+                    terminalButton.classList.remove('playing');
+                }
+
+                // Stop triforce audio if playing
+                if (!triforceAudio.paused) {
+                    triforceAudio.pause();
+                    triforceAudio.currentTime = 0;
+                    triforceButton.classList.remove('playing');
+                }
+
+                // Stop mega man audio if playing
+                if (!megamanAudio.paused) {
+                    megamanAudio.pause();
+                    megamanAudio.currentTime = 0;
+                    jaredButton.classList.remove('playing');
                 }
 
                 // Start from beginning
