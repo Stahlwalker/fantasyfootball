@@ -600,11 +600,14 @@
         }
 
         /* Members List */
+        /* Single column, always — a leaderboard-style vertical stack so rank
+           order reads unambiguously top-to-bottom with no left-right component */
         .members-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            display: flex;
+            flex-direction: column;
             gap: 20px;
-            margin: 40px 0;
+            max-width: 600px;
+            margin: 40px auto;
         }
 
         .member-item {
@@ -632,17 +635,19 @@
             color: var(--text-accent);
         }
 
-        /* Retired Members - Centered Layout */
-        .members-list.retired {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            max-width: 900px;
-            margin: 40px auto;
+        /* Dotted divider inside member cards */
+        .member-divider {
+            height: 2px;
+            margin: 14px 0;
+            background-image: repeating-linear-gradient(to right, var(--divider-color, var(--border-secondary)) 0, var(--divider-color, var(--border-secondary)) 6px, transparent 6px, transparent 14px);
+            background-size: 28px 2px;
+            opacity: 0.5;
+            animation: memberDividerScroll 1.4s linear infinite;
         }
 
-        .members-list.retired .member-item {
-            flex: 0 1 250px;
+        @keyframes memberDividerScroll {
+            from { background-position: 0 0; }
+            to { background-position: 28px 0; }
         }
 
         /* Footer */
@@ -927,10 +932,6 @@
             }
 
             /* Members List */
-            .members-list {
-                grid-template-columns: 1fr;
-            }
-
             .member-item {
                 padding: 15px;
             }
@@ -3443,48 +3444,7 @@
                 <p>A bunch of folks who think they know a thing about things, when they actually don't know nothing about anything.</p>
             </div>
 
-            <div class="members-list">
-                <div class="member-item" onclick="showPlayerStats('Jared')" style="cursor: pointer;">
-                    <span style="color: var(--text-primary); text-decoration: none; font-size: 11px;">Jared</span>
-                    <p style="font-size: 10px; color: var(--text-accent); margin-top: 10px; text-shadow: 0 0 10px var(--text-accent);">$3,000</p>
-                </div>
-                <div class="member-item" onclick="showPlayerStats('Ethan')" style="cursor: pointer;">
-                    <span style="color: var(--text-primary); text-decoration: none; font-size: 11px;">Ethan</span>
-                    <p style="font-size: 10px; color: var(--text-secondary); margin-top: 10px; opacity: 0.6;">$0</p>
-                </div>
-                <div class="member-item" onclick="showPlayerStats('Luke')" style="cursor: pointer;">
-                    <span style="color: var(--text-primary); text-decoration: none; font-size: 11px;">Luke</span>
-                    <p style="font-size: 10px; color: var(--text-accent); margin-top: 10px; text-shadow: 0 0 10px var(--text-accent);">$3,050</p>
-                </div>
-                <div class="member-item" onclick="showPlayerStats('Pat')" style="cursor: pointer;">
-                    <span style="color: var(--text-primary); text-decoration: none; font-size: 11px;">Pat</span>
-                    <p style="font-size: 10px; color: var(--text-secondary); margin-top: 10px; opacity: 0.6;">$0</p>
-                </div>
-                <div class="member-item" onclick="showPlayerStats('Brian')" style="cursor: pointer;">
-                    <span style="color: var(--text-primary); text-decoration: none; font-size: 11px;">Brian</span>
-                    <p style="font-size: 10px; color: var(--text-secondary); margin-top: 10px; opacity: 0.6;">$0</p>
-                </div>
-                <div class="member-item" onclick="showPlayerStats('Chris')" style="cursor: pointer;">
-                    <span style="color: var(--text-primary); text-decoration: none; font-size: 11px;">Chris</span>
-                    <p style="font-size: 10px; color: var(--text-accent); margin-top: 10px; text-shadow: 0 0 10px var(--text-accent);">$400</p>
-                </div>
-                <div class="member-item" onclick="showPlayerStats('Conor')" style="cursor: pointer;">
-                    <span style="color: var(--text-primary); text-decoration: none; font-size: 11px;">Conor</span>
-                    <p style="font-size: 10px; color: var(--text-accent); margin-top: 10px; text-shadow: 0 0 10px var(--text-accent);">$350</p>
-                </div>
-                <div class="member-item" onclick="showPlayerStats('Tony')" style="cursor: pointer;">
-                    <span style="color: var(--text-primary); text-decoration: none; font-size: 11px;">Tony</span>
-                    <p style="font-size: 10px; color: var(--text-accent); margin-top: 10px; text-shadow: 0 0 10px var(--text-accent);">$1,600</p>
-                </div>
-                <div class="member-item" onclick="showPlayerStats('Scott')" style="cursor: pointer;">
-                    <span style="color: var(--text-primary); text-decoration: none; font-size: 11px;">Scott</span>
-                    <p style="font-size: 10px; color: var(--text-secondary); margin-top: 10px; opacity: 0.6;">$0</p>
-                </div>
-                <div class="member-item" onclick="showPlayerStats('Weston')" style="cursor: pointer;">
-                    <span style="color: var(--text-primary); text-decoration: none; font-size: 11px;">Weston</span>
-                    <p style="font-size: 10px; color: var(--text-accent); margin-top: 10px; text-shadow: 0 0 10px var(--text-accent);">$300</p>
-                </div>
-            </div>
+            <div class="members-list" id="active-roster-list"></div>
 
             <!-- Retired Section Divider -->
             <div style="margin: 60px auto; max-width: 600px;">
@@ -3493,23 +3453,7 @@
                 <div style="height: 2px; background: linear-gradient(90deg, transparent 0%, var(--border-primary) 20%, var(--text-accent) 50%, var(--border-primary) 80%, transparent 100%); box-shadow: 0 0 10px var(--text-accent);"></div>
             </div>
 
-            <div class="members-list retired">
-                <div class="member-item" onclick="showPlayerStats('Martin')" style="opacity: 0.8; border-color: var(--text-accent); cursor: pointer;">
-                    <span style="color: var(--text-primary); text-decoration: none; font-size: 11px;">Martin</span>
-                    <p style="font-size: 10px; color: var(--text-accent); margin-top: 10px; text-shadow: 0 0 10px var(--text-accent);">$2,650</p>
-                    <p style="font-size: 8px; color: var(--border-primary); margin-top: 5px; text-shadow: 0 0 5px var(--border-primary);">3X CHAMPION</p>
-                </div>
-                <div class="member-item" onclick="showPlayerStats('Danny')" style="opacity: 0.8; border-color: var(--border-primary); cursor: pointer;">
-                    <span style="color: var(--text-primary); text-decoration: none; font-size: 11px;">Danny</span>
-                    <p style="font-size: 10px; color: var(--text-secondary); margin-top: 10px; opacity: 0.6;">$0</p>
-                    <p style="font-size: 8px; color: var(--border-primary); margin-top: 5px; text-shadow: 0 0 5px var(--border-primary);">THE GADKE</p>
-                </div>
-                <div class="member-item" onclick="showPlayerStats('George')" style="opacity: 0.8; border-color: var(--text-secondary); cursor: pointer;">
-                    <span style="color: var(--text-primary); text-decoration: none; font-size: 11px;">George</span>
-                    <p style="font-size: 10px; color: var(--text-secondary); margin-top: 10px; opacity: 0.6;">$0</p>
-                    <p style="font-size: 8px; color: var(--text-secondary); margin-top: 5px; opacity: 0.6;">ONE & DONE</p>
-                </div>
-            </div>
+            <div class="members-list retired" id="retired-roster-list"></div>
         </div>
     </section>
 
@@ -4196,6 +4140,7 @@
                 championships: 3,
                 toiletBowls: 0,
                 earnings: '$3,050',
+                activeYears: [2013, 2026],
                 years: ['2017', '2022', '2023'],
                 message: "The KING of the league! 3x champion and league commissioner. Luke's dominance knows no bounds. From sneaking into playoffs on tiebreakers to running the table, this legend prints money like it's his day job."
             },
@@ -4204,6 +4149,9 @@
                 championships: 3,
                 toiletBowls: 1,
                 earnings: '$2,650',
+                activeYears: [2015, 2024],
+                retired: true,
+                tag: '3X CHAMPION',
                 years: ['2018', '2019', '2021'],
                 toiletYears: ['2022'],
                 message: "The Ghost of Party Marty! A RETIRED LEGEND who went out on top. 3x champion with back-to-back wins in 2018-2019. Came back for one more run in 2021 and snagged another trophy. But then... the 2022 champ-to-chump special. Left the game a LEGEND!"
@@ -4213,6 +4161,7 @@
                 championships: 3,
                 toiletBowls: 2,
                 earnings: '$3,000',
+                activeYears: [2013, 2026],
                 years: ['2013', '2020', '2025'],
                 toiletYears: ['2017', '2023'],
                 message: "The BIPOLAR KING! Inaugural champion who set the tone, then came back in 2020 to dominate again, and completed the trilogy in 2025 for his 3rd championship! But... also a 2x toilet bowl champion. The highest of highs and the lowest of lows. That's the Zompoc Delivery guarantee!"
@@ -4222,6 +4171,7 @@
                 championships: 1,
                 toiletBowls: 1,
                 earnings: '$1,600',
+                activeYears: [2013, 2026],
                 years: ['2024'],
                 toiletYears: ['2020'],
                 message: "THE CURSE BREAKER! Sat in toilet bowl shame for years, but Zimbabwe Space Chickens finally rose from the ashes in 2024 like a phoenix! From last place to first place in epic fashion. The redemption arc we all needed!"
@@ -4231,6 +4181,7 @@
                 championships: 1,
                 toiletBowls: 2,
                 earnings: '$400',
+                activeYears: [2013, 2026],
                 years: ['2016'],
                 toiletYears: ['2015', '2024'],
                 message: "The ROLLERCOASTER RIDER! One shining moment in 2016 when Power Bottoms reigned supreme. But bookended by toilet bowl appearances in 2015 AND 2024. The 2x loser club member who tasted glory once... and never forgot it."
@@ -4240,6 +4191,7 @@
                 championships: 1,
                 toiletBowls: 2,
                 earnings: '$300',
+                activeYears: [2013, 2026],
                 years: ['2014'],
                 toiletYears: ['2019', '2025'],
                 message: "One hit wonder! Dillon Panthers showed everyone what 'clear eyes, full hearts, CAN'T LOSE' really means in 2014. Then came 2019 and lost to a 2-11 team. And now 2025 joins the 2x loser club! The definition of feast or famine!"
@@ -4249,6 +4201,7 @@
                 championships: 1,
                 toiletBowls: 0,
                 earnings: '$350',
+                activeYears: [2014, 2026],
                 years: ['2015'],
                 message: "The CONSISTENT ONE! Won once with Dirk Digglers in 2015 and never looked back... because he never won again. But hey, at least he's never seen the toilet bowl! That's something, right?"
             },
@@ -4257,6 +4210,7 @@
                 championships: 0,
                 toiletBowls: 1,
                 earnings: '$0',
+                activeYears: [2013, 2026],
                 toiletYears: ['2021'],
                 message: "SO CLOSE YET SO FAR! Put up some impressive seasons but never won a championship. Instead, Rickety Crickets found the toilet bowl in 2021. Pain."
             },
@@ -4265,6 +4219,7 @@
                 championships: 0,
                 toiletBowls: 2,
                 earnings: '$0',
+                activeYears: [2013, 2026],
                 toiletYears: ['2016', '2018'],
                 message: "THE FRIDGE IS COLD! The first 2x toilet bowl loser in league history. No championships to show for it. The Fridge just can't seem to keep his hands out of the cookie jar... or should we say toilet bowl?"
             },
@@ -4273,6 +4228,7 @@
                 championships: 0,
                 toiletBowls: 0,
                 earnings: '$0',
+                activeYears: [2013, 2026],
                 message: "THE GHOST! Never won, never lost the toilet bowl. Just... exists. Floating through the seasons like a phantom, always there but never quite making an impact. The most average player in league history!"
             },
             'Scott': {
@@ -4280,6 +4236,7 @@
                 championships: 0,
                 toiletBowls: 0,
                 earnings: '$0',
+                activeYears: [2025, 2026],
                 message: "THE NEWBIE! Scott joined the league in 2025, fresh meat thrown straight into the fire. No championships, no toilet bowls... yet. One season down and he's still standing. Give him time to find out if he's a legend or lunch!"
             },
             'Danny': {
@@ -4287,6 +4244,9 @@
                 championships: 0,
                 toiletBowls: 1,
                 earnings: '$0',
+                activeYears: [2013, 2014],
+                retired: true,
+                tag: 'THE GADKE',
                 toiletYears: ['2014'],
                 message: "THE LEGEND WHO REFUSED TO OPEN THE BOX! Danny played in 2013-2014, lost the toilet bowl in 2014, and when we mailed the pink toilet seat to Mississippi... he NEVER EVEN OPENED IT! So legendary, so defiant, we named the trophy 'The Gadke' after him. He ghosted the league AND the trophy!"
             },
@@ -4295,10 +4255,97 @@
                 championships: 0,
                 toiletBowls: 1,
                 earnings: '$0',
+                activeYears: [2013, 2013],
+                retired: true,
+                tag: 'ONE & DONE',
                 toiletYears: ['2013'],
                 message: "THE INAUGURAL LOSER! George played one season in 2013, grabbed the first-ever toilet bowl, and said 'nope, I'm out.' One and done. Left no trace except his name in the history books as the OG loser. Respect the quick exit strategy!"
             }
         };
+
+        // League buy-in fee by season
+        const buyInsByYear = {
+            2013: 25, 2014: 30, 2015: 35, 2016: 40, 2017: 50,
+            2018: 75, 2019: 85, 2020: 95, 2021: 105, 2022: 115,
+            2023: 140, 2024: 160, 2025: 180, 2026: 200
+        };
+
+        function getEarningsNum(player) {
+            return parseInt(player.earnings.replace(/[^0-9]/g, ''), 10) || 0;
+        }
+
+        function getPaidIn(player) {
+            const [startYear, endYear] = player.activeYears;
+            let paidIn = 0;
+            for (let year = startYear; year <= endYear; year++) {
+                paidIn += buyInsByYear[year] || 0;
+            }
+            return paidIn;
+        }
+
+        function getNetStanding(player) {
+            return getEarningsNum(player) - getPaidIn(player);
+        }
+
+        function formatDollars(amount) {
+            return (amount < 0 ? '-$' : '$') + Math.abs(amount).toLocaleString();
+        }
+
+        const NET_POSITIVE_COLOR = '#39ff88';
+        const NET_NEGATIVE_COLOR = '#ff3b3b';
+
+        function buildRosterCardHtml(name) {
+            const player = playerData[name];
+            const earningsNum = getEarningsNum(player);
+            const paidIn = getPaidIn(player);
+            const net = getNetStanding(player);
+
+            const earningsStyle = earningsNum > 0
+                ? 'color: var(--text-primary);'
+                : 'color: var(--text-secondary); opacity: 0.6;';
+
+            const netColor = net > 0 ? NET_POSITIVE_COLOR : (net < 0 ? NET_NEGATIVE_COLOR : 'var(--text-secondary)');
+            const borderColor = net > 0 ? NET_POSITIVE_COLOR : (net < 0 ? NET_NEGATIVE_COLOR : 'var(--border-secondary)');
+
+            const tagHtml = player.tag
+                ? `<p style="font-size: 8px; color: var(--border-primary); margin-top: 8px; text-shadow: 0 0 5px var(--border-primary);">${player.tag}</p>`
+                : '';
+
+            return `
+                <div class="member-item" onclick="showPlayerStats('${name}')" style="cursor: pointer; border-color: ${borderColor}; ${player.retired ? 'opacity: 0.8;' : ''}">
+                    <span style="color: var(--text-primary); text-decoration: none; font-size: 11px;">${name}</span>
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 14px; gap: 10px;">
+                        <div style="text-align: left;">
+                            <div style="font-size: 7px; color: var(--text-secondary); opacity: 0.6; letter-spacing: 1px;">EARNINGS</div>
+                            <div style="font-size: 12px; margin-top: 3px; ${earningsStyle}">${player.earnings}</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-size: 7px; color: var(--text-secondary); opacity: 0.6; letter-spacing: 1px;">STANDING</div>
+                            <div style="font-size: 12px; margin-top: 3px; color: ${netColor}; text-shadow: 0 0 8px ${netColor}; font-weight: bold;">${formatDollars(net)}</div>
+                        </div>
+                    </div>
+                    <div class="member-divider" style="--divider-color: ${borderColor};"></div>
+                    <div style="font-size: 8px; color: var(--text-accent); opacity: 0.8;">paid in ${formatDollars(paidIn)}</div>
+                    ${tagHtml}
+                </div>
+            `;
+        }
+
+        function renderRoster() {
+            const sortedByNet = (names) => names
+                .map(name => ({ name, net: getNetStanding(playerData[name]) }))
+                .sort((a, b) => b.net - a.net)
+                .map(entry => entry.name);
+
+            const allNames = Object.keys(playerData);
+            const activeNames = sortedByNet(allNames.filter(name => !playerData[name].retired));
+            const retiredNames = sortedByNet(allNames.filter(name => playerData[name].retired));
+
+            document.getElementById('active-roster-list').innerHTML = activeNames.map(buildRosterCardHtml).join('');
+            document.getElementById('retired-roster-list').innerHTML = retiredNames.map(buildRosterCardHtml).join('');
+        }
+
+        document.addEventListener('DOMContentLoaded', renderRoster);
 
         function showPlayerStats(playerName) {
             const player = playerData[playerName];
@@ -4320,6 +4367,7 @@
             if (player.toiletYears && player.toiletYears.length > 0) {
                 stats += `\n   (${player.toiletYears.join(', ')})`;
             }
+            stats += `\n📊 STANDING: ${formatDollars(getNetStanding(player))} (paid ${formatDollars(getPaidIn(player))} / won ${player.earnings})`;
 
             document.getElementById('player-stats').textContent = stats;
             document.getElementById('player-message').textContent = player.message;
