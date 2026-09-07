@@ -635,19 +635,42 @@
             color: var(--text-accent);
         }
 
-        /* Dotted divider inside member cards */
-        .member-divider {
-            height: 2px;
-            margin: 14px 0;
-            background-image: repeating-linear-gradient(to right, var(--divider-color, var(--border-secondary)) 0, var(--divider-color, var(--border-secondary)) 6px, transparent 6px, transparent 14px);
-            background-size: 28px 2px;
-            opacity: 0.5;
-            animation: memberDividerScroll 1.4s linear infinite;
+        /* HP bar inside member cards */
+        .hp-bar-track {
+            height: 18px;
+            max-width: 180px;
+            margin: 0 auto;
+            border: 3px solid var(--border-secondary);
+            background: #0a0a0a;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.8);
         }
 
-        @keyframes memberDividerScroll {
-            from { background-position: 0 0; }
-            to { background-position: 28px 0; }
+        .hp-bar-fill {
+            height: 100%;
+            transition: width 0.3s;
+            background-image:
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 35%, rgba(0, 0, 0, 0) 65%, rgba(0, 0, 0, 0.35) 100%),
+                repeating-linear-gradient(to right, rgba(0, 0, 0, 0.35) 0, rgba(0, 0, 0, 0.35) 2px, transparent 2px, transparent 9px);
+        }
+
+        .hp-ko-label {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            font-weight: bold;
+            animation: hpKoBlink 1s step-start infinite;
+        }
+
+        @keyframes hpKoBlink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0.15; }
         }
 
         /* Footer */
@@ -4294,6 +4317,25 @@
         const NET_POSITIVE_COLOR = '#39ff88';
         const NET_NEGATIVE_COLOR = '#ff3b3b';
 
+        function getStandingRange() {
+            const nets = Object.keys(playerData).map(name => getNetStanding(playerData[name]));
+            return { min: Math.min(...nets), max: Math.max(...nets) };
+        }
+
+        // One continuous bar: full = best standing in the league, empty = worst.
+        // It drains the worse someone is doing, regardless of which side of zero they're on.
+        function getHpFillPercent(net, range) {
+            if (range.max === range.min) return 100;
+            return Math.max(0, Math.min(100, ((net - range.min) / (range.max - range.min)) * 100));
+        }
+
+        // Color tracks sign only (green = up money, red = in the hole) — independent of fill length.
+        function getHpColor(net) {
+            if (net > 0) return NET_POSITIVE_COLOR;
+            if (net < 0) return NET_NEGATIVE_COLOR;
+            return 'var(--text-secondary)';
+        }
+
         function buildRosterCardHtml(name) {
             const player = playerData[name];
             const earningsNum = getEarningsNum(player);
@@ -4311,9 +4353,13 @@
                 ? `<p style="font-size: 8px; color: var(--border-primary); margin-top: 8px; text-shadow: 0 0 5px var(--border-primary);">${player.tag}</p>`
                 : '';
 
+            const fillPercent = getHpFillPercent(net, getStandingRange());
+            const hpColor = getHpColor(net);
+            const isKO = fillPercent <= 0;
+
             return `
                 <div class="member-item" onclick="showPlayerStats('${name}')" style="cursor: pointer; border-color: ${borderColor}; ${player.retired ? 'opacity: 0.8;' : ''}">
-                    <span style="color: var(--text-primary); text-decoration: none; font-size: 11px;">${name}</span>
+                    <span style="display: block; color: var(--text-primary); text-decoration: none; font-size: 19px; font-weight: bold; letter-spacing: 1px; text-shadow: 0 0 10px ${hpColor};">${name}</span>
                     <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 14px; gap: 10px;">
                         <div style="text-align: left;">
                             <div style="font-size: 7px; color: var(--text-secondary); opacity: 0.6; letter-spacing: 1px;">EARNINGS</div>
@@ -4321,10 +4367,15 @@
                         </div>
                         <div style="text-align: right;">
                             <div style="font-size: 7px; color: var(--text-secondary); opacity: 0.6; letter-spacing: 1px;">STANDING</div>
-                            <div style="font-size: 12px; margin-top: 3px; color: ${netColor}; text-shadow: 0 0 3px ${netColor}; font-weight: bold;">${formatDollars(net)}</div>
+                            <div style="font-size: 12px; margin-top: 3px; color: ${netColor}; font-weight: bold;">${formatDollars(net)}</div>
                         </div>
                     </div>
-                    <div class="member-divider" style="--divider-color: ${borderColor};"></div>
+                    <div style="margin: 12px 0 4px 0;">
+                        <div class="hp-bar-track" style="border-color: ${hpColor};">
+                            <div class="hp-bar-fill" style="width: ${fillPercent}%; background-color: ${hpColor}; box-shadow: 0 0 8px ${hpColor};"></div>
+                            ${isKO ? `<span class="hp-ko-label">K.O.</span>` : ''}
+                        </div>
+                    </div>
                     <div style="font-size: 8px; color: var(--text-accent); opacity: 0.8;">paid in ${formatDollars(paidIn)}</div>
                     ${tagHtml}
                 </div>
