@@ -3505,6 +3505,7 @@
                 <button class="year-selector-btn" onclick="selectYear(2023)" data-year="2023">2023</button>
                 <button class="year-selector-btn" onclick="selectYear(2024)" data-year="2024">2024</button>
                 <button class="year-selector-btn" onclick="selectYear(2025)" data-year="2025">2025</button>
+                <button class="year-selector-btn" onclick="selectYear(2026)" data-year="2026">2026</button>
             </div>
 
             <!-- Map Container -->
@@ -4889,7 +4890,8 @@
             2022: { championship: 'Illinois', toilet: 'Texas' },
             2023: { championship: 'Illinois', toilet: 'Illinois' },
             2024: { championship: 'Illinois', toilet: 'Wisconsin' },
-            2025: { championship: 'Illinois', toilet: 'Colorado' }
+            2025: { championship: 'Illinois', toilet: 'Colorado' },
+            2026: { championship: 'TBD', toilet: 'TBD' }
         };
 
         // State positions on the map (as percentages)
@@ -4922,7 +4924,7 @@
         }
 
         function navigateYear(direction) {
-            const years = [2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025];
+            const years = [2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026];
             const currentYear = parseInt(document.getElementById('current-year').textContent);
             const currentIndex = years.indexOf(currentYear);
 
